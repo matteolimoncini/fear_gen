@@ -23,7 +23,10 @@ valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
 #select patients with either pupil and eda data
 valid_pupil_eda = list(set(valid_patients_eda).intersection(set(valid_patients_pupil)))
 
-def extract_pupil_by_subject(subject_number:int) -> pd.DataFrame:
+def extract_pupil_by_subject(subject_number:int) -> list:
+    if(subject_number not in valid_patients_pupil):
+        print('subject number not valid, probably this patient has not valid pupil signals')
+        return []
     if(subject_number<10):
         subject_number= '0'+str(subject_number)
     pupil1 = pd.read_csv('../osfstorage-archive/eye/pupil/Look0'+subject_number+'_pupil.csv', sep=';')
@@ -34,7 +37,26 @@ def extract_pupil_by_subject(subject_number:int) -> pd.DataFrame:
     cols = pupil1.columns.drop('trial')
 
     pupil1[cols] = pupil1[cols].apply(pd.to_numeric, errors='coerce')
-    return pupil1
+
+    # convert all datas into one list
+    pat1_pupil = []
+    for i in range(160):
+        colonne = pupil1.columns.drop(['trial'])
+        for colonna in colonne:
+            pat1_pupil.append(pupil1.loc[i][colonna])
+    pat1_pupil
+
+    return pat1_pupil
+
+def extract_eda_by_subject(subject_number:int) -> list:
+    if(subject_number not in valid_patients_eda):
+        print('subject number not valid, probably this patient has not valid eda signals')
+        return []
+    if(subject_number<10):
+        subject_number= '0'+str(subject_number)
+    pat1_eda = pd.read_csv("../tmp_eda"+subject_number+".csv")['CH1']
+    pat1_eda.to_numpy()
+
 
 if __name__ == '__main__':
     print(extract_pupil_by_subject(1))
