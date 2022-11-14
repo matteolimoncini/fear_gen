@@ -1,11 +1,15 @@
 import csv
+
+import matplotlib
 import neurokit2 as nk
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from pyreadr import pyreadr
+from tqdm import tqdm
 
 # setup plots
+matplotlib.use("TkAgg")
 plt.rcParams['figure.figsize'] = [15, 5]  # Bigger images
 plt.rcParams['font.size'] = 16
 
@@ -42,7 +46,6 @@ def read_csv_pupil_raw(subject_number:int) -> pd.DataFrame:
 
 def create_csv_pupil():
     for subject in valid_patients_pupil:
-        print(subject)
         pupil_i = read_csv_pupil_raw(subject)
         name = 'tmp_pupil' + str(subject) + '.csv'
         pupil_i.to_csv(name, index=False)
@@ -53,13 +56,12 @@ def read_csv_pupil(subject:int) -> pd.DataFrame:
 
 def extract_pupil_by_subject(subject_number:int) -> list:
     pupil = read_csv_pupil(subject_number)
-
+    pupil_ = pupil.copy().drop(['trial'], axis=1)
     # convert all datas into one list
     pat1_pupil = []
     for i in range(160):
-        colonne = pupil.columns.drop(['trial'])
-        for colonna in colonne:
-            pat1_pupil.append(pupil.loc[i][colonna])
+        row_list = pupil_.loc[i, :].values.flatten().tolist()
+        pat1_pupil = pat1_pupil + row_list
     # pat1_pupil
 
     return pat1_pupil
@@ -92,20 +94,18 @@ def extract_maxpupil_trial(pupil_csv: pd.DataFrame) -> list:
 
 def all_subject_pupil() -> pd.DataFrame:
     generic_df = pd.DataFrame(columns=['pupilDiameter', 'maxIndex', 'subject'])
-    for i in valid_patients_pupil:
+    for i in tqdm(valid_patients_pupil):
         subject = i
-        #print(subject)
+        #print(f'pupil: {subject}')
         person_i = read_csv_pupil(subject)
         person_i_all_pupil = extract_pupil_by_subject(subject)
         max_list_i = extract_maxpupil_trial(person_i)
         dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i,
-                 'subject': [i for x in range(len(max_list_i))]}
+                 'subject': [i for x in range(len(max_list_i))], 'time':np.arange(0, len(max_list_i) / 100, 0.01)}
         df_ = pd.DataFrame(dict_)
+        df_ = add_latency(df_, 1000)
+        df_['time'] = np.arange(0, len(df_) / 100, 0.01)
         generic_df = pd.concat([generic_df, df_], axis=0)
-    time_ = np.arange(0, len(generic_df) / 100, 0.01)
-    generic_df['time'] = time_
-
-    generic_df = add_latency(generic_df, 1000)
 
     return generic_df
 
@@ -125,23 +125,31 @@ def add_latency(generic_df, msecs):
 
 def all_subject_eda() -> pd.DataFrame:
     generic_df = pd.DataFrame(columns=['subject', 'phasic', 'phasic_peak'])
-    for i in valid_patients_eda:
+    for i in tqdm(valid_patients_eda):
         eda = extract_eda_by_subject(i)
-
+        #print(f'eda: {i}')
         eda = resample_eda(eda)
 
         signals, info = nk.eda_process(eda, sampling_rate=100, method="neurokit")
-        df = {'subject': i, 'phasic': signals['EDA_Phasic'], 'phasic_peak': signals['SCR_Peaks']}
+        df = {'subject': i, 'phasic': signals['EDA_Phasic'], 'phasic_peak': signals['SCR_Peaks'], 'time':np.arange(0, len(signals) / 100, 0.01)}
         df_ = pd.DataFrame(df)
+        df_ = add_latency(df_, 5000)
+        df_['time'] = np.arange(0, len(df_) / 100, 0.01)
         generic_df = pd.concat([generic_df, df_], axis=0)
-    generic_df['time'] = np.arange(0, len(generic_df) / 100, 0.01)
 
-    generic_df = add_latency(generic_df, 5000)
+
 
     return generic_df
+
+def plot_(df):
+    df.replace('NaN', 0)
+    plt.plot(list(df.time), list(df.pupilDiameter))
+    plt.plot(list(df.time), list(df.phasic))
+    #plt.show()
 
 if __name__ == '__main__':
     df_sync_eda = all_subject_eda()
     df_sync_pupil = all_subject_pupil()
-    df_merge = df_sync_pupil.merge(df_sync_eda, how="right")
-    print(df_merge)
+    print(len(df_sync_pupil), len(df_sync_eda))
+    #df_merge = df_sync_pupil.merge(df_sync_eda, how="right")
+    #print(plot_(df_merge))
