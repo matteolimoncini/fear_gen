@@ -92,6 +92,9 @@ def all_subject_pupil() -> pd.DataFrame:
         generic_df = pd.concat([generic_df, df_], axis=0)
     time_ = np.arange(0, len(generic_df)/100, 0.01)
     generic_df['time'] = time_
+
+    generic_df = add_latency(generic_df, 1000)
+
     return generic_df
 
 
@@ -101,6 +104,12 @@ def resample_eda(eda_signal) -> list:
         if x % 5 == 0:
             eda_new.append(eda_signal[x])
     return eda_new
+
+
+def add_latency(generic_df, msecs):
+    df = generic_df[generic_df.time >= msecs/1000]
+    return df
+
 
 def all_subject_eda() -> pd.DataFrame:
     generic_df = pd.DataFrame(columns=['subject','phasic','phasic_peak'])
@@ -114,14 +123,17 @@ def all_subject_eda() -> pd.DataFrame:
         df_=pd.DataFrame(df)
         generic_df = pd.concat([generic_df, df_], axis=0)
     generic_df['time'] = np.arange(0,len(generic_df)/100,0.01)
+
+    generic_df = add_latency(generic_df,5000)
+
     return generic_df
 
 if __name__ == '__main__':
 
     df_sync_eda = all_subject_eda()
-    #df_sync_pupil = all_subject_pupil()
-    #pd.concat([df_sync_eda,df_sync_pupil],axis=1)
-    print(df_sync_eda)
+    df_sync_pupil = all_subject_pupil()
+    df_merge = df_sync_pupil.merge(df_sync_eda,how="right")
+    print(df_merge)
 
 
 
