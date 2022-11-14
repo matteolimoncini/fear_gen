@@ -24,7 +24,7 @@ valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
 valid_pupil_eda = list(set(valid_patients_eda).intersection(set(valid_patients_pupil)))
 
 
-def read_csv_pupil(subject_number:int) -> pd.DataFrame:
+def read_csv_pupil_raw(subject_number:int) -> pd.DataFrame:
     if subject_number not in valid_patients_pupil:
         print('subject number not valid, probably this patient has not valid pupil signals')
         return pd.DataFrame()
@@ -41,8 +41,19 @@ def read_csv_pupil(subject_number:int) -> pd.DataFrame:
     return pupil1
 
 
+def create_csv_pupil():
+    for subject in valid_patients_pupil:
+        print(subject)
+        pupil_i = read_csv_pupil_raw(subject)
+        name = 'tmp_pupil' + str(subject) + '.csv'
+        pupil_i.to_csv(name, index=False)
+
+def read_csv_pupil(subject:int) -> pd.DataFrame:
+    name = 'tmp_pupil'+str(subject)+'.csv'
+    return pd.read_csv(name, sep=',')
+
 def extract_pupil_by_subject(subject_number:int) -> list:
-    pupil = read_csv_pupil(subject_number)
+    pupil = read_csv_pupil_raw(subject_number)
 
     # convert all datas into one list
     pat1_pupil = []
@@ -84,7 +95,7 @@ def all_subject_pupil() -> pd.DataFrame:
     for i in valid_patients_pupil:
         subject = i
         #print(subject)
-        person_i = read_csv_pupil(subject)
+        person_i = read_csv_pupil_raw(subject)
         person_i_all_pupil = extract_pupil_by_subject(subject)
         max_list_i = extract_maxpupil_trial(person_i)
         dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i, 'subject': [i for x in range(len(max_list_i))]}
@@ -117,11 +128,7 @@ def all_subject_eda() -> pd.DataFrame:
     return generic_df
 
 if __name__ == '__main__':
-
-    df_sync_eda = all_subject_eda()
-    #df_sync_pupil = all_subject_pupil()
-    #pd.concat([df_sync_eda,df_sync_pupil],axis=1)
-    print(df_sync_eda)
+    print(read_csv_pupil(55))
 
 
 
