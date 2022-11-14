@@ -52,7 +52,7 @@ def read_csv_pupil(subject:int) -> pd.DataFrame:
     return pd.read_csv(name, sep=',')
 
 def extract_pupil_by_subject(subject_number:int) -> list:
-    pupil = read_csv_pupil_raw(subject_number)
+    pupil = read_csv_pupil(subject_number)
 
     # convert all datas into one list
     pat1_pupil = []
@@ -95,7 +95,7 @@ def all_subject_pupil() -> pd.DataFrame:
     for i in valid_patients_pupil:
         subject = i
         #print(subject)
-        person_i = read_csv_pupil_raw(subject)
+        person_i = read_csv_pupil(subject)
         person_i_all_pupil = extract_pupil_by_subject(subject)
         max_list_i = extract_maxpupil_trial(person_i)
         dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i,
