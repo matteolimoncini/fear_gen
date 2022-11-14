@@ -108,17 +108,18 @@ def all_subject_eda() -> pd.DataFrame:
         eda = resample_eda(eda)
 
         signals, info = nk.eda_process(eda, sampling_rate=100, method="neurokit")
-
-
         df = {'subject':i,'phasic':signals['EDA_Phasic'],'phasic_peak':signals['SCR_Peaks']}
         df_=pd.DataFrame(df)
         generic_df = pd.concat([generic_df, df_], axis=0)
+    generic_df['time'] = np.arange(0,len(generic_df)/100,0.01)
     return generic_df
 
 if __name__ == '__main__':
 
-    df_sync = all_subject_eda()
-    print(df_sync)
+    df_sync_eda = all_subject_eda()
+    #df_sync_pupil = all_subject_pupil()
+    #pd.concat([df_sync_eda,df_sync_pupil],axis=1)
+    print(df_sync_eda)
 
 
 
