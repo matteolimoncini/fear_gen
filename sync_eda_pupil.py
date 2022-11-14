@@ -5,32 +5,31 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from pyreadr import pyreadr
 
-#setup plots
+# setup plots
 plt.rcParams['figure.figsize'] = [15, 5]  # Bigger images
-plt.rcParams['font.size']= 16
+plt.rcParams['font.size'] = 16
 
-
-#remove patients non valid for eda
-notvalid = [x for x in range(34,41)]
+# remove patients non valid for eda
+notvalid = [x for x in range(34, 41)]
 notvalid.append(9)
-valid_patients_eda = [ele for ele in range(1,56) if ele not in notvalid]
+valid_patients_eda = [ele for ele in range(1, 56) if ele not in notvalid]
 
-#remove patients non valid for pupil
-notvalid = [x for x in range(34,41)]
-notvalid.extend([9,11,20,25,42])
-valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
+# remove patients non-valid for pupil
+notvalid = [x for x in range(34, 41)]
+notvalid.extend([9, 11, 20, 25, 42])
+valid_patients_pupil = [ele for ele in range(1, 56) if ele not in notvalid]
 
-#select patients with either pupil and eda data
+# select patients with either pupil and eda data
 valid_pupil_eda = list(set(valid_patients_eda).intersection(set(valid_patients_pupil)))
 
 
-def read_csv_pupil(subject_number:int) -> pd.DataFrame:
+def read_csv_pupil(subject_number: int) -> pd.DataFrame:
     if subject_number not in valid_patients_pupil:
         print('subject number not valid, probably this patient has not valid pupil signals')
         return pd.DataFrame()
     if subject_number < 10:
-        subject_number = '0'+str(subject_number)
-    pupil1 = pd.read_csv('../osfstorage-archive/eye/pupil/Look0'+str(subject_number)+'_pupil.csv', sep=';')
+        subject_number = '0' + str(subject_number)
+    pupil1 = pd.read_csv('../osfstorage-archive/eye/pupil/Look0' + str(subject_number) + '_pupil.csv', sep=';')
     for i in pupil1.columns:
         if i != 'trial':
             for j in pupil1.index:
@@ -41,7 +40,7 @@ def read_csv_pupil(subject_number:int) -> pd.DataFrame:
     return pupil1
 
 
-def extract_pupil_by_subject(subject_number:int) -> list:
+def extract_pupil_by_subject(subject_number: int) -> list:
     pupil = read_csv_pupil(subject_number)
 
     # convert all datas into one list
@@ -50,16 +49,17 @@ def extract_pupil_by_subject(subject_number:int) -> list:
         colonne = pupil.columns.drop(['trial'])
         for colonna in colonne:
             pat1_pupil.append(pupil.loc[i][colonna])
-    #pat1_pupil
+    # pat1_pupil
 
     return pat1_pupil
 
-def extract_eda_by_subject(subject_number:int) -> list:
-    if(subject_number not in valid_patients_eda):
+
+def extract_eda_by_subject(subject_number: int) -> list:
+    if subject_number not in valid_patients_eda:
         print('subject number not valid, probably this patient has not valid eda signals')
         return []
-    if(subject_number<10):
-        subject_number= '0'+str(subject_number)
+    if subject_number < 10:
+        subject_number = '0' + str(subject_number)
     path_csv = str("tmp_eda" + str(subject_number) + ".csv")
     pat_eda = pd.read_csv(path_csv)['CH1']
     return pat_eda.to_numpy()
@@ -83,14 +83,15 @@ def all_subject_pupil() -> pd.DataFrame:
     generic_df = pd.DataFrame(columns=['pupilDiameter', 'maxIndex', 'subject'])
     for i in valid_patients_pupil:
         subject = i
-        #print(subject)
+        # print(subject)
         person_i = read_csv_pupil(subject)
         person_i_all_pupil = extract_pupil_by_subject(subject)
         max_list_i = extract_maxpupil_trial(person_i)
-        dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i, 'subject': [i for x in range(len(max_list_i))]}
+        dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i,
+                 'subject': [i for x in range(len(max_list_i))]}
         df_ = pd.DataFrame(dict_)
         generic_df = pd.concat([generic_df, df_], axis=0)
-    time_ = np.arange(0, len(generic_df)/100, 0.01)
+    time_ = np.arange(0, len(generic_df) / 100, 0.01)
     generic_df['time'] = time_
 
     generic_df = add_latency(generic_df, 1000)
@@ -107,34 +108,30 @@ def resample_eda(eda_signal) -> list:
 
 
 def add_latency(generic_df, msecs):
-    df = generic_df[generic_df.time >= msecs/1000]
+    df = generic_df[generic_df.time >= msecs / 1000]
     return df
 
 
 def all_subject_eda() -> pd.DataFrame:
-    generic_df = pd.DataFrame(columns=['subject','phasic','phasic_peak'])
+    generic_df = pd.DataFrame(columns=['subject', 'phasic', 'phasic_peak'])
     for i in valid_patients_eda:
         eda = extract_eda_by_subject(i)
 
         eda = resample_eda(eda)
 
         signals, info = nk.eda_process(eda, sampling_rate=100, method="neurokit")
-        df = {'subject':i,'phasic':signals['EDA_Phasic'],'phasic_peak':signals['SCR_Peaks']}
-        df_=pd.DataFrame(df)
+        df = {'subject': i, 'phasic': signals['EDA_Phasic'], 'phasic_peak': signals['SCR_Peaks']}
+        df_ = pd.DataFrame(df)
         generic_df = pd.concat([generic_df, df_], axis=0)
-    generic_df['time'] = np.arange(0,len(generic_df)/100,0.01)
+    generic_df['time'] = np.arange(0, len(generic_df) / 100, 0.01)
 
-    generic_df = add_latency(generic_df,5000)
+    generic_df = add_latency(generic_df, 5000)
 
     return generic_df
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     df_sync_eda = all_subject_eda()
     df_sync_pupil = all_subject_pupil()
-    df_merge = df_sync_pupil.merge(df_sync_eda,how="right")
+    df_merge = df_sync_pupil.merge(df_sync_eda, how="right")
     print(df_merge)
-
-
-
-
