@@ -90,6 +90,8 @@ def all_subject_pupil() -> pd.DataFrame:
         dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i, 'subject': [i for x in range(len(max_list_i))]}
         df_ = pd.DataFrame(dict_)
         generic_df = pd.concat([generic_df, df_], axis=0)
+    time_ = np.arange(0, len(generic_df)/100, 0.01)
+    generic_df['time'] = time_
     return generic_df
 
 
