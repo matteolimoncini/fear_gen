@@ -60,8 +60,9 @@ def extract_eda_by_subject(subject_number:int) -> list:
         return []
     if(subject_number<10):
         subject_number= '0'+str(subject_number)
-    pat1_eda = pd.read_csv("../tmp_eda"+subject_number+".csv")['CH1']
-    pat1_eda.to_numpy()
+    path_csv = str("tmp_eda" + str(subject_number) + ".csv")
+    pat_eda = pd.read_csv(path_csv)['CH1']
+    return pat_eda.to_numpy()
 
 
 def extract_maxpupil_trial(pupil_csv: pd.DataFrame) -> list:
@@ -86,15 +87,37 @@ def all_subject_pupil() -> pd.DataFrame:
         person_i = read_csv_pupil(subject)
         person_i_all_pupil = extract_pupil_by_subject(subject)
         max_list_i = extract_maxpupil_trial(person_i)
-        dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i, 'subject': [1 for x in range(len(max_list_i))]}
+        dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i, 'subject': [i for x in range(len(max_list_i))]}
         df_ = pd.DataFrame(dict_)
         generic_df = pd.concat([generic_df, df_], axis=0)
     return generic_df
 
 
+def resample_eda(eda_signal) -> list:
+    eda_new = []
+    for x in range(len(eda_signal)):
+        if x % 5 == 0:
+            eda_new.append(eda_signal[x])
+    return eda_new
+
+def all_subject_eda() -> pd.DataFrame:
+    generic_df = pd.DataFrame(columns=['subject','phasic','phasic_peak'])
+    for i in valid_patients_eda:
+        eda = extract_eda_by_subject(i)
+
+        eda = resample_eda(eda)
+
+        signals, info = nk.eda_process(eda, sampling_rate=100, method="neurokit")
+
+
+        df = {'subject':i,'phasic':signals['EDA_Phasic'],'phasic_peak':signals['SCR_Peaks']}
+        df_=pd.DataFrame(df)
+        generic_df = pd.concat([generic_df, df_], axis=0)
+    return generic_df
+
 if __name__ == '__main__':
 
-    df_sync = all_subject_pupil()
+    df_sync = all_subject_eda()
     print(df_sync)
 
 
