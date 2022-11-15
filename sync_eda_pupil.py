@@ -126,20 +126,28 @@ def add_latency(generic_df, msecs):
 def all_subject_eda() -> pd.DataFrame:
     generic_df = pd.DataFrame(columns=['subject', 'phasic', 'phasic_peak'])
     for i in tqdm(valid_patients_eda):
-        eda = extract_eda_by_subject(i)
-        #print(f'eda: {i}')
-        eda = resample_eda(eda)
-
-        signals, info = nk.eda_process(eda, sampling_rate=100, method="neurokit")
-        df = {'subject': i, 'phasic': signals['EDA_Phasic'], 'phasic_peak': signals['SCR_Peaks'], 'time':np.arange(0, len(signals) / 100, 0.01)}
-        df_ = pd.DataFrame(df)
-        df_ = add_latency(df_, 5000)
-        df_['time'] = np.arange(0, len(df_) / 100, 0.01)
+        df_ = modified_eda_by_subject(i)
+        #df_['time'] = np.arange(0, len(signals) / 100, 0.01)[:len(df_)] #no sense sta cosa ma senza non va
         generic_df = pd.concat([generic_df, df_], axis=0)
 
 
 
     return generic_df
+
+
+def modified_eda_by_subject(subject):
+    eda = extract_eda_by_subject(subject)
+    # print(f'eda: {i}')
+    eda = resample_eda(eda)
+    signals, info = nk.eda_process(eda, sampling_rate=100, method="neurokit")
+    eda_phasic = signals['EDA_Phasic']
+    eda_phasic = remove_last_zeros(eda_phasic)
+    eda_phasic = remove_outliers(eda_phasic)
+    df = {'subject': subject, 'phasic': eda_phasic, 'phasic_peak': signals['SCR_Peaks'][:len(eda_phasic)]}
+    df_ = pd.DataFrame(df)
+    df_ = add_latency(df_, -5)
+    return df_
+
 
 def plot_(df):
     df.replace('NaN', 0)
