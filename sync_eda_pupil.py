@@ -93,21 +93,29 @@ def extract_maxpupil_trial(pupil_csv: pd.DataFrame) -> list:
 
 
 def all_subject_pupil() -> pd.DataFrame:
-    generic_df = pd.DataFrame(columns=['pupilDiameter', 'maxIndex', 'subject'])
-    for i in tqdm(valid_patients_pupil):
-        subject = i
-        #print(f'pupil: {subject}')
-        person_i = read_csv_pupil(subject)
-        person_i_all_pupil = extract_pupil_by_subject(subject)
-        max_list_i = extract_maxpupil_trial(person_i)
-        dict_ = {'pupilDiameter': person_i_all_pupil, 'maxIndex': max_list_i,
-                 'subject': [i for x in range(len(max_list_i))], 'time':np.arange(0, len(max_list_i) / 100, 0.01)}
-        df_ = pd.DataFrame(dict_)
-        df_ = add_latency(df_, 1000)
-        df_['time'] = np.arange(0, len(df_) / 100, 0.01)
+    """
+    Create a dataframe with all pupil data of all subject after adding latency
+    :return: a dataframe with all pupil data of all subject with columns ['pupil_diameter', 'pupil_peak', 'subject']
+    """
+    generic_df = pd.DataFrame(columns=['pupil_diameter', 'pupil_peak', 'subject'])
+    for i in tqdm(valid_pupil_eda):
+        df_ = modified_pupil_subject(i)
         generic_df = pd.concat([generic_df, df_], axis=0)
 
     return generic_df
+
+
+def modified_pupil_subject(subject):
+    # print(f'pupil: {subject}')
+    person_i_all_pupil = extract_pupil_by_subject(subject)
+    max_list_i = extract_maxpupil_trial(subject)
+    # print(f'person: {len(person_i_all_pupil)}, max: {len(max_list_i)}')
+    dict_ = {'pupil_diameter': person_i_all_pupil, 'pupil_peak': max_list_i,
+             'subject': [subject for x in range(len(max_list_i))]}
+    df_ = pd.DataFrame(dict_)
+    df_ = add_latency(df_, -1)
+    # df_['time'] = np.arange(0, len(df_) / 100, 0.01)
+    return df_
 
 
 def resample_eda(eda_signal) -> list:
