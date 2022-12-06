@@ -2,7 +2,6 @@ from ..signal import Signal
 from ..utils import utils
 from ...feature_extractor import FE
 from ...feature_extractor.candide import candide
-from scipy import interpolate
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider
 import numpy as np

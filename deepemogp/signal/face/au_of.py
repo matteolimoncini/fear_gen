@@ -2,9 +2,7 @@ from ..signal import Signal
 from ..utils import utils
 from ...feature_extractor import FE
 from ...feature_extractor.candide import candide
-from scipy import interpolate
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 class AU_OF(Signal):
@@ -27,14 +25,16 @@ class AU_OF(Signal):
                       'AU10_r', 'AU12_r', 'AU14_r', 'AU15_r', 'AU17_r', 'AU20_r', 'AU23_r', 'AU25_r', \
                       'AU26_r', 'AU45_r']
 
+            w = raw['data']
+
             if show:  # show raw action units
-                plt.plot(raw)
+                plt.plot(w)
                 plt.legend(fields)
                 plt.title('Raw Action Units')
                 plt.show()
 
             # realise the AUV conversion
-            w = candide.convertAU(raw, 'OF', show)
+            w = candide.convertAU(w, 'OF', show)
 
             # down-sample data
             w = utils.resample(w, raw['fps'], new_fps)

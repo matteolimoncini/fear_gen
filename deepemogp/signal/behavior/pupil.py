@@ -1,6 +1,6 @@
-from fear_gen.deep_emo_gp.deepemogp.signal.signal import Signal
-from fear_gen.deep_emo_gp.deepemogp.signal.utils import utils
-from fear_gen.deep_emo_gp.deepemogp.feature_extractor import FE
+from fear_gen.deepemogp.signal.signal import Signal
+from fear_gen.deepemogp.signal.utils import utils
+from fear_gen.deepemogp.feature_extractor import FE
 
 
 class PUPIL(Signal):

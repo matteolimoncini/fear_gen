@@ -2,7 +2,6 @@ from ..signal import Signal
 from ..utils import utils
 from ...feature_extractor import FE
 
-import pandas as pd
 import numpy as np
 
 

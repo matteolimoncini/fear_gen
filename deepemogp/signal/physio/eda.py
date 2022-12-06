@@ -3,8 +3,6 @@ from ..utils import utils
 from ..utils import cvxEDA
 from ...feature_extractor import FE
 
-import scipy.signal as sig
-import pandas as pd
 import biosppy
 
 
