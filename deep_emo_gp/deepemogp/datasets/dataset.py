@@ -12,5 +12,5 @@ class Dataset(object):
         self.subjects = subjects
 
     def __str__(self):
-        return ("\nDataset\n- name: %s\n- signals: %s\n- subjects: %s\n- annotations: %s\n" % (
-        self.name, [s.name for s in self.signals], [s for s in self.subjects], [s.name for s in self.annotations]))
+        return ("\nDataset\n- name: %s\n- signals: %s\n- subjects: %s\n " % (
+        self.name, [s.name for s in self.signals], [s for s in self.subjects]))

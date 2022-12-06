@@ -6,7 +6,7 @@ from scipy import io
 
 class FEAR(Dataset):
     # path of the directory containing physiological signals
-    signal_folder = '/media/paolo/Volume/matteo/unimi/tesi_master/code/dataset/amhuse'
+    signal_folder = '/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/signal'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):
         super(FEAR, self).__init__(name, signals, subjects, annotations=None)
@@ -41,13 +41,30 @@ class FEAR(Dataset):
                     print(">> Loading %s for subject %s and session %s from dataset %s" % (
                         signal.name, person, session, self.name))
 
-                    # only for test
-                    npy_file = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/prova.npy'
-                    data = np.load(npy_file, allow_pickle=True).item()
-                    print('loaded npy file')
-                    # save raw data
-                    signal.raw.append({'data': iter(data['eda'])})
+                    csv_file = self.signal_folder + '/eda_csv/' + person + '_eda.csv'
+                    df = pd.read_csv(csv_file)
+                    session = int(session) - 1
+                    # pupil_.loc[i, :].values.flatten().tolist()
+                    values = df.loc[session, :].values.flatten().tolist()
+                    signal.raw.append({'data': values})
+                    print(signal.raw)
 
+            elif signal.name is 'PUPIL':
+
+                for subject in self.subjects:  # loop over all considered subjects
+
+                    person, session = subject.split("_")
+
+                    print(">> Loading %s for subject %s and session %s from dataset %s" % (
+                        signal.name, person, session, self.name))
+
+                    csv_file = self.signal_folder + '/pupil_csv/' + person + '_pupil.csv'
+                    df = pd.read_csv(csv_file)
+                    session = int(session) - 1
+                    # pupil_.loc[i, :].values.flatten().tolist()
+                    values = df.loc[session, :].values.flatten().tolist()
+                    signal.raw.append({'data': values})
+                    print(signal.raw)
 
             elif signal.name is 'HR':
 
@@ -58,14 +75,13 @@ class FEAR(Dataset):
                     print(">> Loading %s for subject %s and session %s from dataset %s" % (
                         signal.name, person, session, self.name))
 
-                    # only for test
-                    npy_file = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/prova.npy'
-                    data = np.load(npy_file, allow_pickle=True).item()
-                    print('loaded npy file')
-                    print(data['hr'])
-                    # save raw data
-                    signal.raw.append({'data': iter(data['hr'])})
-
+                    csv_file = self.signal_folder + '/hr_csv/' + person + '_hr.csv'
+                    df = pd.read_csv(csv_file)
+                    session = int(session) - 1
+                    #pupil_.loc[i, :].values.flatten().tolist()
+                    values = df.loc[session, :].values.flatten().tolist()
+                    signal.raw.append({'data': values})
+                    print(signal.raw)
 
             else:
                 raise ValueError(

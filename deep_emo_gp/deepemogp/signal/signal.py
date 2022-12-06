@@ -21,12 +21,12 @@ class Signal(object):
     def __str__(self):
         raw_size = []
         for s in self.raw:
-            raw_size.append(s['data'].shape[0])
+            raw_size.append(s['data'])
 
         proc_size = []
         for s in self.processed:
-            proc_size.append(s['data'].shape[0])
+            proc_size.append(s['data'])
 
         return (
-                    "\nSignal\n- type: %s\n- raw series: %s\n- raw size: %s\n- processed size: %s\n- feature type: %s\n- features size: %s\n"
-                    % (self.name, len(self.raw), raw_size, proc_size, self.feature_ext.name, self.features.shape))
+                    "\nSignal\n- type: %s\n- raw series: %s\n- raw size: %s\n- processed size: %s\n- feature type: %s\n"
+                    % (self.name, len(self.raw), raw_size, proc_size, self.feature_ext.name))
