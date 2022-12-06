@@ -5,7 +5,7 @@ from scipy import io
 
 class FEAR(Dataset):
     # path of the directory containing physiological signals
-    signal_folder = '../signal'
+    signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/signal'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):
         super(FEAR, self).__init__(name, signals, subjects, annotations=None)
