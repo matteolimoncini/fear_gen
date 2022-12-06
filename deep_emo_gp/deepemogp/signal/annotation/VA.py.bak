@@ -1,0 +1,78 @@
+
+from ..signal import Signal
+from ..utils import utils
+from ...feature_extractor import FE
+
+import pandas as pd
+import numpy as np
+
+class VA(Signal):
+    """Class to handle the dimensional Valence/Arousal emotional annotations"""
+    
+    def __init__(self, name='', feature_ext=FE()):
+        super(VA, self).__init__(name, feature_ext)
+
+
+    def preprocess(self, new_fps=25, ewe=True, show=False):
+        '''
+        pre process VA signal to extract the gold standard adopting
+        '''
+
+        print ">> Processing %s emotional annotations..." % (self.name)
+
+        for anno in self.raw:
+
+            data = anno['data']
+
+            if ewe:
+                # apply the EWE technique to annotations
+                data = self.EWE(data, self.name, show)
+            else:
+                if show:
+                    import pylab as pl
+                    pl.plot(anno, label=self.name)
+                    pl.title(self.name + ' annotations')
+                    pl.legend(loc='best')
+                    pl.show()
+
+            # re-sample data
+            tmp_anno = utils.resample(data, anno['fps'], new_fps)
+
+            # save processed data
+            self.processed.append({'data': tmp_anno, 'fps': new_fps})
+
+
+
+    def EWE(self, signal, d, show):
+        '''
+        This method implements  EWE, Evaluator Weighted Estimator 
+        (Grimm and Kroschel, 2005)
+        '''
+
+        xMLE = np.mean(signal,axis=1)
+        rK = [0] * signal.shape[1]
+
+        for idx, s in enumerate(signal):
+            cc = np.corrcoef(signal[s], xMLE)
+            rK[idx] = cc[0,1]
+
+        ewe = signal.dot(rK)/np.sum(rK)
+
+        if show:
+            import pylab as pl
+            
+            xMLE = np.mean(signal,axis=1)
+
+            for idx, s in enumerate(signal):
+                pl.plot(signal[s], linewidth=1, label="%s: %.2f"%(s.strip(), rK[idx]) )
+
+            pl.plot(ewe, label='EWE', linewidth=2, linestyle='--')
+            pl.plot(xMLE, label='mean', linewidth=2, linestyle='-.')
+
+            pl.title(d + ' annotations')
+            pl.legend(loc='best')
+            pl.show()
+
+
+        return ewe
+

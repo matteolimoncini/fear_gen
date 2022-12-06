@@ -1,0 +1,283 @@
+import numpy as np
+import pandas as pd
+import code
+import cv2
+from scipy import optimize
+import matplotlib.tri as mtri
+import matplotlib.pyplot as plt
+
+ax, sc_y, sc_p = [None, None, None]
+
+
+# def convertAU(au, landmarkmode, show):
+#     # candide AUVs
+#     # [AUV0   (AU10),
+#     #  AUV11  (AU26/27),
+#     #  AUV2   (AU20),
+#     #  AUV3   (AU4),
+#     #  AUV14  (AU13/15),
+#     #  AUV5   (AU2),
+#     #  AUV6   (AU42/43/44/45),
+#     #  AUV7   (AU7),
+#     #  AUV8   (AU9),
+#     #  AUV9   (AU23/24),
+#     #  AUV10  (AU5)]
+
+#     # mapping OF -> Candide
+#     # Openface Action Units
+#     #['AU01_r', 'AU02_r', 'AU04_r', 'AU05_r', 'AU06_r',
+#     # 'AU07_r', 'AU09_r', 'AU10_r', 'AU12_r', 'AU14_r',
+#     # 'AU15_r', 'AU17_r', 'AU20_r', 'AU23_r', 'AU25_r',
+#     # 'AU26_r', 'AU45_r']
+#     if landmarkmode == 'OF':
+#         auv_mapping = [7, 15, 12, 2, 10, 1, 16, 5, 6, 13, 3]
+
+#         new_au = au[auv_mapping]
+
+#         new_au = (new_au * 2) / 5
+
+#         plt.plot(new_au)
+#         plt.show()
+
+#         meanModel, tri, mapping, auv = loadCandideModel(landmarkmode)
+
+#         if True:
+#             # 3D face model plot
+#             fig, ax3 = plt.subplots(subplot_kw =dict(projection="3d"))
+#             ax3.view_init(azim=-90, elev=-90)
+
+
+#             for f in range(len(new_au)):
+#                 p = np.concatenate([[1], np.zeros(5), new_au.iloc[f].values])
+#                 p3 = getShape3D(meanModel, auv, p)
+#                 triang = mtri.Triangulation(p3[0,:],p3[1,:], tri)
+
+#                 ax3.clear()
+#                 ax3.plot_trisurf(triang, p3[2,:], linewidth=0.2, antialiased=True)
+#                 ax3.set_title("Converting Action units - frame %d/%d" % (f, len(new_au)))
+#                 plt.pause(0.1)
+
+#         return new_au
+
+
+def mapToCandide(landmarks, landmarkmode, show):
+    global ax, sc_y, sc_p
+
+    meanModel, tri, mapping, auv = loadCandideModel(landmarkmode)
+
+    # parameter initialization
+    nparams = 6 + len(auv)
+    params = np.zeros(nparams)
+
+    # get number of frames
+    frames = len(landmarks)
+
+    # 3D model
+    x = meanModel[:, mapping[1]]
+
+    # defined AUV
+    a = auv[:, :, mapping[1]]
+
+    # 2D landmarks
+    landmarks = np.reshape(landmarks, [frames, 2, -1])
+    landmarks = landmarks[:, :, mapping[0]]
+
+    w = np.zeros(shape=(frames, len(auv)))
+
+    if show:
+        # optimization plot
+        fig, ax = plt.subplots()
+        ax.invert_yaxis()
+        ax.set_aspect('equal')
+        sc_y = plt.scatter(landmarks[0, 0, :], landmarks[0, 1, :])
+        sc_p = plt.scatter(landmarks[0, 0, :], landmarks[0, 1, :])
+
+        # 3D face model plot
+        fig1, ax3 = plt.subplots(subplot_kw=dict(projection="3d"))
+        ax3.set_aspect('equal')
+        ax3.view_init(azim=-90, elev=-90)
+
+    for i in range(frames):  # loop over all frames
+
+        print("- Extracting AUV from frame %d/%d\r" % (i, frames - 1), end=' ')
+
+        y = landmarks[i, :, :]
+
+        xc = x.T - np.mean(x.T, axis=0)
+        yc = y.T - np.mean(y.T, axis=0)
+
+        xc = xc.T
+        yc = yc.T
+
+        # calculate scale
+        scale = np.linalg.norm(yc) / np.linalg.norm(xc[:2, :])
+
+        # calculate traslation
+        t = np.mean(y, axis=1) - np.mean(x[:2, :], axis=1)
+
+        params[0] = scale
+        params[4] = t[0]
+        params[5] = t[1]
+
+        p = optimizeCandideModel(params, y, x, a, show=show)
+
+        if show:
+            p3 = getShape3D(meanModel, auv, p)
+            triang = mtri.Triangulation(p3[0, :], p3[1, :], tri)
+
+            ax3.clear()
+            ax3.plot_trisurf(triang, p3[2, :], linewidth=0.2, antialiased=True)
+            plt.pause(0.01)
+
+        # take only the action unit weights
+        w[i, :] = p[6:]
+
+    print('\n')
+
+    return w
+
+
+def getShape3D(x, auv, params):
+    # scale
+    s = params[0]
+    # rotation
+    r = params[1:4]
+    # traslation
+    t = params[4:6]
+    # action units weights
+    w = params[6:]
+
+    # rotation matrix
+    R = cv2.Rodrigues(r)[0]
+    # code.interact(local=locals())
+    shape3D = x + np.sum(w[:, np.newaxis, np.newaxis] * auv, axis=0)
+
+    shape3D = s * np.dot(R, shape3D)
+    shape3D[:2, :] = shape3D[:2, :] + t[:, np.newaxis]
+
+    return shape3D
+
+
+def optimizeCandideModel(params, landmarks, meanModel, auv, maxIter=1, eps=10e-7, show=False):
+    global ax, sc_y, sc_p
+
+    x = np.array(params, dtype=np.float64)
+
+    oldCost = -1
+
+    for i in range(maxIter):
+
+        r = residual(x, meanModel, auv, landmarks)
+        cost = np.sum(r ** 2)
+
+        if (cost < eps or abs(cost - oldCost) < eps):
+            break
+        oldCost = cost
+
+        J = jacobian(params, meanModel, auv)
+        grad = np.dot(J.T, r)
+        H = np.dot(J.T, J)
+
+        direction = np.linalg.lstsq(H, grad, rcond=None)[0]
+
+        lineSearchRes = optimize.minimize_scalar(LineSearchFun,
+                                                 args=(x, direction, meanModel, auv, landmarks, residual))
+        alpha = lineSearchRes["x"]
+
+        x = x + alpha * direction
+
+        if show:
+            p3 = getShape3D(meanModel, auv, x)
+
+            sc_y.set_offsets(np.c_[landmarks[0, :], landmarks[1, :]])
+            sc_p.set_offsets(np.c_[p3[0, :], p3[1, :]])
+            ax.set_title("Fitting Candide model - iter %d, cost: %d" % (i, cost))
+            plt.pause(0.01)
+
+    return x
+
+
+def residual(params, x, auv, y):
+    r = y - getShape3D(x, auv, params)[:2, :]
+    r = r.flatten()
+    return r
+
+
+def LineSearchFun(alpha, x, d, meanModel, auv, y, fun):
+    r = fun(x + alpha * d, meanModel, auv, y)
+    return np.sum(r ** 2)
+
+
+def jacobian(params, meanModel, auv):
+    s = params[0]
+    r = params[1:4]
+    t = params[4:6]
+    w = params[6:]
+
+    nparams = len(params)
+    nauv = len(auv)
+
+    R = cv2.Rodrigues(r)[0]
+    P = R[:2]
+    shape3D = meanModel + np.sum(w[:, np.newaxis, np.newaxis] * auv, axis=0)
+
+    nPoints = meanModel.shape[1]
+
+    jacobian = np.zeros((nPoints * 2, nparams))
+
+    jacobian[:, 0] = np.dot(P, shape3D).flatten()
+
+    stepSize = 10e-4
+    step = np.zeros(nparams)
+    step[1] = stepSize;
+    jacobian[:, 1] = ((getShape3D(meanModel, auv, params + step)[:2, :] - getShape3D(meanModel, auv, params)[:2,
+                                                                          :]) / stepSize).flatten()
+    step = np.zeros(nparams)
+    step[2] = stepSize;
+    jacobian[:, 2] = ((getShape3D(meanModel, auv, params + step)[:2, :] - getShape3D(meanModel, auv, params)[:2,
+                                                                          :]) / stepSize).flatten()
+    step = np.zeros(nparams)
+    step[3] = stepSize;
+    jacobian[:, 3] = ((getShape3D(meanModel, auv, params + step)[:2, :] - getShape3D(meanModel, auv, params)[:2,
+                                                                          :]) / stepSize).flatten()
+
+    jacobian[:nPoints, 4] = 1
+    jacobian[nPoints:, 5] = 1
+
+    startIdx = nparams - nauv
+    for i in range(nauv):
+        jacobian[:, i + startIdx] = s * np.dot(P, auv[i]).flatten()
+
+    return jacobian
+
+
+def loadCandideModel(landmarkmode):
+    datafolder = 'deepemogp/feature_extractor/candide/data/'
+
+    # mean candide model
+    meanModel = np.load(datafolder + 'candide3.npy')
+
+    # original mesh as face list
+    tri = np.load(datafolder + 'triangles.npy')
+
+    # corresponding points between 2D extracted landmarks and 3D model points
+    # First column : the tracked points (fiducial),
+    # Second column: corresponding CANDIDE-3 points
+    mapping = np.load(datafolder + 'mapping_' + landmarkmode + '.npy')
+
+    # Animation Units defined in Candide
+    # in the following order:
+    # [AUV0   (AU10),
+    #  AUV11  (AU26/27),
+    #  AUV2   (AU20),
+    #  AUV3   (AU4),
+    #  AUV14  (AU13/15),
+    #  AUV5   (AU2),
+    #  AUV6   (AU42/43/44/45),
+    #  AUV7   (AU7),
+    #  AUV8   (AU9),
+    #  AUV9   (AU23/24),
+    #  AUV10  (AU5)]
+    auv = np.load(datafolder + 'auv.npy')
+
+    return meanModel, tri, mapping, auv
