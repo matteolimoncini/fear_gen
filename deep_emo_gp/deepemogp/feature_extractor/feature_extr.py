@@ -78,6 +78,62 @@ class FE(object):
             # concatenate all extracted features
             signal.features = pd.concat([signal.features, feature], ignore_index=True)
 
+    def extract_feat_without_preprocess(self, signal, show=False):
+
+        print(
+            ">> Extracting %s features from %s signal, adopting %s window ..." % (self.name, signal.name, self.window))
+
+        for processed in signal.raw:  # for each processed data series
+
+            chunk_len = processed['fps'] * self.window[0]            # 500 * 4 = 2000
+            overlap_len = chunk_len - (processed['fps'] * self.window[1]) # 2000 - (500*2) = 1000
+
+            # split signal in chunks and apply the related feature extractor
+            feature = biosppy.signals.tools.windower(processed['data'], chunk_len, overlap_len, self.apply)['values']
+
+            if show:  # show the reconstruction effectiveness
+                rec_signal = []
+
+                step = int(self.window[0] / (self.window[0] - self.window[1]))
+
+                # skip overlapping windows in the reconstruction
+                for f in range(0, len(feature), step):
+                    rec = self.reconstruct(feature[f])
+
+                    if rec is None:  # in case the adopted feature extractor cannot be reconstructed
+                        break
+
+                    rec_signal = np.concatenate([rec_signal, rec])
+
+                if len(rec_signal) > 0:
+                    processed = processed['data'][:len(rec_signal)]
+
+                    tm = np.arange(0., len(rec_signal))
+                    plt.figure()
+                    plt.plot(tm, processed, label='original')
+                    plt.plot(tm, rec_signal, label='reconstructed')
+                    plt.legend(loc='best')
+                    plt.title('Reconstruction of %s signal adopting %s (max err = %.2f)' % (
+                        signal.name, self.name, max(abs(processed - rec_signal))))
+                    plt.show()
+
+            # eventually skip samples to align different signals
+            feature = pd.DataFrame(feature[self.skip:])
+
+            if show:
+                if feature.shape[1] > 1:
+                    pd.plotting.scatter_matrix(feature, alpha=0.2, figsize=(6, 6), diagonal='kde')
+                code.interact(local=locals())
+                plt.figure()
+                for d in range(feature.shape[1]):
+                    plt.plot(feature[d], label='d=' + str(d))
+                plt.legend(loc='upper right')
+                plt.title('Feature extracted from signal %s' % (signal.name))
+                plt.show()
+
+            # concatenate all extracted features
+            signal.features = pd.concat([signal.features, feature], ignore_index=True)
+
     def apply(self, chunk):
         if self.name == 'raw':
             return chunk

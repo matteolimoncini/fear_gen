@@ -45,7 +45,8 @@ class FEAR(Dataset):
                     session = int(session) - 1
                     # pupil_.loc[i, :].values.flatten().tolist()
                     values = df.loc[session, :].values.flatten().tolist()
-                    signal.raw.append({'data': values})
+                    fps = int(len(values)/6)
+                    signal.raw.append({'data': values, 'fps': fps})
                     print(signal.raw)
 
             elif signal.name is 'PUPIL':
@@ -62,7 +63,8 @@ class FEAR(Dataset):
                     session = int(session) - 1
                     # pupil_.loc[i, :].values.flatten().tolist()
                     values = df.loc[session, :].values.flatten().tolist()
-                    signal.raw.append({'data': values})
+                    fps = int(len(values)/5)
+                    signal.raw.append({'data': values, 'fps':fps})
                     print(signal.raw)
 
             elif signal.name is 'HR':
@@ -79,7 +81,8 @@ class FEAR(Dataset):
                     session = int(session) - 1
                     #pupil_.loc[i, :].values.flatten().tolist()
                     values = df.loc[session, :].values.flatten().tolist()
-                    signal.raw.append({'data': values})
+                    fps = int(len(values) / 6)
+                    signal.raw.append({'data': values, 'fps':fps})
                     print(signal.raw)
 
             else:
