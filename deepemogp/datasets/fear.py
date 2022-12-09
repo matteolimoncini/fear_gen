@@ -3,6 +3,7 @@ import pandas as pd
 from .dataset import Dataset
 from scipy import io
 
+
 class FEAR(Dataset):
     # path of the directory containing physiological signals
     signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/signal'
@@ -31,59 +32,83 @@ class FEAR(Dataset):
 
         for signal in self.signals:  # loop over all considered signals
 
-            if signal.name is 'EDA':
+            if signal.name == 'EDA':
 
                 for subject in self.subjects:  # loop over all considered subjects
 
-                    person, session = subject.split("_")
-
-                    print(">> Loading %s for subject %s and session %s from dataset %s" % (
-                        signal.name, person, session, self.name))
+                    if '_' in subject:
+                        person, session = subject.split("_")
+                        print(">> Loading %s for subject %s and session %s from dataset %s" % (
+                            signal.name, person, session, self.name))
+                        session = int(session) - 1
+                    else:
+                        person = subject
+                        print(">> Loading %s for subject %s and all sessions from dataset %s" % (
+                            signal.name, person, self.name))
 
                     csv_file = self.signal_folder + '/eda_csv/' + person + '_eda.csv'
                     df = pd.read_csv(csv_file)
-                    session = int(session) - 1
-                    # pupil_.loc[i, :].values.flatten().tolist()
-                    values = df.loc[session, :].values.flatten().tolist()
-                    fps = int(len(values)/6)
-                    signal.raw.append({'data': values, 'fps': fps})
-                    print(signal.raw)
 
-            elif signal.name is 'PUPIL':
+                    if '_' in subject:
+                        values = df.loc[session, :].values.flatten().tolist()
+                    else:
+                        values = df.values.flatten().tolist()
+
+                    fps = int(len(values) / 6)
+                    signal.raw.append({'data': values, 'fps': fps})
+                    # print(signal.raw[:10])
+
+            elif signal.name == 'PUPIL':
 
                 for subject in self.subjects:  # loop over all considered subjects
 
-                    person, session = subject.split("_")
-
-                    print(">> Loading %s for subject %s and session %s from dataset %s" % (
-                        signal.name, person, session, self.name))
+                    if '_' in subject:
+                        person, session = subject.split("_")
+                        print(">> Loading %s for subject %s and session %s from dataset %s" % (
+                            signal.name, person, session, self.name))
+                        session = int(session) - 1
+                    else:
+                        person = subject
+                        print(">> Loading %s for subject %s and all sessions from dataset %s" % (
+                            signal.name, person, self.name))
 
                     csv_file = self.signal_folder + '/pupil_csv/' + person + '_pupil.csv'
                     df = pd.read_csv(csv_file)
-                    session = int(session) - 1
-                    # pupil_.loc[i, :].values.flatten().tolist()
-                    values = df.loc[session, :].values.flatten().tolist()
-                    fps = int(len(values)/5)
-                    signal.raw.append({'data': values, 'fps':fps})
-                    print(signal.raw)
 
-            elif signal.name is 'HR':
+                    if '_' in subject:
+                        values = df.loc[session, :].values.flatten().tolist()
+                    else:
+                        values = df.values.flatten().tolist()
+
+                    fps = int(len(values) / 5)
+                    signal.raw.append({'data': values, 'fps': fps})
+                    #print(signal.raw[:10])
+
+            elif signal.name == 'HR':
 
                 for subject in self.subjects:  # loop over all considered subjects
 
-                    person, session = subject.split("_")
-
-                    print(">> Loading %s for subject %s and session %s from dataset %s" % (
-                        signal.name, person, session, self.name))
+                    if '_' in subject:
+                        person, session = subject.split("_")
+                        print(">> Loading %s for subject %s and session %s from dataset %s" % (
+                            signal.name, person, session, self.name))
+                        session = int(session) - 1
+                    else:
+                        person = subject
+                        print(">> Loading %s for subject %s and all sessions from dataset %s" % (
+                            signal.name, person, self.name))
 
                     csv_file = self.signal_folder + '/hr_csv/' + person + '_hr.csv'
                     df = pd.read_csv(csv_file)
-                    session = int(session) - 1
-                    #pupil_.loc[i, :].values.flatten().tolist()
-                    values = df.loc[session, :].values.flatten().tolist()
+
+                    if '_' in subject:
+                        values = df.loc[session, :].values.flatten().tolist()
+                    else:
+                        values = df.values.flatten().tolist()
+
                     fps = int(len(values) / 6)
-                    signal.raw.append({'data': values, 'fps':fps})
-                    print(signal.raw)
+                    signal.raw.append({'data': values, 'fps': fps})
+                    #print(signal.raw[:10])
 
             else:
                 raise ValueError(
