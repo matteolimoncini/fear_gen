@@ -6,7 +6,8 @@ from scipy import io
 
 class FEAR(Dataset):
     # path of the directory containing physiological signals
-    signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/signal'
+    # signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/signal'
+    signal_folder = '/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/signal'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):
         super(FEAR, self).__init__(name, signals, subjects, annotations=None)
@@ -41,21 +42,22 @@ class FEAR(Dataset):
                         print(">> Loading %s for subject %s and session %s from dataset %s" % (
                             signal.name, person, session, self.name))
                         session = int(session) - 1
+                        csv_file = self.signal_folder + '/eda_csv/' + person + '_eda.csv'
+                        df = pd.read_csv(csv_file)
+                        values = df.loc[session, :].values.flatten().tolist()
+                        fps = int(len(values) / 6)
+                        signal.raw.append({'data': values, 'fps': fps})
+
                     else:
                         person = subject
                         print(">> Loading %s for subject %s and all sessions from dataset %s" % (
                             signal.name, person, self.name))
-
-                    csv_file = self.signal_folder + '/eda_csv/' + person + '_eda.csv'
-                    df = pd.read_csv(csv_file)
-
-                    if '_' in subject:
-                        values = df.loc[session, :].values.flatten().tolist()
-                    else:
-                        values = df.values.flatten().tolist()
-
-                    fps = int(len(values) / 6)
-                    signal.raw.append({'data': values, 'fps': fps})
+                        csv_file = self.signal_folder + '/eda_csv/' + person + '_eda.csv'
+                        df = pd.read_csv(csv_file)
+                        for i in df.index:
+                            values = df.loc[i, :].values.flatten().tolist()
+                            fps = int(len(values) / 6)
+                            signal.raw.append({'data': values, 'fps': fps})
                     # print(signal.raw[:10])
 
             elif signal.name == 'PUPIL':
@@ -67,21 +69,21 @@ class FEAR(Dataset):
                         print(">> Loading %s for subject %s and session %s from dataset %s" % (
                             signal.name, person, session, self.name))
                         session = int(session) - 1
+                        csv_file = self.signal_folder + '/pupil_csv/' + person + '_pupil.csv'
+                        df = pd.read_csv(csv_file)
+                        values = df.loc[session, :].values.flatten().tolist()
+                        fps = int(len(values) / 5)
+                        signal.raw.append({'data': values, 'fps': fps})
                     else:
                         person = subject
                         print(">> Loading %s for subject %s and all sessions from dataset %s" % (
                             signal.name, person, self.name))
-
-                    csv_file = self.signal_folder + '/pupil_csv/' + person + '_pupil.csv'
-                    df = pd.read_csv(csv_file)
-
-                    if '_' in subject:
-                        values = df.loc[session, :].values.flatten().tolist()
-                    else:
-                        values = df.values.flatten().tolist()
-
-                    fps = int(len(values) / 5)
-                    signal.raw.append({'data': values, 'fps': fps})
+                        csv_file = self.signal_folder + '/pupil_csv/' + person + '_pupil.csv'
+                        df = pd.read_csv(csv_file)
+                        for i in df.index:
+                            values = df.loc[i, :].values.flatten().tolist()
+                            fps = int(len(values) / 5)
+                            signal.raw.append({'data': values, 'fps': fps})
                     #print(signal.raw[:10])
 
             elif signal.name == 'HR':
@@ -93,21 +95,22 @@ class FEAR(Dataset):
                         print(">> Loading %s for subject %s and session %s from dataset %s" % (
                             signal.name, person, session, self.name))
                         session = int(session) - 1
+                        csv_file = self.signal_folder + '/hr_csv/' + person + '_hr.csv'
+                        df = pd.read_csv(csv_file)
+                        values = df.loc[session, :].values.flatten().tolist()
+                        fps = int(len(values) / 6)
+                        signal.raw.append({'data': values, 'fps': fps})
+
                     else:
                         person = subject
                         print(">> Loading %s for subject %s and all sessions from dataset %s" % (
                             signal.name, person, self.name))
-
-                    csv_file = self.signal_folder + '/hr_csv/' + person + '_hr.csv'
-                    df = pd.read_csv(csv_file)
-
-                    if '_' in subject:
-                        values = df.loc[session, :].values.flatten().tolist()
-                    else:
-                        values = df.values.flatten().tolist()
-
-                    fps = int(len(values) / 6)
-                    signal.raw.append({'data': values, 'fps': fps})
+                        csv_file = self.signal_folder + '/hr_csv/' + person + '_hr.csv'
+                        df = pd.read_csv(csv_file)
+                        for i in df.index:
+                            values = df.loc[i, :].values.flatten().tolist()
+                            fps = int(len(values) / 6)
+                            signal.raw.append({'data': values, 'fps': fps})
                     #print(signal.raw[:10])
 
             else:
