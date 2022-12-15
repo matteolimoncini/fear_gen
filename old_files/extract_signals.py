@@ -103,8 +103,8 @@ def extract_feature_basic(sliding_window, type_: str, subject: int, frequency: i
 
 
 if __name__ == '__main__':
-    path = 'prova.npy'
+    path = '../prova.npy'
     '''if not os.path.exists(path):
         export_data_to_npy('prova.npy', 1)'''
-    data = np.load('prova.npy', allow_pickle=True).item()
+    data = np.load('../prova.npy', allow_pickle=True).item()
     print(data.keys())
