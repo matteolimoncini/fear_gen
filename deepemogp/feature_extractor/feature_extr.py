@@ -178,8 +178,8 @@ class FE(object):
             self.params['w_maxlev'] = pywt.dwt_max_level(len(chunk), w.dec_len)
 
         self.params['w_lenchunk'] = len(chunk)
-        print('params: ')
-        print(self.params['w_lenchunk'])
+        # print('params: ')
+        # print(self.params['w_lenchunk'])
 
         # extract only the wavelet approximation coefficient from
         # the latest meaningful level
