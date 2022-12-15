@@ -15,6 +15,16 @@ class HR(Signal):
         pre process HR signal
         '''
 
+        '''
+        ecg_cleaned = nk.ecg_clean(raw['data'], sampling_rate=500)
+
+        peaks, info = nk.ecg_peaks(ecg_cleaned, sampling_rate=500, correct_artifacts=True)
+
+        # Compute HRV indices
+
+        hrv_indices = nk.hrv(peaks, sampling_rate=500, show=True)
+        '''
+
         if useneurokit:
             print(">> Processing %s ... using neurokit" % (self.name))
             for raw in self.raw:
