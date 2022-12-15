@@ -17,9 +17,12 @@ class HR(Signal):
 
         if useneurokit:
             print(">> Processing %s ... using neurokit" % (self.name))
-            df, info = nk.ecg_process(list(self.raw[0]['data']))
-            tmp_HR = df['ECG_Rate']
-            new_fps = 500
+            for raw in self.raw:
+                df, info = nk.ecg_process(list(raw['data']))
+                tmp_HR = df['ECG_Rate']
+                new_fps = 500
+                self.processed.append({'data': tmp_HR, 'fps': new_fps})
+
 
         else:
             print(">> Processing %s ... without neurokit only resample" % (self.name))
@@ -29,5 +32,4 @@ class HR(Signal):
 
                 # down-sample data
                 tmp_HR = utils.resample(raw['data'], raw['fps'], new_fps)
-
-        self.processed.append({'data': tmp_HR, 'fps': new_fps})
+                self.processed.append({'data': tmp_HR, 'fps': new_fps})
