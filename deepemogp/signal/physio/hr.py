@@ -1,6 +1,7 @@
 from ..signal import Signal
 from ..utils import utils
 from ...feature_extractor import FE
+import neurokit2 as nk
 
 
 class HR(Signal):
@@ -9,17 +10,24 @@ class HR(Signal):
     def __init__(self, feature_ext=FE()):
         super(HR, self).__init__('HR', feature_ext)
 
-    def preprocess(self, new_fps=25, show=False):
+    def preprocess(self, new_fps=25, show=False, useneurokit=False):
         '''
         pre process HR signal
         '''
 
-        print(">> Processing %s ..." % (self.name))
+        if useneurokit:
+            print(">> Processing %s ... using neurokit" % (self.name))
+            df, info = nk.ecg_process(list(self.raw[0]['data']))
+            tmp_HR = df['ECG_Rate']
+            new_fps = 500
 
-        for raw in self.raw:  # for each raw data series
-            # Heart Rate can be already considered a feature
+        else:
+            print(">> Processing %s ... without neurokit only resample" % (self.name))
 
-            # down-sample data
-            tmp_HR = utils.resample(raw['data'], raw['fps'], new_fps)
+            for raw in self.raw:  # for each raw data series
+                # Heart Rate can be already considered a feature
 
-            self.processed.append({'data': tmp_HR, 'fps': new_fps})
+                # down-sample data
+                tmp_HR = utils.resample(raw['data'], raw['fps'], new_fps)
+
+        self.processed.append({'data': tmp_HR, 'fps': new_fps})
