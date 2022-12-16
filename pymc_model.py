@@ -19,7 +19,12 @@ SUBJECT = input("subject list to extract:")
 subj_ = int(SUBJECT)
 num_trials_to_remove = int(input("Number of trials to remove: "))
 extraction_method = str(input("Extraction method (wavelet/mean)"))
-latent_space = int(input("Latent space dimension:"))
+latent_space = int(input("Latent space dimension: "))
+use_sampling = input("Use sampling? y/n: ")
+if use_sampling == 'y':
+    use_sampling = True
+else:
+    use_sampling = False
 
 if subj_ > 10:
     subj_ = str(SUBJECT)
@@ -68,7 +73,7 @@ pupil_ = behavior.PUPIL(f2)
 
 
 # extraction of the desired data from the dataset
-d = datasets.FEAR(signals={hr_,pupil_,eda_}, subjects={subj_})
+d = datasets.FEAR(signals={hr_,pupil_,eda_}, subjects={SUBJECT})
 
 for s in d.signals:
     # preprocess ...
@@ -171,8 +176,14 @@ with pm.Model() as sPPCA:
 
 gv = pm.model_to_graphviz(sPPCA)
 
-with sPPCA:
-    trace = pm.sample(1000,init='advi+adapt_diag',chains=1,progressbar=False,target_accept=0.95)
+
+if use_sampling:
+    with sPPCA:
+        trace = pm.sample(1000,init='advi+adapt_diag',chains=1,progressbar=False,target_accept=0.95)
+else:
+    with sPPCA:
+        approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+        trace = approx.sample(500)
 
 #az.plot_trace(trace);
 with sPPCA:
