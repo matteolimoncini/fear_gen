@@ -23,6 +23,8 @@ notvalid = [x for x in range(34, 41)]
 notvalid= notvalid + [9,11,12,20]
 valid_patients_hr = [ele for ele in range(1, 56) if ele not in notvalid]
 
+
+
 # variabili globali
 NUM_TRIALS = 160
 LATENCY_HR = 250
@@ -31,6 +33,23 @@ LATENCY_PUPIL = 1000
 SAMPLING_RATE_HR = 500
 SAMPLING_RATE_EDA = 500
 SAMPLING_RATE_PUPIL = 100
+
+def extract_only_valid_subject():
+    valid_final = []
+    for i in valid_pupil_eda:
+        df = pd.read_csv('/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/data/sync_signals/eda_csv/' + str(
+            i) + '_eda.csv')
+        if df.shape[0] == 160:
+            valid_final.append(i)
+    return valid_final
+
+
+def read_correct_subject_csv(subject):
+    if subject < 10:
+        return '0'+str(subject)
+    else:
+        return subject
+
 
 # physio signals functions
 

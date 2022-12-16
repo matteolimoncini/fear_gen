@@ -8,13 +8,15 @@ from sklearn.preprocessing import StandardScaler
 from scipy import stats
 import pandas as pd
 import logging
+import extract_correct_csv
 
 
 scaler = StandardScaler()
 
 #parametri
 
-# argv1 = subj, argv2 = #trial da escludere, argv3 = extraction method
+all_valid_subject = extract_correct_csv.extract_only_valid_subject()
+
 SUBJECT = input("subject list to extract:")
 subj_ = int(SUBJECT)
 num_trials_to_remove = int(input("Number of trials to remove: "))
@@ -26,10 +28,7 @@ if use_sampling == 'y':
 else:
     use_sampling = False
 
-if subj_ > 10:
-    subj_ = str(SUBJECT)
-else:
-    subj_ = '0'+str(SUBJECT)
+subj_ = extract_correct_csv.read_correct_subject_csv(SUBJECT)
 # extract data rating
 
 csv_ = '/Users/marcoghezzi/PycharmProjects/pythonProject/osfstorage-archive/behavior/LookAtMe_0'+subj_+'.csv'
