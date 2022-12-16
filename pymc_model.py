@@ -33,7 +33,7 @@ else:
 # extract data rating
 
 csv_ = '/Users/marcoghezzi/PycharmProjects/pythonProject/osfstorage-archive/behavior/LookAtMe_0'+subj_+'.csv'
-#csv_ = '/home/paolo/matteo/matteo/unimi/tesi_master/code/osfstorage-archive/behavior/LookAtMe_045.csv'
+# csv_ = '/home/paolo/matteo/matteo/unimi/tesi_master/code/osfstorage-archive/behavior/LookAtMe_0'+subj_+'.csv'
 global_data = pd.read_csv(csv_, sep='\t')
 y = np.array(list([int(d>2) for d in global_data['rating']]))
 e_labels = y[:,np.newaxis]  # rating > 2
