@@ -19,11 +19,11 @@ all_valid_subject = extract_correct_csv.extract_only_valid_subject()
 
 # SUBJECT = input("subject list to extract:")
 # subj_ = int(SUBJECT)
-num_trials_to_remove = int(input("Number of trials to remove: "))
-extraction_method = str(input("Extraction method (wavelet/mean)"))
-latent_space = int(input("Latent space dimension max: "))
-list_latent_space = [range(1, latent_space)]
-use_sampling = input("Use sampling? y/n: ")
+num_trials_to_remove = 16  # int(input("Number of trials to remove: "))
+extraction_method = 'wavelet'  # str(input("Extraction method (wavelet/mean)"))
+latent_space = 5  # int(input("Latent space dimension max: "))
+list_latent_space = np.arange(1, latent_space)
+use_sampling = 'n'  # input("Use sampling? y/n: ")
 if use_sampling == 'y':
     use_sampling = True
 else:
@@ -32,22 +32,24 @@ else:
     logging.basicConfig(level=logging.DEBUG, filename="logfile", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
 
-for SUBJECT in tqdm(all_valid_subject):
+for SUBJECT in all_valid_subject:
     logging.info("\n\n\n ---- CHANGE SUBJECT ---- \n\n\n")
-    logging.info("\n\nSubject number: " + SUBJECT + " Latent space dimension: " + str(
-        K) + " feat extraction: " + extraction_method + " using sampling: " + str(use_sampling))
+    logging.info("\n\nSubject number: " + str(
+        SUBJECT) + " Latent space dimension: " + " feat extraction: " + extraction_method + " using sampling: " + str(
+        use_sampling))
 
     for latent_space in list_latent_space:
 
         logging.info("\n\n ---- CHANGE K ---- \n\n")
-        logging.info("\n\nSubject number: " + SUBJECT + " Latent space dimension: " + str(
-            K) + " feat extraction: " + extraction_method + " using sampling: " + str(use_sampling))
+        logging.info("\n\nSubject number: " + str(
+            SUBJECT) + " Latent space dimension: " + " feat extraction: " + extraction_method + " using sampling: " + str(
+            use_sampling))
 
         subj_ = extract_correct_csv.read_correct_subject_csv(SUBJECT)
         # extract data rating
 
         csv_ = '/Users/marcoghezzi/PycharmProjects/pythonProject/osfstorage-archive/behavior/LookAtMe_0' + subj_ + '.csv'
-        # csv_ = '/home/paolo/matteo/matteo/unimi/tesi_master/code/osfstorage-archive/behavior/LookAtMe_0'+subj_+'.csv'
+        csv_ = '/home/paolo/matteo/matteo/unimi/tesi_master/code/osfstorage-archive/behavior/LookAtMe_0' + subj_ + '.csv'
         global_data = pd.read_csv(csv_, sep='\t')
         y = np.array(list([int(d > 2) for d in global_data['rating']]))
         e_labels = y[:, np.newaxis]  # rating > 2
@@ -85,7 +87,7 @@ for SUBJECT in tqdm(all_valid_subject):
         pupil_ = behavior.PUPIL(f2)
 
         # extraction of the desired data from the dataset
-        d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects={SUBJECT})
+        d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects={str(SUBJECT)})
 
         for s in d.signals:
             # preprocess ...
@@ -209,4 +211,5 @@ for SUBJECT in tqdm(all_valid_subject):
 
         train_accuracy_exp = accuracy_score(e_labels, e_pred_mode)
 
-        logging.info("\n Subject number: " + SUBJECT + " Train Accuracy Pain Expectation: " + str(train_accuracy_exp))
+        logging.info(
+            "\n Subject number: " + str(SUBJECT) + " Train Accuracy Pain Expectation: " + str(train_accuracy_exp))

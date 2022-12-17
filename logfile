@@ -1352,3 +1352,47 @@
 2022-12-17 13:17:49,716 INFO     Interrupted at 54,148 [54%]: Average Loss = 1.1306e+10
 2022-12-17 13:17:55,565 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2022-12-17 13:19:11,755 INFO     Interrupted at 836 [0%]: Average Loss = 1.5268e+10
+2022-12-17 20:36:53,560 INFO     Finished [100%]: Average Loss = 3.6072e+09
+2022-12-17 20:36:57,538 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:39:48,082 INFO     Finished [100%]: Average Loss = 5.3338e+07
+2022-12-17 20:39:52,961 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:42:50,178 INFO     Finished [100%]: Average Loss = 3.9339e+07
+2022-12-17 20:42:55,725 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:46:13,746 INFO     Finished [100%]: Average Loss = 3.6346e+07
+2022-12-17 20:46:23,980 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:47:31,739 DEBUG    Attempting to acquire lock 140323302139552 on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
+2022-12-17 20:47:31,740 DEBUG    Lock 140323302139552 acquired on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
+2022-12-17 20:47:32,944 DEBUG    Attempting to release lock 140323302139552 on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
+2022-12-17 20:47:32,948 DEBUG    Lock 140323302139552 released on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
+2022-12-17 20:47:33,456 DEBUG    deprecate positional args: graphviz.backend.piping.pipe(['renderer', 'formatter', 'neato_no_op', 'quiet'])
+2022-12-17 20:47:33,459 DEBUG    deprecate positional args: graphviz.backend.rendering.render(['renderer', 'formatter', 'neato_no_op', 'quiet'])
+2022-12-17 20:47:33,462 DEBUG    deprecate positional args: graphviz.backend.unflattening.unflatten(['stagger', 'fanout', 'chain', 'encoding'])
+2022-12-17 20:47:33,464 DEBUG    deprecate positional args: graphviz.backend.viewing.view(['quiet'])
+2022-12-17 20:47:33,475 DEBUG    deprecate positional args: graphviz.quoting.quote(['is_html_string', 'is_valid_id', 'dot_keywords', 'endswith_odd_number_of_backslashes', 'escape_unescaped_quotes'])
+2022-12-17 20:47:33,475 DEBUG    deprecate positional args: graphviz.quoting.a_list(['kwargs', 'attributes'])
+2022-12-17 20:47:33,475 DEBUG    deprecate positional args: graphviz.quoting.attr_list(['kwargs', 'attributes'])
+2022-12-17 20:47:33,476 DEBUG    deprecate positional args: graphviz.dot.Dot.clear(['keep_attrs'])
+2022-12-17 20:47:33,477 DEBUG    deprecate positional args: graphviz.dot.Dot.__iter__(['subgraph'])
+2022-12-17 20:47:33,477 DEBUG    deprecate positional args: graphviz.dot.Dot.node(['_attributes'])
+2022-12-17 20:47:33,477 DEBUG    deprecate positional args: graphviz.dot.Dot.edge(['_attributes'])
+2022-12-17 20:47:33,477 DEBUG    deprecate positional args: graphviz.dot.Dot.attr(['_attributes'])
+2022-12-17 20:47:33,478 DEBUG    deprecate positional args: graphviz.dot.Dot.subgraph(['name', 'comment', 'graph_attr', 'node_attr', 'edge_attr', 'body'])
+2022-12-17 20:47:33,481 DEBUG    deprecate positional args: graphviz.piping.Pipe._pipe_legacy(['renderer', 'formatter', 'neato_no_op', 'quiet'])
+2022-12-17 20:47:33,485 DEBUG    deprecate positional args: graphviz.saving.Save.save(['directory'])
+2022-12-17 20:47:33,485 DEBUG    deprecate positional args: graphviz.rendering.Render.render(['directory', 'view', 'cleanup', 'format', 'renderer', 'formatter', 'neato_no_op', 'quiet', 'quiet_view'])
+2022-12-17 20:47:33,485 DEBUG    deprecate positional args: graphviz.rendering.Render.view(['directory', 'cleanup', 'quiet', 'quiet_view'])
+2022-12-17 20:47:33,488 DEBUG    deprecate positional args: graphviz.unflattening.Unflatten.unflatten(['stagger', 'fanout', 'chain'])
+2022-12-17 20:47:33,488 DEBUG    deprecate positional args: graphviz.graphs.BaseGraph.__init__(['comment', 'filename', 'directory', 'format', 'engine', 'encoding', 'graph_attr', 'node_attr', 'edge_attr', 'body', 'strict'])
+2022-12-17 20:47:33,490 DEBUG    deprecate positional args: graphviz.sources.Source.from_file(['directory', 'format', 'engine', 'encoding', 'renderer', 'formatter'])
+2022-12-17 20:47:33,491 DEBUG    deprecate positional args: graphviz.sources.Source.__init__(['filename', 'directory', 'format', 'engine', 'encoding'])
+2022-12-17 20:47:33,491 DEBUG    deprecate positional args: graphviz.sources.Source.save(['directory'])
+2022-12-17 20:51:16,526 INFO     Finished [100%]: Average Loss = 3.6072e+09
+2022-12-17 20:51:26,542 INFO     Finished [100%]: Average Loss = 2.0329e+09
+2022-12-17 20:51:26,880 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:51:31,163 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:53:34,509 INFO     Finished [100%]: Average Loss = 1.8705e+07
+2022-12-17 20:53:38,746 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:55:50,519 INFO     Finished [100%]: Average Loss = 1.6422e+07
+2022-12-17 20:55:54,730 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-17 20:58:07,803 INFO     Finished [100%]: Average Loss = 1.3841e+07
+2022-12-17 20:58:11,755 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
