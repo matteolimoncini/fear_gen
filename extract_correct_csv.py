@@ -45,10 +45,10 @@ def extract_only_valid_subject():
 
 
 def read_correct_subject_csv(subject):
-    if subject < 10:
+    if int(subject) < 10:
         return '0'+str(subject)
     else:
-        return subject
+        return str(subject)
 
 
 # physio signals functions

@@ -1,4 +1,6 @@
 2022-12-16 15:19:45,763 INFO     Subject number: + 45Train Accuracy Pain Expectation: 0.65625
+2022-12-16 15:40:24,977 INFO     Subject number: 2 Train Accuracy Pain Expectation: 0.5138888888888888
+2022-12-16 15:50:02,341 INFO     Subject number: 2 Train Accuracy Pain Expectation: 0.4930555555555556
 2022-12-17 12:05:09,558 DEBUG    Attempting to acquire lock 140546051470768 on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
 2022-12-17 12:05:09,559 DEBUG    Lock 140546051470768 acquired on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
 2022-12-17 12:05:10,354 DEBUG    Attempting to release lock 140546051470768 on /home/paolo/.aesara/compiledir_Linux-5.4--generic-x86_64-with-glibc2.29-x86_64-3.8.10-64/.lock
@@ -1396,3 +1398,5 @@
 2022-12-17 20:55:54,730 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2022-12-17 20:58:07,803 INFO     Finished [100%]: Average Loss = 1.3841e+07
 2022-12-17 20:58:11,755 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2022-12-20 16:13:54,971 INFO     Subject number: 2 Latent space dimension: 1 feat extraction: wavelet using sampling: False Train Accuracy Pain Expectation: 0.5138888888888888
+
