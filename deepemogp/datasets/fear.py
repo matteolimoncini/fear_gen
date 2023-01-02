@@ -6,9 +6,10 @@ from scipy import io
 
 class FEAR(Dataset):
     # path of the directory containing physiological signals
-    signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/sync_signals'
+    # signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/sync_signals'
 
     # signal_folder = '/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/data/sync_signals'
+    signal_folder = 'data/sync_signals'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):
         super(FEAR, self).__init__(name, signals, subjects, annotations=None)
