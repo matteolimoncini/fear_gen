@@ -10,7 +10,7 @@ from scipy import stats
 
 #
 notvalid = [x for x in range(34,41)]
-notvalid.extend([3, 9, 11, 20, 25, 42])
+notvalid.extend([3, 9, 11, 20, 25, 42, 19])
 valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
 
 notvalid = [x for x in range(34,41)]
@@ -37,7 +37,7 @@ SAMPLING_RATE_PUPIL = 100
 def extract_only_valid_subject():
     valid_final = []
     for i in valid_pupil_eda:
-        df = pd.read_csv('/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/sync_signals/eda_csv/' + str(
+        df = pd.read_csv('data/sync_signals/eda_csv/' + str(
             i) + '_eda.csv')
         if df.shape[0] == 160:
             valid_final.append(i)
