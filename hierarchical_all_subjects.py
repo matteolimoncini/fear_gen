@@ -39,8 +39,13 @@ for i in valid_subject:
     f3 = feature_extractor.FE('mean', window=(1, 0))
 
     # definition of the physiological signals to be extracted
-    eda_ = physio.EDA(f3)
-    hr_ = physio.HR(f3)
+    extraction_method_physio = "wavelet"
+    if extraction_method_physio == 'wavelet':
+        eda_ = physio.EDA(f2)
+        hr_ = physio.HR(f2)
+    else:
+        eda_ = physio.EDA(f3)
+        hr_ = physio.HR(f3)
     pupil_ = behavior.PUPIL(f3)
 
     # extraction of the desired data from the dataset
@@ -162,7 +167,8 @@ for i in valid_subject:
     logging.basicConfig(level=logging.INFO, filename="logfile", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
     logging.info("Subject number: " + str(i) + " Train Accuracy Pain Expectation: " + str(train_accuracy_exp) + " script: " +
-                 os.path.basename(__file__))
+                 os.path.basename(__file__) + ", feature extraction method HR and EDA: " + extraction_method_physio +
+                 ', feature extraction method PUPIL: mean')
 
 
 
