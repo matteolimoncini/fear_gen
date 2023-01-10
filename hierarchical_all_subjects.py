@@ -4,7 +4,6 @@ import os.path
 import numpy as np
 import pymc as pm
 import aesara.tensor as at
-import arviz as az
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 from scipy import stats
@@ -46,24 +45,27 @@ for i in valid_subject:
 
     # extraction of the desired data from the dataset
     d = datasets.FEAR(signals={hr_,pupil_,eda_}, subjects={str(i)})
-
-    for s in d.signals:
-        # preprocess ...
-        if s.name == 'EDA':
-            s.preprocess(show=show,new_fps=500)
-            s.feature_ext.extract_feat(s,show=show)
-        else:
-            if s.name == 'HR':
-                list_hr_test = s.raw[0]['data']
-                s.preprocess(show=show, useneurokit=True)
+    try:
+        for s in d.signals:
+            # preprocess ...
+            if s.name == 'EDA':
+                s.preprocess(show=show,new_fps=500)
                 s.feature_ext.extract_feat(s,show=show)
-
             else:
-                s.feature_ext.extract_feat_without_preprocess(s, show=show)
+                if s.name == 'HR':
+                    list_hr_test = s.raw[0]['data']
+                    s.preprocess(show=show, useneurokit=True)
+                    s.feature_ext.extract_feat(s,show=show)
 
-        #add feature extraction for eda before preprocessing
+                else:
+                    s.feature_ext.extract_feat_without_preprocess(s, show=show)
 
-        # ... and extract features from each signal type
+            #add feature extraction for eda before preprocessing
+
+            # ... and extract features from each signal type
+    except:
+        logging.info('Subject ' + str(i) + ' skipped: preprocess failed')
+        continue
 
 
     for sig in d.signals:
