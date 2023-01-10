@@ -91,7 +91,6 @@ pure-eval==0.2.2
 pycparser==2.21
 Pygments==2.13.0
 pymc==4.2.2
-pymc3==3.11.5
 pyparsing==3.0.9
 pyreadr==0.4.7
 pyrsistent==0.18.1

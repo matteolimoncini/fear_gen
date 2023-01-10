@@ -1400,3 +1400,71 @@
 2022-12-17 20:58:11,755 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2022-12-20 16:13:54,971 INFO     Subject number: 2 Latent space dimension: 1 feat extraction: wavelet using sampling: False Train Accuracy Pain Expectation: 0.5138888888888888
 
+2023-01-09 16:16:43,762 INFO     Subject number: 2 Train Accuracy Pain Expectation: 0.59375 script: hierarchical_all_subjects.py
+2023-01-09 16:19:41,056 INFO     Finished [100%]: Average Loss = 45,333
+2023-01-09 16:19:48,311 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-09 16:19:48,588 INFO     Subject number: 4 Train Accuracy Pain Expectation: 0.51875 script: hierarchical_all_subjects.py
+2023-01-09 16:22:52,746 INFO     Finished [100%]: Average Loss = 46,997
+2023-01-09 16:23:00,151 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-09 16:23:00,431 INFO     Subject number: 10 Train Accuracy Pain Expectation: 0.61875 script: hierarchical_all_subjects.py
+2023-01-10 09:47:54,414 INFO     Subject number: 2 Train Accuracy Pain Expectation: 0.59375 script: hierarchical_all_subjects.py
+2023-01-10 09:50:52,851 INFO     Finished [100%]: Average Loss = 45,333
+2023-01-10 09:51:00,218 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 09:51:00,498 INFO     Subject number: 4 Train Accuracy Pain Expectation: 0.51875 script: hierarchical_all_subjects.py
+2023-01-10 09:54:06,537 INFO     Finished [100%]: Average Loss = 46,997
+2023-01-10 09:54:13,762 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 09:54:14,040 INFO     Subject number: 10 Train Accuracy Pain Expectation: 0.61875 script: hierarchical_all_subjects.py
+2023-01-10 11:17:11,027 INFO     Subject number: 2 Train Accuracy Pain Expectation: 0.59375 script: hierarchical_all_subjects.py
+2023-01-10 11:20:07,849 INFO     Finished [100%]: Average Loss = 45,333
+2023-01-10 11:20:15,093 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:20:15,367 INFO     Subject number: 4 Train Accuracy Pain Expectation: 0.51875 script: hierarchical_all_subjects.py
+2023-01-10 11:23:20,241 INFO     Finished [100%]: Average Loss = 46,997
+2023-01-10 11:23:27,401 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:23:27,676 INFO     Subject number: 10 Train Accuracy Pain Expectation: 0.61875 script: hierarchical_all_subjects.py
+2023-01-10 11:24:21,789 INFO     Subject 22 skipped: preprocess failed
+2023-01-10 11:25:02,425 INFO     Subject 24 skipped: preprocess failed
+2023-01-10 11:26:00,736 INFO     Subject 30 skipped: preprocess failed
+2023-01-10 11:26:33,332 INFO     Subject 32 skipped: preprocess failed
+2023-01-10 11:27:05,927 INFO     Subject 33 skipped: preprocess failed
+2023-01-10 11:30:04,297 INFO     Finished [100%]: Average Loss = 48,260
+2023-01-10 11:30:11,616 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:30:11,898 INFO     Subject number: 41 Train Accuracy Pain Expectation: 0.64375 script: hierarchical_all_subjects.py
+2023-01-10 11:33:09,260 INFO     Finished [100%]: Average Loss = 49,746
+2023-01-10 11:33:16,505 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:33:16,780 INFO     Subject number: 43 Train Accuracy Pain Expectation: 0.58125 script: hierarchical_all_subjects.py
+2023-01-10 11:36:11,491 INFO     Finished [100%]: Average Loss = 48,896
+2023-01-10 11:36:18,841 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:36:19,114 INFO     Subject number: 44 Train Accuracy Pain Expectation: 0.60625 script: hierarchical_all_subjects.py
+2023-01-10 11:39:16,406 INFO     Finished [100%]: Average Loss = 44,564
+2023-01-10 11:39:23,644 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:39:23,921 INFO     Subject number: 45 Train Accuracy Pain Expectation: 0.725 script: hierarchical_all_subjects.py
+2023-01-10 11:42:21,254 INFO     Finished [100%]: Average Loss = 48,223
+2023-01-10 11:42:28,626 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:42:28,898 INFO     Subject number: 46 Train Accuracy Pain Expectation: 0.625 script: hierarchical_all_subjects.py
+2023-01-10 11:45:26,840 INFO     Finished [100%]: Average Loss = 46,249
+2023-01-10 11:45:34,082 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:45:34,359 INFO     Subject number: 47 Train Accuracy Pain Expectation: 0.7125 script: hierarchical_all_subjects.py
+2023-01-10 11:48:32,603 INFO     Finished [100%]: Average Loss = 44,230
+2023-01-10 11:48:39,852 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:48:40,130 INFO     Subject number: 48 Train Accuracy Pain Expectation: 0.8 script: hierarchical_all_subjects.py
+2023-01-10 11:51:35,307 INFO     Finished [100%]: Average Loss = 42,977
+2023-01-10 11:51:42,547 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:51:42,817 INFO     Subject number: 49 Train Accuracy Pain Expectation: 0.60625 script: hierarchical_all_subjects.py
+2023-01-10 11:54:38,038 INFO     Finished [100%]: Average Loss = 43,832
+2023-01-10 11:54:45,259 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:54:45,532 INFO     Subject number: 50 Train Accuracy Pain Expectation: 0.5375 script: hierarchical_all_subjects.py
+2023-01-10 11:57:40,701 INFO     Finished [100%]: Average Loss = 35,371
+2023-01-10 11:57:47,902 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 11:57:48,172 INFO     Subject number: 51 Train Accuracy Pain Expectation: 0.625 script: hierarchical_all_subjects.py
+2023-01-10 12:00:44,595 INFO     Finished [100%]: Average Loss = 43,053
+2023-01-10 12:00:51,833 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 12:00:52,105 INFO     Subject number: 52 Train Accuracy Pain Expectation: 0.65625 script: hierarchical_all_subjects.py
+2023-01-10 12:03:51,665 INFO     Finished [100%]: Average Loss = 41,159
+2023-01-10 12:03:58,889 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 12:03:59,162 INFO     Subject number: 53 Train Accuracy Pain Expectation: 0.55625 script: hierarchical_all_subjects.py
+2023-01-10 12:06:57,076 INFO     Finished [100%]: Average Loss = 47,851
+2023-01-10 12:07:04,356 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 12:07:04,630 INFO     Subject number: 54 Train Accuracy Pain Expectation: 0.60625 script: hierarchical_all_subjects.py
+2023-01-10 12:10:00,044 INFO     Finished [100%]: Average Loss = 41,340
+2023-01-10 12:10:06,948 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-10 12:10:07,224 INFO     Subject number: 55 Train Accuracy Pain Expectation: 0.59375 script: hierarchical_all_subjects.py
