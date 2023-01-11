@@ -168,7 +168,7 @@ for i in valid_subject:
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
     logging.info("Subject number: " + str(i) + " Train Accuracy Pain Expectation: " + str(train_accuracy_exp) + " script: " +
                  os.path.basename(__file__) + ", feature extraction method HR and EDA: " + extraction_method_physio +
-                 ', feature extraction method PUPIL: mean')
+                 ', feature extraction method PUPIL: mean, latent space dimension: ' + K)
 
 
 
