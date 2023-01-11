@@ -173,8 +173,6 @@ with pm.Model(coords=coords) as sPPCA:
     # p = probability of success?
     x_e = pm.Bernoulli('x_e' , p=pm.math.sigmoid(c.dot(We.T)), shape=[N_e,D_e], observed=e_data)
 
-gv = pm.model_to_graphviz(sPPCA)
-gv.view('hierarchical_model_final')
 
 with sPPCA:
     approx = pm.fit(10000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])

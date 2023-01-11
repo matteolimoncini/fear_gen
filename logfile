@@ -1468,3 +1468,4 @@
 2023-01-10 12:10:00,044 INFO     Finished [100%]: Average Loss = 41,340
 2023-01-10 12:10:06,948 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2023-01-10 12:10:07,224 INFO     Subject number: 55 Train Accuracy Pain Expectation: 0.59375 script: hierarchical_all_subjects.py
+2023-01-11 17:42:56,721 INFO     Train Accuracy Pain Expectation using all valid subjects: 0.4886029411764706 script: test_model_hierarchical_server.pylatent space dimension: 3
