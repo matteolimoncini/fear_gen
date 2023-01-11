@@ -1,16 +1,11 @@
 # import
 
-import csv
-import neurokit2 as nk
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-import matplotlib
-from scipy import stats
 
 #
 notvalid = [x for x in range(34,41)]
-notvalid.extend([3, 9, 11, 20, 25, 42, 19])
+notvalid.extend([3, 9, 11, 19, 20, 21, 22, 24, 25, 30, 32, 33, 42])
 valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
 
 notvalid = [x for x in range(34,41)]
