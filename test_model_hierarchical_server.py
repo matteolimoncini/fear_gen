@@ -27,12 +27,15 @@ prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 
 global_e_labels = []
 global_subject = []
+num_trials_to_remove = 48
+
 for i in prova_3_subj:
     subj_ = extract_correct_csv.read_correct_subject_csv(i)
-    csv_ = 'data/LookAtMe_0'+str(subj_)+'.csv'
+    csv_ = 'data/LookAtMe_0' + str(subj_) + '.csv'
     global_data = pd.read_csv(csv_, sep='\t')
-    y = np.array(list([int(d>2) for d in global_data['rating']]))
-    e_labels = y[:,np.newaxis]  # rating > 2
+    y = np.array(list([int(d > 2) for d in global_data['rating']]))
+    e_labels = y[:, np.newaxis]  # rating > 2
+    e_labels = e_labels[num_trials_to_remove:]
     global_e_labels = global_e_labels + e_labels.tolist()
     subject = np.array(list([s for s in global_data['subject']]))[:, np.newaxis]
     global_subject = global_subject + subject.tolist()
@@ -56,21 +59,21 @@ subj_def = global_subject_df.replace(subject_dict).values
 show = False
 # definition of the feature extractors to be used later
 f2 = feature_extractor.FE('wavelet', window=(2, 1))
-f3 = feature_extractor.FE('mean', window=(1,0))
+f3 = feature_extractor.FE('mean', window=(1, 0))
 
 # definition of the physiological signals to be extracted
-eda_ = physio.EDA(f3)
-hr_ = physio.HR(f3)
+eda_ = physio.EDA(f2)
+hr_ = physio.HR(f2)
 pupil_ = behavior.PUPIL(f3)
 
 # extraction of the desired data from the dataset
 elenco_subj = ([str(d) for d in prova_3_subj])
-d = datasets.FEAR(signals={hr_,pupil_,eda_}, subjects=set(elenco_subj))
+d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects=set(elenco_subj))
 
 for s in d.signals:
     # preprocess ...
-    if s.name =='EDA':
-        s.preprocess(show=show,new_fps=500)
+    if s.name == 'EDA':
+        s.preprocess(show=show, new_fps=500)
         s.feature_ext.extract_feat(s,show=show)
     else:
         if s.name == 'HR':
@@ -97,13 +100,16 @@ for sig in d.signals:
 TRIAL = 160*len(prova_3_subj)
 
 hr = np.array(hr_data)
-hr = hr.reshape((TRIAL, int(hr.shape[0]/TRIAL*hr.shape[1])))
+hr = hr.reshape((TRIAL, int(hr.shape[0] / TRIAL * hr.shape[1])))
+hr = hr[num_trials_to_remove:]
 
 pupil = np.array(pupil_data)
-pupil = pupil.reshape((TRIAL, int(pupil.shape[0]/TRIAL*pupil.shape[1])))
+pupil = pupil.reshape((TRIAL, int(pupil.shape[0] / TRIAL * pupil.shape[1])))
+pupil = pupil[num_trials_to_remove:]
 
 eda = np.array(eda_data)
-eda = eda.reshape((TRIAL,int(eda.shape[0]/TRIAL*eda.shape[1])))
+eda = eda.reshape((TRIAL, int(eda.shape[0] / TRIAL * eda.shape[1])))
+eda = eda[num_trials_to_remove:]
 
 N_pupil = pupil.shape[0]
 D_pupil = pupil.shape[1]
