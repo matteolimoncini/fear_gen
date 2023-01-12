@@ -97,19 +97,25 @@ for sig in d.signals:
     if sig.name=='PUPIL':
         pupil_data = sig.features
 
-TRIAL = 160*len(prova_3_subj)
+NUM_TRIAL = 160
+TRIAL = NUM_TRIAL*len(prova_3_subj)
 
-hr = np.array(hr_data)
-hr = hr.reshape((TRIAL, int(hr.shape[0] / TRIAL * hr.shape[1])))
-hr = hr[num_trials_to_remove:]
+def populate_array(x, name):
+    return name[NUM_TRIAL*(x-1)+num_trials_to_remove:NUM_TRIAL*x]
 
-pupil = np.array(pupil_data)
-pupil = pupil.reshape((TRIAL, int(pupil.shape[0] / TRIAL * pupil.shape[1])))
-pupil = pupil[num_trials_to_remove:]
 
-eda = np.array(eda_data)
-eda = eda.reshape((TRIAL, int(eda.shape[0] / TRIAL * eda.shape[1])))
-eda = eda[num_trials_to_remove:]
+hr_temp = np.array(hr_data)
+hr_temp = hr_temp.reshape((TRIAL, int(hr_temp.shape[0]/TRIAL*hr_temp.shape[1])))
+hr = np.concatenate([populate_array(x, hr_temp) for x in range(1, len(prova_3_subj)+1)])
+
+pupil_temp = np.array(pupil_data)
+pupil_temp = pupil_temp.reshape((TRIAL, int(pupil_temp.shape[0]/TRIAL*pupil_temp.shape[1])))
+pupil = np.concatenate([populate_array(x, pupil_temp) for x in range(1, len(prova_3_subj)+1)])
+
+eda_temp = np.array(eda_data)
+eda_temp = eda_temp.reshape((TRIAL,int(eda_temp.shape[0]/TRIAL*eda_temp.shape[1])))
+eda = np.concatenate([populate_array(x, eda_temp) for x in range(1, len(prova_3_subj)+1)])
+
 
 N_pupil = pupil.shape[0]
 D_pupil = pupil.shape[1]
