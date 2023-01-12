@@ -24,7 +24,7 @@ from deepemogp import feature_extractor
 from deepemogp.signal import physio as physio
 from deepemogp import datasets as datasets
 from deepemogp.signal import behavior as behavior
-from fear_gen import extract_correct_csv
+import extract_correct_csv
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action='ignore', category=RuntimeWarning)
