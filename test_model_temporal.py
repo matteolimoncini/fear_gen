@@ -55,12 +55,6 @@ for i in prova_3_subj:
     pupil = pd.read_csv('data/features/pupil/' + str(i) + '.csv')
     pupil = pupil[num_trials_to_remove:]
 
-    csv_ = 'data/LookAtMe_0' + str(subj_) + '.csv'
-    global_data = pd.read_csv(csv_, sep='\t')
-    y = np.array(list([int(d > 2) for d in global_data['rating']]))
-    e_labels = y[:, np.newaxis]  # rating > 2
-    e_labels = e_labels[num_trials_to_remove:]
-
     N_pupil = pupil.shape[0]
     D_pupil = pupil.shape[1]
 
@@ -69,9 +63,6 @@ for i in prova_3_subj:
 
     N_eda = eda.shape[0]
     D_eda = eda.shape[1]
-
-    N_e = e_labels.shape[0]
-    D_e = e_labels.shape[1]
 
     index = np.arange(60)
 
