@@ -1,7 +1,11 @@
+import logging
+import os
+
 import numpy as np
 import pymc as pm
 import matplotlib.pyplot as plt
 import aesara.tensor as at
+from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 import extract_correct_csv
 from scipy import stats
@@ -148,6 +152,7 @@ with sPPCA:
 
 e_pred = posterior_predictive.posterior_predictive["x_e"]
 e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:,np.newaxis]
+train_accuracy_exp = accuracy_score(global_e_labels, e_pred_mode)
 logging.basicConfig(level=logging.INFO, filename="logfile", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
 logging.info("Train Accuracy Pain Expectation using all valid subjects: " + str(train_accuracy_exp) + " script: " +
