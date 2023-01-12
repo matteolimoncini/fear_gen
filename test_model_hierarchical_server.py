@@ -1,28 +1,17 @@
-import logging
-import os
-
 import numpy as np
 import pymc as pm
 import matplotlib.pyplot as plt
 import aesara.tensor as at
-import arviz as az
-from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 import extract_correct_csv
 from scipy import stats
 import pandas as pd
 import warnings
 
-from deepemogp import feature_extractor
-from deepemogp.signal import physio as physio
-from deepemogp import datasets as datasets
-from deepemogp.signal import behavior as behavior
-
 warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 scaler = StandardScaler()
-
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 
 global_e_labels = []
@@ -31,14 +20,16 @@ num_trials_to_remove = 48
 
 for i in prova_3_subj:
     subj_ = extract_correct_csv.read_correct_subject_csv(i)
-    csv_ = 'data/LookAtMe_0' + str(subj_) + '.csv'
+    csv_ = 'data/LookAtMe_0'+str(subj_)+'.csv'
     global_data = pd.read_csv(csv_, sep='\t')
-    y = np.array(list([int(d > 2) for d in global_data['rating']]))
-    e_labels = y[:, np.newaxis]  # rating > 2
+    y = np.array(list([int(d>2) for d in global_data['rating']]))
+    e_labels = y[:,np.newaxis]  # rating > 2
     e_labels = e_labels[num_trials_to_remove:]
     global_e_labels = global_e_labels + e_labels.tolist()
     subject = np.array(list([s for s in global_data['subject']]))[:, np.newaxis]
+    subject = subject[num_trials_to_remove:]
     global_subject = global_subject + subject.tolist()
+
 #e_labels = e_labels[num_trials_to_remove:]
 '''N_e = e_labels.shape[0]
 D_e = e_labels.shape[1]'''
@@ -56,66 +47,19 @@ global_subject_df = pd.DataFrame(global_subject, columns=['subject'])
 subject_dict = dict(zip(global_subject_df.subject.unique(), range(len(prova_3_subj))))
 subj_def = global_subject_df.replace(subject_dict).values
 
-show = False
-# definition of the feature extractors to be used later
-f2 = feature_extractor.FE('wavelet', window=(2, 1))
-f3 = feature_extractor.FE('mean', window=(1, 0))
-
-# definition of the physiological signals to be extracted
-eda_ = physio.EDA(f2)
-hr_ = physio.HR(f2)
-pupil_ = behavior.PUPIL(f3)
-
-# extraction of the desired data from the dataset
-elenco_subj = ([str(d) for d in prova_3_subj])
-d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects=set(elenco_subj))
-
-for s in d.signals:
-    # preprocess ...
-    if s.name == 'EDA':
-        s.preprocess(show=show, new_fps=500)
-        s.feature_ext.extract_feat(s,show=show)
-    else:
-        if s.name == 'HR':
-            list_hr_test = s.raw[0]['data']
-            s.preprocess(show=show, useneurokit=True)
-            s.feature_ext.extract_feat(s,show=show)
-
-        else:
-            s.feature_ext.extract_feat_without_preprocess(s, show=show)
-
-    #add feature extraction for eda before preprocessing
-
-    # ... and extract features from each signal type
-
-
-for sig in d.signals:
-    if sig.name=='EDA':
-        eda_data = sig.features
-    if sig.name=='HR':
-        hr_data = sig.features
-    if sig.name=='PUPIL':
-        pupil_data = sig.features
-
 NUM_TRIAL = 160
 TRIAL = NUM_TRIAL*len(prova_3_subj)
-
 def populate_array(x, name):
     return name[NUM_TRIAL*(x-1)+num_trials_to_remove:NUM_TRIAL*x]
 
-
-hr_temp = np.array(hr_data)
-hr_temp = hr_temp.reshape((TRIAL, int(hr_temp.shape[0]/TRIAL*hr_temp.shape[1])))
+hr_temp = np.concatenate([pd.read_csv('data/features/hr/'+str(x)+'.csv') for x in prova_3_subj])
 hr = np.concatenate([populate_array(x, hr_temp) for x in range(1, len(prova_3_subj)+1)])
 
-pupil_temp = np.array(pupil_data)
-pupil_temp = pupil_temp.reshape((TRIAL, int(pupil_temp.shape[0]/TRIAL*pupil_temp.shape[1])))
+pupil_temp = np.concatenate([pd.read_csv('data/features/pupil/'+str(x)+'.csv') for x in prova_3_subj])
 pupil = np.concatenate([populate_array(x, pupil_temp) for x in range(1, len(prova_3_subj)+1)])
 
-eda_temp = np.array(eda_data)
-eda_temp = eda_temp.reshape((TRIAL,int(eda_temp.shape[0]/TRIAL*eda_temp.shape[1])))
+eda_temp = np.concatenate([pd.read_csv('data/features/eda/'+str(x)+'.csv') for x in prova_3_subj])
 eda = np.concatenate([populate_array(x, eda_temp) for x in range(1, len(prova_3_subj)+1)])
-
 
 N_pupil = pupil.shape[0]
 D_pupil = pupil.shape[1]
@@ -126,6 +70,10 @@ D_hr = hr.shape[1]
 N_eda = eda.shape[0]
 D_eda = eda.shape[1]
 K = 3
+print(N_pupil, D_pupil)
+print(N_hr, D_hr)
+print(N_eda, D_eda)
+print(N_e, D_e)
 
 coords = {'subject': global_subject_df.subject.unique(), 'tot_trial':np.arange(N_hr)}
 
@@ -183,12 +131,13 @@ with pm.Model(coords=coords) as sPPCA:
     # pain expectation. ciò che dovremmo inferire dato c
     # due strade: binary o multiclass (1-4)
     # p = probability of success?
-    x_e = pm.Bernoulli('x_e' , p=pm.math.sigmoid(c.dot(We.T)), shape=[N_e,D_e], observed=e_data)
+    x_e = pm.Bernoulli('x_e' , p=pm.math.sigmoid(c.dot(We.T)) , shape = [N_e,D_e], observed=e_data)
 
 
 with sPPCA:
     approx = pm.fit(10000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
     trace = approx.sample(500)
+
 
 with sPPCA:
     # update values of predictors:
@@ -198,10 +147,7 @@ with sPPCA:
         trace, var_names=['x_e'], random_seed=123)
 
 e_pred = posterior_predictive.posterior_predictive["x_e"]
-
 e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:,np.newaxis]
-
-train_accuracy_exp = accuracy_score(global_e_labels, e_pred_mode)
 logging.basicConfig(level=logging.INFO, filename="logfile", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
 logging.info("Train Accuracy Pain Expectation using all valid subjects: " + str(train_accuracy_exp) + " script: " +
