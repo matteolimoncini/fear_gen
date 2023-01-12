@@ -13,19 +13,21 @@ warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 
-f2 = feature_extractor.FE('wavelet', window=(2, 1))
-f3 = feature_extractor.FE('mean', window=(1, 0))
-
-show = False
-
-# definition of the physiological signals to be extracted
-eda_ = physio.EDA(f2)
-hr_ = physio.HR(f2)
-pupil_ = behavior.PUPIL(f3)
 TRIAL = 160
 path = "/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/features"
 
 for i in prova_3_subj:
+
+    f2 = feature_extractor.FE('wavelet', window=(2, 1))
+    f3 = feature_extractor.FE('mean', window=(1, 0))
+
+    show = False
+
+    # definition of the physiological signals to be extracted
+    eda_ = physio.EDA(f2)
+    hr_ = physio.HR(f2)
+    pupil_ = behavior.PUPIL(f3)
+
     d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects={str(i)})
 
     for s in d.signals:
