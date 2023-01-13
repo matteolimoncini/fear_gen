@@ -38,21 +38,19 @@ logging.basicConfig(level=logging.INFO, filename="logfile_temporal", filemode="a
 
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 
-for i in prova_3_subj:
-
-    subj_ = i
+for subj_ in prova_3_subj:
 
     TRIAL = 160
     num_trials_to_remove = 48
     K = 5
 
-    hr = pd.read_csv('data/features/hr/' + str(i) + '.csv')
+    hr = pd.read_csv('data/features/hr/' + str(subj_) + '.csv')
     hr = hr[num_trials_to_remove:]
 
-    eda = pd.read_csv('data/features/eda/' + str(i) + '.csv')
+    eda = pd.read_csv('data/features/eda/' + str(subj_) + '.csv')
     eda = eda[num_trials_to_remove:]
 
-    pupil = pd.read_csv('data/features/pupil/' + str(i) + '.csv')
+    pupil = pd.read_csv('data/features/pupil/' + str(subj_) + '.csv')
     pupil = pupil[num_trials_to_remove:]
 
     N_pupil = pupil.shape[0]
@@ -118,5 +116,5 @@ for i in prova_3_subj:
 
     mean_subj = np.mean(corrlist)
 
-    logging.info("Mean corr coeff eda-hr using subj: " + str(i) + " " + str(mean_subj) + " script: " +
+    logging.info("Mean corr coeff eda-hr using subj: " + str(subj_) + " " + str(round(mean_subj, 2)) + " script: " +
                  os.path.basename(__file__) + "latent space dims: " + str(K))
