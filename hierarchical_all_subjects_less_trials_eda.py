@@ -134,7 +134,7 @@ for k in valid_k_list:
         concord_list = []
         for i in range(112):
             pear = np.corrcoef(eda_[i], edapred_[i])[0][1]
-            conc = ccc(eda_[i], eda_pred[i])
+            conc = ccc(eda_[i], edapred_[i])
             pearson_list.append(pear)
             concord_list.append(conc)
             # print('trial ' + str(i) + ' corr: ' + str(res.round(3)))
