@@ -24,6 +24,14 @@ scaler = StandardScaler()
 valid_subject = extract_correct_csv.extract_only_valid_subject()
 valid_k_list = list(range(1, 10))
 
+
+def ccc(x, y):
+    ''' Concordance Correlation Coefficient'''
+    sxy = np.sum((x - x.mean()) * (y - y.mean())) / x.shape[0]
+    rhoc = 2 * sxy / (np.var(x) + np.var(y) + (x.mean() - y.mean()) ** 2)
+    return rhoc
+
+
 for k in valid_k_list:
 
     for subj in valid_subject:
@@ -122,15 +130,20 @@ for k in valid_k_list:
         eda_pred = np.squeeze(eda_pred.mean('draw', keepdims='false')[0]).to_numpy()
         edapred_ = eda_pred.T
         eda_ = eda.to_numpy()
-        corrlist = []
+        pearson_list = []
+        concord_list = []
         for i in range(112):
-            res = np.corrcoef(eda_[i], edapred_[i])[0][1]
-            corrlist.append(res)
+            pear = np.corrcoef(eda_[i], edapred_[i])[0][1]
+            conc = ccc(eda_[i], eda_pred[i])
+            pearson_list.append(pear)
+            concord_list.append(conc)
             # print('trial ' + str(i) + ' corr: ' + str(res.round(3)))
-        mean_subj = round(np.mean(corrlist), 4)
+        mean_pear = round(np.mean(pearson_list), 4)
+        mean_corc = round(np.mean(concord_list), 4)
 
         logging.basicConfig(level=logging.INFO, filename="logfile_eda", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
-        logging.info("Subj num: " + str(subj) + " Train Accuracy Pain Expect: " + str(mean_subj) + " script: " +
-                     os.path.basename(__file__) + ", feat extract HR and EDA: wavelet" +
-                     ', feat extract PUPIL: mean, latent space dims: ' + str(K))
+        logging.info(
+            "Subj num: " + str(subj) + " Pearson: " + str(mean_pear) + " " + " Conc: " + str(mean_corc) + " script: " +
+            os.path.basename(__file__) + ", ft ext HR-EDA: wav" +
+            ', ft ext PUPIL: mean, lat space dims: ' + str(K))
