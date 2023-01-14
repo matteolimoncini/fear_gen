@@ -136,7 +136,7 @@ for k in valid_k_list:
         mean_pear = round(np.mean(pearson_list), 4)
         mean_corc = round(np.mean(concord_list), 4)
 
-        logging.basicConfig(level=logging.INFO, filename="logfile_eda", filemode="a+",
+        logging.basicConfig(level=logging.INFO, filename="logfile_eda_160_trials", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
         logging.info(
             "Subj num: " + str(subj) + " Pearson: " + str(mean_pear) + " " + " Conc: " + str(mean_corc) + " script: " +
