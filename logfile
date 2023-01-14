@@ -2383,3 +2383,260 @@
 2023-01-13 08:44:54,510 INFO     Finished [100%]: Average Loss = 1.3102e+06
 2023-01-13 08:45:02,337 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2023-01-13 08:45:02,757 INFO     Subj num: 55 Train Accuracy Pain Expect: 0.6339285714285714 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 9
+2023-01-14 10:38:43,948 INFO     Subj num: 2 Train Accuracy Pain Expect: 0.7321428571428571 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 10:43:18,939 INFO     Subj num: 2 Train Accuracy Pain Expect: 0.74375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 10:49:29,732 INFO     Finished [100%]: Average Loss = 1.4552e+06
+2023-01-14 10:49:39,769 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 10:49:40,304 INFO     Subj num: 4 Train Accuracy Pain Expect: 0.6875 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 10:59:51,099 INFO     Finished [100%]: Average Loss = 1.5876e+06
+2023-01-14 11:00:01,129 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:00:01,673 INFO     Subj num: 10 Train Accuracy Pain Expect: 0.8482142857142857 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:00:11,062 INFO     Finished [100%]: Average Loss = 2.0702e+06
+2023-01-14 11:00:21,688 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:00:22,344 INFO     Subj num: 4 Train Accuracy Pain Expect: 0.625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:12:21,028 INFO     Finished [100%]: Average Loss = 1.549e+06
+2023-01-14 11:12:31,577 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:12:32,118 INFO     Subj num: 41 Train Accuracy Pain Expect: 0.6875 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:16:55,639 INFO     Finished [100%]: Average Loss = 2.2537e+06
+2023-01-14 11:17:06,291 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:17:06,949 INFO     Subj num: 10 Train Accuracy Pain Expect: 0.6375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:25:36,851 INFO     Finished [100%]: Average Loss = 1.6052e+06
+2023-01-14 11:25:47,338 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:25:47,885 INFO     Subj num: 43 Train Accuracy Pain Expect: 0.8839285714285714 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:34:14,050 INFO     Finished [100%]: Average Loss = 2.2222e+06
+2023-01-14 11:34:25,287 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:34:25,937 INFO     Subj num: 41 Train Accuracy Pain Expect: 0.6625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:37:28,476 INFO     Finished [100%]: Average Loss = 1.5859e+06
+2023-01-14 11:37:38,924 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:37:39,471 INFO     Subj num: 44 Train Accuracy Pain Expect: 0.8392857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:48:30,144 INFO     Finished [100%]: Average Loss = 1.4445e+06
+2023-01-14 11:48:40,236 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:48:40,775 INFO     Subj num: 45 Train Accuracy Pain Expect: 0.8303571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:51:42,525 INFO     Finished [100%]: Average Loss = 2.3125e+06
+2023-01-14 11:51:53,186 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:51:53,854 INFO     Subj num: 43 Train Accuracy Pain Expect: 0.7 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 11:59:25,836 INFO     Finished [100%]: Average Loss = 1.5493e+06
+2023-01-14 11:59:36,156 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 11:59:36,691 INFO     Subj num: 46 Train Accuracy Pain Expect: 0.6428571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:09:46,301 INFO     Finished [100%]: Average Loss = 1.4922e+06
+2023-01-14 12:09:56,746 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:09:57,310 INFO     Subj num: 47 Train Accuracy Pain Expect: 0.6696428571428571 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:15:22,923 INFO     Finished [100%]: Average Loss = 2.2486e+06
+2023-01-14 12:15:36,860 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:15:37,550 INFO     Subj num: 44 Train Accuracy Pain Expect: 0.84375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:23:08,224 INFO     Finished [100%]: Average Loss = 1.4272e+06
+2023-01-14 12:23:28,167 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:23:28,958 INFO     Subj num: 48 Train Accuracy Pain Expect: 0.7142857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:31:23,415 INFO     Finished [100%]: Average Loss = 2.0573e+06
+2023-01-14 12:31:34,404 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:31:35,048 INFO     Subj num: 45 Train Accuracy Pain Expect: 0.83125 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:40:46,622 INFO     Finished [100%]: Average Loss = 1.3644e+06
+2023-01-14 12:41:06,306 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:41:07,433 INFO     Subj num: 49 Train Accuracy Pain Expect: 0.6964285714285714 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:47:00,441 INFO     Finished [100%]: Average Loss = 2.2157e+06
+2023-01-14 12:47:11,107 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:47:11,747 INFO     Subj num: 46 Train Accuracy Pain Expect: 0.9625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 12:57:21,961 INFO     Finished [100%]: Average Loss = 1.4005e+06
+2023-01-14 12:57:42,049 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 12:57:42,786 INFO     Subj num: 50 Train Accuracy Pain Expect: 0.9375 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:03:09,299 INFO     Finished [100%]: Average Loss = 2.1224e+06
+2023-01-14 13:03:20,318 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:03:20,965 INFO     Subj num: 47 Train Accuracy Pain Expect: 0.91875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:09:14,503 INFO     Finished [100%]: Average Loss = 1.1264e+06
+2023-01-14 13:09:24,804 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:09:25,341 INFO     Subj num: 51 Train Accuracy Pain Expect: 0.7410714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:18:57,855 INFO     Finished [100%]: Average Loss = 2.0421e+06
+2023-01-14 13:19:08,565 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:19:09,217 INFO     Subj num: 48 Train Accuracy Pain Expect: 0.85 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:20:20,285 INFO     Finished [100%]: Average Loss = 1.3931e+06
+2023-01-14 13:20:31,302 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:20:31,854 INFO     Subj num: 52 Train Accuracy Pain Expect: 0.7232142857142857 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:35:49,611 INFO     Finished [100%]: Average Loss = 1.9525e+06
+2023-01-14 13:36:00,286 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:36:00,929 INFO     Subj num: 49 Train Accuracy Pain Expect: 0.65 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:36:28,483 INFO     Finished [100%]: Average Loss = 1.3394e+06
+2023-01-14 13:36:47,513 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:36:48,240 INFO     Subj num: 53 Train Accuracy Pain Expect: 0.7678571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:47:05,689 INFO     Finished [100%]: Average Loss = 1.5313e+06
+2023-01-14 13:47:17,518 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:47:18,054 INFO     Subj num: 54 Train Accuracy Pain Expect: 0.7767857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:54:05,464 INFO     Finished [100%]: Average Loss = 2.0018e+06
+2023-01-14 13:54:16,597 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:54:17,259 INFO     Subj num: 50 Train Accuracy Pain Expect: 0.95 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 13:59:00,059 INFO     Finished [100%]: Average Loss = 1.3106e+06
+2023-01-14 13:59:10,486 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 13:59:11,041 INFO     Subj num: 55 Train Accuracy Pain Expect: 0.625 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 14:09:49,824 INFO     Finished [100%]: Average Loss = 1.5988e+06
+2023-01-14 14:10:00,815 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:10:01,452 INFO     Subj num: 51 Train Accuracy Pain Expect: 0.75 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 14:17:11,990 INFO     Finished [100%]: Average Loss = 1.5739e+06
+2023-01-14 14:17:33,988 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:17:35,104 INFO     Subj num: 2 Train Accuracy Pain Expect: 0.7142857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 14:25:41,880 INFO     Finished [100%]: Average Loss = 1.9805e+06
+2023-01-14 14:25:53,020 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:25:53,675 INFO     Subj num: 52 Train Accuracy Pain Expect: 0.91875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 14:35:12,580 INFO     Finished [100%]: Average Loss = 1.4552e+06
+2023-01-14 14:35:33,197 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:35:34,048 INFO     Subj num: 4 Train Accuracy Pain Expect: 0.5625 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 14:41:45,938 INFO     Finished [100%]: Average Loss = 1.8886e+06
+2023-01-14 14:41:57,001 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:41:57,638 INFO     Subj num: 53 Train Accuracy Pain Expect: 0.8875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 14:48:12,879 INFO     Finished [100%]: Average Loss = 1.5873e+06
+2023-01-14 14:48:23,480 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:48:24,030 INFO     Subj num: 10 Train Accuracy Pain Expect: 0.8125 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 14:57:59,924 INFO     Finished [100%]: Average Loss = 2.195e+06
+2023-01-14 14:58:11,060 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 14:58:11,710 INFO     Subj num: 54 Train Accuracy Pain Expect: 0.8375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 15:01:08,460 INFO     Finished [100%]: Average Loss = 1.5492e+06
+2023-01-14 15:01:18,793 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:01:19,328 INFO     Subj num: 41 Train Accuracy Pain Expect: 0.7053571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:11:39,245 INFO     Finished [100%]: Average Loss = 1.6058e+06
+2023-01-14 15:11:47,629 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:11:48,056 INFO     Subj num: 43 Train Accuracy Pain Expect: 0.9642857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:13:07,159 INFO     Finished [100%]: Average Loss = 1.8776e+06
+2023-01-14 15:13:15,723 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:13:16,232 INFO     Subj num: 55 Train Accuracy Pain Expect: 0.98125 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 10
+2023-01-14 15:20:23,962 INFO     Finished [100%]: Average Loss = 1.5865e+06
+2023-01-14 15:20:31,801 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:20:32,229 INFO     Subj num: 44 Train Accuracy Pain Expect: 0.7767857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:26:03,340 INFO     Finished [100%]: Average Loss = 2.2672e+06
+2023-01-14 15:26:12,534 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:26:13,059 INFO     Subj num: 2 Train Accuracy Pain Expect: 0.94375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:29:15,178 INFO     Finished [100%]: Average Loss = 1.4449e+06
+2023-01-14 15:29:23,011 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:29:23,438 INFO     Subj num: 45 Train Accuracy Pain Expect: 0.8392857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:37:30,797 INFO     Finished [100%]: Average Loss = 1.55e+06
+2023-01-14 15:37:39,196 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:37:39,622 INFO     Subj num: 46 Train Accuracy Pain Expect: 0.875 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:38:34,668 INFO     Finished [100%]: Average Loss = 2.0707e+06
+2023-01-14 15:38:43,601 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:38:44,113 INFO     Subj num: 4 Train Accuracy Pain Expect: 0.9875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:46:19,016 INFO     Finished [100%]: Average Loss = 1.4923e+06
+2023-01-14 15:46:27,259 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:46:27,685 INFO     Subj num: 47 Train Accuracy Pain Expect: 0.7053571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:51:08,400 INFO     Finished [100%]: Average Loss = 2.2551e+06
+2023-01-14 15:51:17,438 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:51:17,973 INFO     Subj num: 10 Train Accuracy Pain Expect: 0.9875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 15:54:59,191 INFO     Finished [100%]: Average Loss = 1.4277e+06
+2023-01-14 15:55:07,464 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 15:55:07,890 INFO     Subj num: 48 Train Accuracy Pain Expect: 0.7232142857142857 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:03:20,452 INFO     Finished [100%]: Average Loss = 1.3649e+06
+2023-01-14 16:03:28,957 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:03:29,418 INFO     Subj num: 49 Train Accuracy Pain Expect: 0.7410714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:03:47,618 INFO     Finished [100%]: Average Loss = 2.2235e+06
+2023-01-14 16:03:56,639 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:03:57,152 INFO     Subj num: 41 Train Accuracy Pain Expect: 0.93125 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:12:08,444 INFO     Finished [100%]: Average Loss = 1.4005e+06
+2023-01-14 16:12:16,399 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:12:16,845 INFO     Subj num: 50 Train Accuracy Pain Expect: 0.9285714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:16:29,085 INFO     Finished [100%]: Average Loss = 2.3134e+06
+2023-01-14 16:16:38,099 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:16:38,619 INFO     Subj num: 43 Train Accuracy Pain Expect: 0.95625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:21:01,922 INFO     Finished [100%]: Average Loss = 1.1261e+06
+2023-01-14 16:21:10,342 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:21:10,780 INFO     Subj num: 51 Train Accuracy Pain Expect: 0.7053571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:29:04,974 INFO     Finished [100%]: Average Loss = 2.2486e+06
+2023-01-14 16:29:13,857 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:29:14,406 INFO     Subj num: 44 Train Accuracy Pain Expect: 0.98125 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:29:22,939 INFO     Finished [100%]: Average Loss = 1.3932e+06
+2023-01-14 16:29:36,934 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:29:37,620 INFO     Subj num: 52 Train Accuracy Pain Expect: 0.7321428571428571 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:38:10,972 INFO     Finished [100%]: Average Loss = 1.3396e+06
+2023-01-14 16:38:19,382 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:38:19,823 INFO     Subj num: 53 Train Accuracy Pain Expect: 0.6964285714285714 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:41:50,419 INFO     Finished [100%]: Average Loss = 2.0577e+06
+2023-01-14 16:41:59,410 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:41:59,960 INFO     Subj num: 45 Train Accuracy Pain Expect: 0.81875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:46:56,978 INFO     Finished [100%]: Average Loss = 1.5318e+06
+2023-01-14 16:47:04,920 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:47:05,364 INFO     Subj num: 54 Train Accuracy Pain Expect: 0.8035714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:54:26,802 INFO     Finished [100%]: Average Loss = 2.2162e+06
+2023-01-14 16:54:35,756 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:54:36,270 INFO     Subj num: 46 Train Accuracy Pain Expect: 0.8875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 16:55:40,016 INFO     Finished [100%]: Average Loss = 1.3108e+06
+2023-01-14 16:55:47,903 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 16:55:48,331 INFO     Subj num: 55 Train Accuracy Pain Expect: 0.6607142857142857 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 17:04:10,299 INFO     Finished [100%]: Average Loss = 1.5747e+06
+2023-01-14 17:04:18,330 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:04:18,755 INFO     Subj num: 2 Train Accuracy Pain Expect: 0.8660714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:07:14,800 INFO     Finished [100%]: Average Loss = 2.1229e+06
+2023-01-14 17:07:23,820 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:07:24,364 INFO     Subj num: 47 Train Accuracy Pain Expect: 0.70625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 17:12:58,949 INFO     Finished [100%]: Average Loss = 1.4558e+06
+2023-01-14 17:13:07,270 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:13:07,699 INFO     Subj num: 4 Train Accuracy Pain Expect: 0.7053571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:19:54,602 INFO     Finished [100%]: Average Loss = 2.0425e+06
+2023-01-14 17:20:03,139 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:20:03,668 INFO     Subj num: 48 Train Accuracy Pain Expect: 0.8125 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 17:21:46,040 INFO     Finished [100%]: Average Loss = 1.5876e+06
+2023-01-14 17:21:54,311 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:21:54,736 INFO     Subj num: 10 Train Accuracy Pain Expect: 0.7678571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:30:05,506 INFO     Finished [100%]: Average Loss = 1.5494e+06
+2023-01-14 17:30:13,352 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:30:13,780 INFO     Subj num: 41 Train Accuracy Pain Expect: 0.7410714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:32:28,791 INFO     Finished [100%]: Average Loss = 1.9526e+06
+2023-01-14 17:32:37,343 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:32:37,867 INFO     Subj num: 49 Train Accuracy Pain Expect: 0.65625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 17:38:56,888 INFO     Finished [100%]: Average Loss = 1.6057e+06
+2023-01-14 17:39:04,719 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:39:05,155 INFO     Subj num: 43 Train Accuracy Pain Expect: 0.8571428571428571 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:45:08,675 INFO     Finished [100%]: Average Loss = 2.002e+06
+2023-01-14 17:45:17,778 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:45:18,306 INFO     Subj num: 50 Train Accuracy Pain Expect: 0.7375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 17:47:39,686 INFO     Finished [100%]: Average Loss = 1.5866e+06
+2023-01-14 17:47:48,138 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:47:48,567 INFO     Subj num: 44 Train Accuracy Pain Expect: 0.625 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:55:58,916 INFO     Finished [100%]: Average Loss = 1.4456e+06
+2023-01-14 17:56:06,762 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:56:07,189 INFO     Subj num: 45 Train Accuracy Pain Expect: 0.8035714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 17:57:38,350 INFO     Finished [100%]: Average Loss = 1.599e+06
+2023-01-14 17:57:47,258 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 17:57:47,780 INFO     Subj num: 51 Train Accuracy Pain Expect: 0.68125 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 18:04:50,732 INFO     Finished [100%]: Average Loss = 1.5503e+06
+2023-01-14 18:04:58,663 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:04:59,086 INFO     Subj num: 46 Train Accuracy Pain Expect: 0.7053571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 18:10:11,719 INFO     Finished [100%]: Average Loss = 1.981e+06
+2023-01-14 18:10:20,637 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:10:21,144 INFO     Subj num: 52 Train Accuracy Pain Expect: 0.75 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 18:13:34,752 INFO     Finished [100%]: Average Loss = 1.4929e+06
+2023-01-14 18:13:43,059 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:13:43,488 INFO     Subj num: 47 Train Accuracy Pain Expect: 0.6696428571428571 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 18:21:50,057 INFO     Finished [100%]: Average Loss = 1.4288e+06
+2023-01-14 18:21:57,919 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:21:58,345 INFO     Subj num: 48 Train Accuracy Pain Expect: 0.7767857142857143 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 18:22:47,761 INFO     Finished [100%]: Average Loss = 1.8888e+06
+2023-01-14 18:22:56,233 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:22:56,758 INFO     Subj num: 53 Train Accuracy Pain Expect: 0.80625 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 18:30:37,186 INFO     Finished [100%]: Average Loss = 1.3649e+06
+2023-01-14 18:30:45,025 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:30:45,452 INFO     Subj num: 49 Train Accuracy Pain Expect: 0.6339285714285714 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 18:35:20,353 INFO     Finished [100%]: Average Loss = 2.1951e+06
+2023-01-14 18:35:28,799 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:35:29,332 INFO     Subj num: 54 Train Accuracy Pain Expect: 0.8 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 18:39:21,231 INFO     Finished [100%]: Average Loss = 1.401e+06
+2023-01-14 18:39:29,574 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:39:30,002 INFO     Subj num: 50 Train Accuracy Pain Expect: 0.9285714285714286 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 18:47:39,209 INFO     Finished [100%]: Average Loss = 1.1267e+06
+2023-01-14 18:47:47,087 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:47:47,513 INFO     Subj num: 51 Train Accuracy Pain Expect: 0.7321428571428571 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 18:48:01,670 INFO     Finished [100%]: Average Loss = 1.8777e+06
+2023-01-14 18:48:10,655 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:48:11,197 INFO     Subj num: 55 Train Accuracy Pain Expect: 0.71875 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 11
+2023-01-14 18:56:24,708 INFO     Finished [100%]: Average Loss = 1.3941e+06
+2023-01-14 18:56:32,565 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 18:56:32,991 INFO     Subj num: 52 Train Accuracy Pain Expect: 0.8214285714285714 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 19:00:56,880 INFO     Finished [100%]: Average Loss = 2.2676e+06
+2023-01-14 19:01:05,612 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:01:06,152 INFO     Subj num: 2 Train Accuracy Pain Expect: 0.75 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 19:05:07,596 INFO     Finished [100%]: Average Loss = 1.3404e+06
+2023-01-14 19:05:16,051 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:05:16,479 INFO     Subj num: 53 Train Accuracy Pain Expect: 0.6875 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 19:13:26,204 INFO     Finished [100%]: Average Loss = 1.5322e+06
+2023-01-14 19:13:34,062 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:13:34,489 INFO     Subj num: 54 Train Accuracy Pain Expect: 0.7053571428571429 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 19:13:40,420 INFO     Finished [100%]: Average Loss = 2.0711e+06
+2023-01-14 19:13:49,433 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:13:49,940 INFO     Subj num: 4 Train Accuracy Pain Expect: 0.9375 script: hierarchical_all_subjects.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
+2023-01-14 19:22:13,628 INFO     Finished [100%]: Average Loss = 1.3114e+06
+2023-01-14 19:22:21,906 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:22:22,333 INFO     Subj num: 55 Train Accuracy Pain Expect: 0.6607142857142857 script: hierarchical_all_subjects_less_trials.py, feat extract HR and EDA: wavelet, feat extract PUPIL: mean, latent space dims: 12
