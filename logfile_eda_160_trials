@@ -113,3 +113,9 @@
 2023-01-14 19:19:28,624 INFO     Finished [100%]: Average Loss = 2.31e+06
 2023-01-14 19:19:37,075 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2023-01-14 19:19:37,643 INFO     Subj num: 43 Pearson: 0.8554  Conc: 0.4496 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 3
+2023-01-14 19:30:53,044 INFO     Finished [100%]: Average Loss = 2.2461e+06
+2023-01-14 19:31:01,916 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:31:02,585 INFO     Subj num: 44 Pearson: 0.9133  Conc: 0.7671 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 3
+2023-01-14 19:42:25,702 INFO     Finished [100%]: Average Loss = 2.0542e+06
+2023-01-14 19:42:34,581 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-14 19:42:35,156 INFO     Subj num: 45 Pearson: 0.863  Conc: 0.4743 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 3
