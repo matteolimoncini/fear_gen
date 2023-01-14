@@ -22,7 +22,7 @@ warnings.simplefilter(action="ignore", category=RuntimeWarning)
 scaler = StandardScaler()
 
 valid_subject = extract_correct_csv.extract_only_valid_subject()
-valid_k_list = list(range(1, 10))
+valid_k_list = list(range(10, 16))
 
 for k in valid_k_list:
 
