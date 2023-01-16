@@ -154,7 +154,7 @@ for k in valid_k_list:
     e_pred = posterior_predictive.posterior_predictive["x_e"]
     e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
     train_accuracy_exp = accuracy_score(global_e_labels, e_pred_mode)
-    logging.basicConfig(level=logging.INFO, filename="logfile", filemode="a+",
+    logging.basicConfig(level=logging.INFO, filename="logfile_hierarchical_112", filemode="a+",
                         format="%(asctime)-15s %(levelname)-8s %(message)s")
     logging.info("Train Accuracy Pain Expectation using all valid subjects: " + str(train_accuracy_exp) + " script: " +
                  os.path.basename(__file__) + "latent space dimension: " + str(K))
