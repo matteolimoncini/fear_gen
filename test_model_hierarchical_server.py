@@ -17,15 +17,13 @@ warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 scaler = StandardScaler()
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
-
+valid_k_list = list(range(1, 16))
 global_e_labels = []
 global_subject = []
 num_trials_to_remove = 48
-valid_k_list = list(range(1, 10))
-logging.basicConfig(level=logging.INFO, filename="logfile_allsubj", filemode="a+",
-                            format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 for k in valid_k_list:
+
     for i in prova_3_subj:
         subj_ = extract_correct_csv.read_correct_subject_csv(i)
         csv_ = 'data/LookAtMe_0'+str(subj_)+'.csv'
@@ -78,15 +76,15 @@ for k in valid_k_list:
     N_eda = eda.shape[0]
     D_eda = eda.shape[1]
     K = k
-    print(N_pupil, D_pupil)
-    print(N_hr, D_hr)
-    print(N_eda, D_eda)
-    print(N_e, D_e)
+    # print(N_pupil, D_pupil)
+    # print(N_hr, D_hr)
+    # print(N_eda, D_eda)
+    # print(N_e, D_e)
 
-    coords = {'subject': global_subject_df.subject.unique(), 'tot_trial':np.arange(N_hr)}
+    coords = {'subject': global_subject_df.subject.unique(), 'tot_trial': np.arange(N_hr)}
 
     with pm.Model(coords=coords) as sPPCA:
-        #dati osservabili
+        # dati osservabili
         hr_data = pm.MutableData("hr_data", hr)
         pupil_data = pm.MutableData("pupil_data", pupil)
         eda_data = pm.MutableData("eda_data", eda)
@@ -146,7 +144,6 @@ for k in valid_k_list:
         approx = pm.fit(10000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
         trace = approx.sample(500)
 
-
     with sPPCA:
         # update values of predictors:
         # pm.set_data({"hr_data":hr})
@@ -155,8 +152,9 @@ for k in valid_k_list:
             trace, var_names=['x_e'], random_seed=123)
 
     e_pred = posterior_predictive.posterior_predictive["x_e"]
-    e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:,np.newaxis]
+    e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
     train_accuracy_exp = accuracy_score(global_e_labels, e_pred_mode)
-
-    logging.info("Train Acc Pain Expect using all valid subj: " + str(train_accuracy_exp) + " script: " +
-                 os.path.basename(__file__) + "lat spc dims: " + str(K))
+    logging.basicConfig(level=logging.INFO, filename="logfile", filemode="a+",
+                        format="%(asctime)-15s %(levelname)-8s %(message)s")
+    logging.info("Train Accuracy Pain Expectation using all valid subjects: " + str(train_accuracy_exp) + " script: " +
+                 os.path.basename(__file__) + "latent space dimension: " + str(K))
