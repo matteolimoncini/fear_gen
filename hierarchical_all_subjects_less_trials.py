@@ -33,7 +33,8 @@ valid_k_list = list(range(1, 16))
 for k in valid_k_list:
 
     for i in valid_subject:
-        num_trials_to_remove = 48
+        num_trials_to_remove = 0
+        num_trials_to_remove_after = 112
 
         string_subject = extract_correct_csv.read_correct_subject_csv(i)
         csv_ = 'data/LookAtMe_0' + string_subject + '.csv'
@@ -42,6 +43,7 @@ for k in valid_k_list:
         y = np.array(list([int(d > 2) for d in global_data['rating']]))
         e_labels = y[:, np.newaxis]  # rating > 2
         e_labels = e_labels[num_trials_to_remove:]
+        e_labels = e_labels[:num_trials_to_remove_after]
         N_e = e_labels.shape[0]
         D_e = e_labels.shape[1]
 
@@ -49,12 +51,15 @@ for k in valid_k_list:
 
         hr = pd.read_csv('data/features/hr/' + str(i) + '.csv')
         hr = hr[num_trials_to_remove:]
+        hr = hr[:num_trials_to_remove_after]
 
         eda = pd.read_csv('data/features/eda/' + str(i) + '.csv')
         eda = eda[num_trials_to_remove:]
+        eda = eda[:num_trials_to_remove_after]
 
         pupil = pd.read_csv('data/features/pupil/' + str(i) + '.csv')
         pupil = pupil[num_trials_to_remove:]
+        pupil = pupil[:num_trials_to_remove_after]
 
         N_pupil = pupil.shape[0]
         D_pupil = pupil.shape[1]
@@ -115,7 +120,8 @@ for k in valid_k_list:
         gv = pm.model_to_graphviz(sPPCA)
 
         with sPPCA:
-            trace = pmjax.sample_blackjax_nuts(1000, chains=1)
+            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            trace = approx.sample(500)
 
         # az.plot_trace(trace);
         with sPPCA:
@@ -129,7 +135,7 @@ for k in valid_k_list:
 
         train_accuracy_exp = accuracy_score(e_labels, e_pred_mode)
 
-        logging.basicConfig(level=logging.INFO, filename="log_gpu/logfile_label_112trials", filemode="a+",
+        logging.basicConfig(level=logging.INFO, filename="logfile_label_first48trials", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
         logging.info("Subj num: " + str(i) + " Train Accuracy Pain Expect: " + str(train_accuracy_exp) + " script: " +
                      os.path.basename(__file__) + ", feat extract HR and EDA: wavelet" +
