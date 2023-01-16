@@ -74,7 +74,7 @@ for k in valid_k_list:
             pupil_data = pm.MutableData("pupil_data", pupil.T)
             eda_data = pm.MutableData("eda_data", eda.T)
 
-            e_data = pm.ConstantData("e_data", e_labels.T)
+            # e_data = pm.ConstantData("e_data", e_labels.T)
 
             # matrici pesi
             Whr = pm.Normal('Whr', mu=at.zeros([D_hr, K]), sigma=2.0 * at.ones([D_hr, K]), shape=[D_hr, K])
@@ -85,7 +85,7 @@ for k in valid_k_list:
 
             # weight matrix for pain expectation.
             # check mu,sigma,shape
-            We = pm.Normal('W_e', mu=at.zeros([D_e, K]), sigma=2.0 * at.ones([D_e, K]), shape=[D_e, K])
+            #We = pm.Normal('W_e', mu=at.zeros([D_e, K]), sigma=2.0 * at.ones([D_e, K]), shape=[D_e, K])
 
             # latent space
             c = pm.Normal('c', mu=at.zeros([N_hr, K]), sigma=at.ones([N_hr, K]), shape=[N_hr, K])
@@ -109,7 +109,7 @@ for k in valid_k_list:
             # pain expectation. ciò che dovremmo inferire dato c
             # due strade: binary o multiclass (1-4)
             # p = probability of success?
-            x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(We.dot(c.T)), shape=[D_e, N_e], observed=e_data)
+            #x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(We.dot(c.T)), shape=[D_e, N_e], observed=e_data)
 
             # x_hr = pm.Bernoulli('x_hr', p=pm.math.sigmoid(Whr.dot(c.T)), shape=[D_hr, N_hr], observed=hr_data)
             # x_eda = pm.Bernoulli('x_eda', p=pm.math.sigmoid(Weda.dot(c.T)), shape=[D_eda, N_eda], observed=eda_data)
@@ -141,7 +141,7 @@ for k in valid_k_list:
         mean_pear = round(np.mean(pearson_list), 4)
         mean_corc = round(np.mean(concord_list), 4)
 
-        logging.basicConfig(level=logging.INFO, filename="logfile_eda", filemode="a+",
+        logging.basicConfig(level=logging.INFO, filename="logfile_eda_nolabel", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
         logging.info(
             "Subj num: " + str(subj) + " Pearson: " + str(mean_pear) + " " + " Conc: " + str(mean_corc) + " script: " +
