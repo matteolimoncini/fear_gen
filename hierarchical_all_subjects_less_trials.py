@@ -10,6 +10,12 @@ from scipy import stats
 import pandas as pd
 import warnings
 import extract_correct_csv
+import pymc.sampling_jax as pmjax
+import jax
+
+print(jax.default_backend())
+
+print(jax.devices())
 
 from deepemogp import feature_extractor
 from deepemogp.signal import physio as physio
@@ -109,8 +115,7 @@ for k in valid_k_list:
         gv = pm.model_to_graphviz(sPPCA)
 
         with sPPCA:
-            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
-            trace = approx.sample(500)
+            trace = pmjax.sample_blackjack_nuts(100000, chains=32)
 
         # az.plot_trace(trace);
         with sPPCA:
@@ -124,7 +129,7 @@ for k in valid_k_list:
 
         train_accuracy_exp = accuracy_score(e_labels, e_pred_mode)
 
-        logging.basicConfig(level=logging.INFO, filename="logfile", filemode="a+",
+        logging.basicConfig(level=logging.INFO, filename="/log_gpu/logfile_label_112trials", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
         logging.info("Subj num: " + str(i) + " Train Accuracy Pain Expect: " + str(train_accuracy_exp) + " script: " +
                      os.path.basename(__file__) + ", feat extract HR and EDA: wavelet" +
