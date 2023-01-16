@@ -108,13 +108,18 @@ for subj_ in prova_3_subj:
 
     eda_ = eda.to_numpy()
 
-    corrlist = []
+    pearson_list = []
+    concord_list = []
     for i in range(112):
-        res = np.corrcoef(eda_[i], edapred_[i])[0][1]
-        corrlist.append(res)
-        # print('trial '+str(i)+ ' corr: '+str(res.round(3)))
+        pear = np.corrcoef(eda_[i], edapred_[i])[0][1]
+        conc = ccc(eda_[i], edapred_[i])
+        pearson_list.append(pear)
+        concord_list.append(conc)
+        # print('trial ' + str(i) + ' corr: ' + str(res.round(3)))
+    mean_pear = round(np.mean(pearson_list), 4)
+    mean_corc = round(np.mean(concord_list), 4)
 
-    mean_subj = np.mean(corrlist)
-
-    logging.info("Mean corr coeff eda-hr using subj: " + str(subj_) + " " + str(round(mean_subj, 2)) + " script: " +
-                 os.path.basename(__file__) + "latent space dims: " + str(K))
+    logging.info(
+        "Subj num: " + str(subj) + " Pearson: " + str(mean_pear) + " " + " Conc: " + str(mean_corc) + " script: " +
+        os.path.basename(__file__) + ", ft ext HR-EDA: wav" +
+        ', ft ext PUPIL: mean, lat space dims: ' + str(K))
