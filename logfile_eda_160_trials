@@ -733,3 +733,66 @@
 2023-01-16 09:33:55,389 INFO     Finished [100%]: Average Loss = 1.6002e+06
 2023-01-16 09:34:03,882 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
 2023-01-16 09:34:04,437 INFO     Subj num: 51 Pearson: 0.8312  Conc: 0.5405 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 14
+2023-01-16 09:45:02,196 INFO     Finished [100%]: Average Loss = 1.9828e+06
+2023-01-16 09:45:11,134 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 09:45:11,683 INFO     Subj num: 52 Pearson: 0.8079  Conc: 0.4141 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 14
+2023-01-16 09:56:09,059 INFO     Finished [100%]: Average Loss = 1.8901e+06
+2023-01-16 09:56:17,968 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 09:56:18,515 INFO     Subj num: 53 Pearson: 0.8495  Conc: 0.5618 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 14
+2023-01-16 10:07:14,386 INFO     Finished [100%]: Average Loss = 2.1964e+06
+2023-01-16 10:07:22,853 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 10:07:23,401 INFO     Subj num: 54 Pearson: 0.9448  Conc: 0.8189 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 14
+2023-01-16 10:18:27,549 INFO     Finished [100%]: Average Loss = 1.879e+06
+2023-01-16 10:18:35,988 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 10:18:36,550 INFO     Subj num: 55 Pearson: 0.9147  Conc: 0.8161 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 14
+2023-01-16 10:29:50,990 INFO     Finished [100%]: Average Loss = 2.2691e+06
+2023-01-16 10:29:59,668 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 10:30:00,240 INFO     Subj num: 2 Pearson: 0.8888  Conc: 0.6528 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 10:41:04,020 INFO     Finished [100%]: Average Loss = 2.0724e+06
+2023-01-16 10:41:12,498 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 10:41:13,061 INFO     Subj num: 4 Pearson: 0.9322  Conc: 0.7998 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 10:52:10,219 INFO     Finished [100%]: Average Loss = 2.2567e+06
+2023-01-16 10:52:19,166 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 10:52:19,717 INFO     Subj num: 10 Pearson: 0.7169  Conc: 0.175 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 11:03:27,520 INFO     Finished [100%]: Average Loss = 2.2243e+06
+2023-01-16 11:03:36,470 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 11:03:37,027 INFO     Subj num: 41 Pearson: 0.8864  Conc: 0.6253 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 11:14:40,707 INFO     Finished [100%]: Average Loss = 2.3153e+06
+2023-01-16 11:14:49,717 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 11:14:50,271 INFO     Subj num: 43 Pearson: 0.8452  Conc: 0.4525 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 11:25:59,006 INFO     Finished [100%]: Average Loss = 2.2508e+06
+2023-01-16 11:26:07,479 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 11:26:08,034 INFO     Subj num: 44 Pearson: 0.9514  Conc: 0.8114 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 11:37:11,605 INFO     Finished [100%]: Average Loss = 2.0596e+06
+2023-01-16 11:37:20,615 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 11:37:21,162 INFO     Subj num: 45 Pearson: 0.8448  Conc: 0.4626 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 11:48:24,836 INFO     Finished [100%]: Average Loss = 2.2172e+06
+2023-01-16 11:48:33,779 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 11:48:34,344 INFO     Subj num: 46 Pearson: 0.8509  Conc: 0.6349 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 11:59:38,935 INFO     Finished [100%]: Average Loss = 2.1248e+06
+2023-01-16 11:59:57,541 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 11:59:58,630 INFO     Subj num: 47 Pearson: 0.9438  Conc: 0.7421 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 12:19:48,709 INFO     Finished [100%]: Average Loss = 2.0448e+06
+2023-01-16 12:19:57,145 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 12:19:57,706 INFO     Subj num: 48 Pearson: 0.8686  Conc: 0.4609 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 12:30:59,393 INFO     Finished [100%]: Average Loss = 1.9543e+06
+2023-01-16 12:31:08,445 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 12:31:08,993 INFO     Subj num: 49 Pearson: 0.8848  Conc: 0.82 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 12:42:11,099 INFO     Finished [100%]: Average Loss = 2.0035e+06
+2023-01-16 12:42:20,177 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 12:42:20,739 INFO     Subj num: 50 Pearson: 0.9355  Conc: 0.7872 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 12:53:23,805 INFO     Finished [100%]: Average Loss = 1.6009e+06
+2023-01-16 12:53:32,857 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 12:53:33,428 INFO     Subj num: 51 Pearson: 0.828  Conc: 0.535 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 13:05:06,021 INFO     Finished [100%]: Average Loss = 1.9826e+06
+2023-01-16 13:05:14,466 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 13:05:15,034 INFO     Subj num: 52 Pearson: 0.8046  Conc: 0.4145 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 13:16:18,309 INFO     Finished [100%]: Average Loss = 1.8908e+06
+2023-01-16 13:16:26,793 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 13:16:27,346 INFO     Subj num: 53 Pearson: 0.8483  Conc: 0.5587 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 13:27:30,219 INFO     Finished [100%]: Average Loss = 2.1964e+06
+2023-01-16 13:27:39,271 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 13:27:39,847 INFO     Subj num: 54 Pearson: 0.9464  Conc: 0.8248 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
+2023-01-16 13:38:48,077 INFO     Finished [100%]: Average Loss = 1.8793e+06
+2023-01-16 13:38:57,109 INFO     Sampling: [x_e, x_eda, x_hr, x_pupil]
+2023-01-16 13:38:57,679 INFO     Subj num: 55 Pearson: 0.907  Conc: 0.8095 script: hierarchical_all_subjects_eda.py, ft ext HR-EDA: wav, ft ext PUPIL: mean, lat space dims: 15
