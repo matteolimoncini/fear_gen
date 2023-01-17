@@ -34,7 +34,7 @@ for k in valid_k_list:
 
     for i in valid_subject:
         num_trials_to_remove = 0
-        num_trials_to_remove_after = 112
+        num_trials_to_remove_after = 144
 
         string_subject = extract_correct_csv.read_correct_subject_csv(i)
         csv_ = 'data/LookAtMe_0' + string_subject + '.csv'
