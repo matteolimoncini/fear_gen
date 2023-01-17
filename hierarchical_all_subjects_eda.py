@@ -109,9 +109,9 @@ for k in valid_k_list:
             # x_hr = pm.Bernoulli('x_hr', p=pm.math.sigmoid(Whr.dot(c.T)), shape=[D_hr, N_hr], observed=hr_data)
             # x_eda = pm.Bernoulli('x_eda', p=pm.math.sigmoid(Weda.dot(c.T)), shape=[D_eda, N_eda], observed=eda_data)
 
-        with sPPCA:
-            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
-            trace = approx.sample(500)
+            with sPPCA:
+                approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+                trace = approx.sample(500)
 
         # az.plot_trace(trace);
         with sPPCA:

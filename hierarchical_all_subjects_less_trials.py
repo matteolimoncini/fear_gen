@@ -135,7 +135,7 @@ for k in valid_k_list:
 
         train_accuracy_exp = accuracy_score(e_labels, e_pred_mode)
 
-        logging.basicConfig(level=logging.INFO, filename="logfile_label_first48trials", filemode="a+",
+        logging.basicConfig(level=logging.INFO, filename="logfile_label_first16trials", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
         logging.info("Subj num: " + str(i) + " Train Accuracy Pain Expect: " + str(train_accuracy_exp) + " script: " +
                      os.path.basename(__file__) + ", feat extract HR and EDA: wavelet" +
