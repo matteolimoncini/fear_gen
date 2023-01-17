@@ -56,7 +56,7 @@ eda = eda[num_trials_to_remove:]
 pupil = pd.read_csv('data/features/pupil/' + str(i) + '.csv')
 pupil = pupil[num_trials_to_remove:]
 
-TRAIN_PERC = 0.75
+TRAIN_PERC = 0.50
 TEST_PERC = 1 - TRAIN_PERC
 
 pupil_train_len = int(TRAIN_PERC * len(pupil))
@@ -140,9 +140,6 @@ with pm.Model() as sPPCA:
 
     # x_hr = pm.Bernoulli('x_hr', p=pm.math.sigmoid(Whr.dot(c.T)), shape=[D_hr, N_hr], observed=hr_data)
     # x_eda = pm.Bernoulli('x_eda', p=pm.math.sigmoid(Weda.dot(c.T)), shape=[D_eda, N_eda], observed=eda_data)
-
-gv = pm.model_to_graphviz(sPPCA)
-gv.view()
 
 with sPPCA:
     approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
