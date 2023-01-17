@@ -38,6 +38,14 @@ logging.basicConfig(level=logging.INFO, filename="logfile_temporal", filemode="a
 
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 
+
+def ccc(x, y):
+    ''' Concordance Correlation Coefficient'''
+    sxy = np.sum((x - x.mean()) * (y - y.mean())) / x.shape[0]
+    rhoc = 2 * sxy / (np.var(x) + np.var(y) + (x.mean() - y.mean()) ** 2)
+    return rhoc
+
+
 for subj_ in prova_3_subj:
 
     TRIAL = 160
