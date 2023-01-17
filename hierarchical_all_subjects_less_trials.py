@@ -34,7 +34,7 @@ for k in valid_k_list:
 
     for i in valid_subject:
         num_trials_to_remove = 0
-        num_trials_to_remove_after = 112
+        num_trials_to_remove_after = 144
 
         string_subject = extract_correct_csv.read_correct_subject_csv(i)
         csv_ = 'data/LookAtMe_0' + string_subject + '.csv'
@@ -135,7 +135,7 @@ for k in valid_k_list:
 
         train_accuracy_exp = accuracy_score(e_labels, e_pred_mode)
 
-        logging.basicConfig(level=logging.INFO, filename="logfile_label_first48trials", filemode="a+",
+        logging.basicConfig(level=logging.INFO, filename="logfile_label_first16trials", filemode="a+",
                             format="%(asctime)-15s %(levelname)-8s %(message)s")
         logging.info("Subj num: " + str(i) + " Train Accuracy Pain Expect: " + str(train_accuracy_exp) + " script: " +
                      os.path.basename(__file__) + ", feat extract HR and EDA: wavelet" +
