@@ -21,6 +21,9 @@ scaler = StandardScaler()
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 valid_k_list = list(range(1, 10))
 
+global_e_labels = []
+global_subject = []
+
 num_trials_to_remove = 48
 
 logging.basicConfig(level=logging.INFO, filename="log/complete_pooled/unpooled_label", filemode="a+",
