@@ -31,6 +31,9 @@ logging.basicConfig(level=logging.INFO, filename="log/complete_pooled/complete_p
 
 for k in valid_k_list:
 
+    global_e_labels = []
+    global_subject = []
+
     for i in prova_3_subj:
         string_subject = extract_correct_csv.read_correct_subject_csv(i)
         csv_ = 'data/LookAtMe_0' + string_subject + '.csv'
