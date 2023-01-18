@@ -26,7 +26,7 @@ global_subject = []
 
 num_trials_to_remove = 48
 
-logging.basicConfig(level=logging.INFO, filename="log/complete_pooled/unpooled_label", filemode="a+",
+logging.basicConfig(level=logging.INFO, filename="log/complete_pooled/complete_pooled_label", filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 for k in valid_k_list:
@@ -48,9 +48,6 @@ for k in valid_k_list:
 
     global_e_labels = np.array(global_e_labels)
     global_subject = np.array(global_subject)
-
-    N_e = global_e_labels.shape[0]
-    D_e = global_e_labels.shape[1]
 
     N_sub = global_subject.shape[0]
     D_sub = global_subject.shape[1]
@@ -93,7 +90,7 @@ for k in valid_k_list:
     pupil_train = pupil[:N_train]
     hr_train = hr[:N_train]
     eda_train = eda[:N_train]
-    e_labels_train = e_labels[:N_train]
+    e_labels_train = global_e_labels[:N_train]
 
     N_pupil = pupil_train.shape[0]
     D_pupil = pupil_train.shape[1]
@@ -170,7 +167,7 @@ for k in valid_k_list:
     pupil_test = pupil[N_train:].reset_index().drop(columns=['index'])
     hr_test = hr[N_train:].reset_index().drop(columns=['index'])
     eda_test = eda[N_train:].reset_index().drop(columns=['index'])
-    e_test = e_labels[N_train:]
+    e_test = global_e_labels[N_train:]
 
     with sPPCA:
         posterior_pred = pm.sample_posterior_predictive(
