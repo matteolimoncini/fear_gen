@@ -164,9 +164,9 @@ for k in valid_k_list:
 
     # posterior = open_dataset('posterior.h5', engine='scipy')
 
-    pupil_test = pupil[N_train:].reset_index().drop(columns=['index'])
-    hr_test = hr[N_train:].reset_index().drop(columns=['index'])
-    eda_test = eda[N_train:].reset_index().drop(columns=['index'])
+    pupil_test = pupil[N_train:]  # .reset_index().drop(columns=['index'])
+    hr_test = hr[N_train:]  # .reset_index().drop(columns=['index'])
+    eda_test = eda[N_train:]  # .reset_index().drop(columns=['index'])
     e_test = global_e_labels[N_train:]
 
     with sPPCA:
