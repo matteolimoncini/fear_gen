@@ -192,7 +192,6 @@ for k in valid_k_list:
         posterior_pred = pm.sample_posterior_predictive(
             trace, var_names=["x_e"], random_seed=123)
 
-    break
 
     # az.plot_trace(trace);
     with sPPCA:
