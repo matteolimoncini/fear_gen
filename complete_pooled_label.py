@@ -182,7 +182,8 @@ for k in valid_k_list:
         approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
         trace = approx.sample(500)
     name = 'complete_pooled/ADVI_100000_k' + str(k) + '_allsubjects_'
-    trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
+    trace.to_netcdf(name + 'trace.nc')
+    # trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
 
     # from xarray import open_dataset
 
