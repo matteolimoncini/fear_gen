@@ -139,6 +139,7 @@ for k in valid_k_list:
             trace = approx.sample(500)
 
         name = 'unpooled/k' + str(k) + '_sub' + str(i) + '_'
+        approx.to_netcdf(name + 'approx.nc')
         trace.to_netcdf(name + 'trace.nc')
         trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
 
