@@ -135,10 +135,11 @@ for k in valid_k_list:
                                observed=e_labels_train.T)
 
         with sPPCA:
-            approx = pm.fit(10000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(500)
 
         name = 'unpooled/k' + str(k) + '_sub' + str(i) + '_'
+        trace.to_netcdf(name + 'trace.nc')
         trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
 
         # from xarray import open_dataset
