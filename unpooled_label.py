@@ -9,7 +9,7 @@ Original file is located at
 
 import logging
 import os.path
-
+import matplotlib.pyplot as plt
 import numpy as np
 import pymc as pm
 import arviz as az
@@ -139,9 +139,13 @@ for k in valid_k_list:
             trace = approx.sample(500)
 
         name = 'unpooled/k' + str(k) + '_sub' + str(i) + '_'
-        approx.to_netcdf(name + 'approx.nc')
         trace.to_netcdf(name + 'trace.nc')
         trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
+
+        plt.plot(approx.hist)
+        plt.ylabel('ELBO')
+        plt.xlabel('iteration')
+        plt.savefig(name + 'elboplot.png')
 
         # from xarray import open_dataset
 
