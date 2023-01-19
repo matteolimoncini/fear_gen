@@ -193,6 +193,6 @@ for k in valid_k_list:
 
     test_accuracy_exp = accuracy_score(e_test, e_pred_mode)
 
-    logging.info("Subj num: " + str(i) + " Test Acc Pain Expect: " + str(test_accuracy_exp) + " script: " +
-                 os.path.basename(__file__) + ", ft extr HR and EDA: wavelet" +
+    logging.info("All subj, ADVI, Test Acc Pain Exp: " + str(test_accuracy_exp) + " script: " +
+                 os.path.basename(__file__) + ", ft extr HR and EDA: wav" +
                  ', ft extr PUP: mean, lat space dims: ' + str(K))
