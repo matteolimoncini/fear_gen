@@ -141,11 +141,18 @@ for k in valid_k_list:
         name = 'unpooled/k' + str(k) + '_sub' + str(i) + '_'
         trace.to_netcdf(name + 'trace.nc')
         trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
+        np.save(name + 'approx_hist.npy', approx.hist)
 
         plt.plot(approx.hist)
         plt.ylabel('ELBO')
         plt.xlabel('iteration')
         plt.savefig(name + 'elboplot.png')
+
+        plt.plot(approx.hist)
+        plt.ylim(0, 1e5)
+        plt.ylabel('ELBO')
+        plt.xlabel('iteration')
+        plt.savefig(name + 'elboplot_cutted.png')
 
         # from xarray import open_dataset
 
