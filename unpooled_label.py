@@ -138,9 +138,9 @@ for k in valid_k_list:
             approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(500)
 
-        name = 'unpooled/k' + str(k) + '_sub' + str(i) + '_'
+        name = 'unpooled/ADVI1e6/k' + str(k) + '_sub' + str(i) + '_'
+
         trace.to_netcdf(name + 'trace.nc')
-        trace.posterior.to_netcdf(name + 'posterior.h5', engine='scipy')
         np.save(name + 'approx_hist.npy', approx.hist)
 
         plt.plot(approx.hist)
