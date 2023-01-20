@@ -135,7 +135,7 @@ for k in valid_k_list:
                                observed=e_labels_train.T)
 
         with sPPCA:
-            approx = pm.fit(100000, method="svgd", callbacks=[pm.callbacks.CheckParametersConvergence(diff="absolute")])
+            approx = pm.fit(10000, method="svgd", callbacks=[pm.callbacks.CheckParametersConvergence(diff="absolute")])
             trace = approx.sample(500)
 
         print(type(approx))
