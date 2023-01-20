@@ -134,7 +134,7 @@ for k in valid_k_list:
         trace.to_netcdf(name + 'trace.nc')
         np.save(name + 'approx_hist.npy', approx.hist)
 
-        plt.plot(approx.hist)
+        '''plt.plot(approx.hist)
         plt.ylabel('ELBO')
         plt.xlabel('iteration')
         plt.savefig(name + 'elboplot.png')
@@ -143,7 +143,7 @@ for k in valid_k_list:
         plt.ylim(0, 1e5)
         plt.ylabel('ELBO')
         plt.xlabel('iteration')
-        plt.savefig(name + 'elboplot_cutted.png')
+        plt.savefig(name + 'elboplot_cutted.png')'''
 
         # from xarray import open_dataset
 
