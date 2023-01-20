@@ -126,7 +126,7 @@ for k in valid_k_list:
                                observed=e_labels_train.T)
 
         with sPPCA:
-            approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(500)
 
         name = 'unpooled/newfeatwind/ADVI1e6/k' + str(k) + '_sub' + str(i) + '_'
