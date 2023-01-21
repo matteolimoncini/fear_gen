@@ -128,15 +128,14 @@ for k in valid_k_list:
 
         name = 'unpooled/advi/k' + str(k) + '_sub' + str(i) + '_'
         trace_file = name + 'trace.nc'
-        if os.path.exists(trace_file):
+        '''if os.path.exists(trace_file):
             print("loading trace...")
             with sPPCA:
                 pm.load_trace(trace_file)
-        else:
-
-            with sPPCA:
-                approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
-                trace = approx.sample(500)
+        else:'''
+        with sPPCA:
+            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            trace = approx.sample(500)
 
         with sPPCA:
             posterior_predictive = pm.sample_posterior_predictive(
@@ -151,8 +150,7 @@ for k in valid_k_list:
                      os.path.basename(__file__) + ", ft extr HR and EDA: wavelet" +
                      ', ft extr PUP: mean, lat space dims: ' + str(K))
 
-
-        trace.to_netcdf(name + 'trace.nc')
+        trace.to_netcdf(trace_file)
         np.save(name + 'approx_hist.npy', approx.hist)
 
         plt.plot(approx.hist)
