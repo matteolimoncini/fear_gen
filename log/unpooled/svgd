@@ -136,3 +136,18 @@
 2023-01-21 15:38:04,059 INFO     Sampling: [x_e]
 2023-01-21 15:38:08,417 INFO     Sampling: [c, x_e]
 2023-01-21 15:38:08,542 INFO     Subj num: 50 Test Acc Pain Expect: 0.2857142857142857 script: unpooled_label_svgd.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-21 16:07:57,417 INFO     Sampling: [x_e]
+2023-01-21 16:08:01,677 INFO     Sampling: [c, x_e]
+2023-01-21 16:08:01,802 INFO     Subj num: 51 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_svgd.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-21 16:38:05,430 INFO     Sampling: [x_e]
+2023-01-21 16:38:09,751 INFO     Sampling: [c, x_e]
+2023-01-21 16:38:09,875 INFO     Subj num: 52 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_svgd.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-21 17:07:53,100 INFO     Sampling: [x_e]
+2023-01-21 17:07:57,472 INFO     Sampling: [c, x_e]
+2023-01-21 17:07:57,598 INFO     Subj num: 53 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_svgd.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-21 17:37:59,872 INFO     Sampling: [x_e]
+2023-01-21 17:38:04,177 INFO     Sampling: [c, x_e]
+2023-01-21 17:38:04,374 INFO     Subj num: 54 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_svgd.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-21 18:07:57,543 INFO     Sampling: [x_e]
+2023-01-21 18:08:01,763 INFO     Sampling: [c, x_e]
+2023-01-21 18:08:01,888 INFO     Subj num: 55 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_svgd.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
