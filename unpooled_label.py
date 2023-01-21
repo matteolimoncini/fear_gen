@@ -31,7 +31,7 @@ valid_k_list = list(range(1, 7))
 
 num_trials_to_remove = 48
 
-logging.basicConfig(level=logging.INFO, filename="log/unpooled/unpooled_labelADVI1e6", filemode="a+",
+logging.basicConfig(level=logging.INFO, filename="log/unpooled/unpooled_labelADVI1e6_traintest", filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 for k in valid_k_list:
