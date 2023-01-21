@@ -27,7 +27,7 @@ warnings.simplefilter(action="ignore", category=RuntimeWarning)
 scaler = StandardScaler()
 
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
-valid_k_list = list(range(1, 10))
+valid_k_list = list(range(1, 7))
 
 num_trials_to_remove = 48
 
@@ -137,6 +137,18 @@ for k in valid_k_list:
         with sPPCA:
             approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(500)
+
+            posterior_predictive = pm.sample_posterior_predictive(
+                trace, var_names=["x_e"], random_seed=123, predictions=True)
+
+        e_pred_train = posterior_predictive.predictions['x_e']
+        e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
+
+        train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+
+        logging.info("Subj num: " + str(i) + " Train Acc Pain Expect: " + str(train_accuracy_exp) + " script: " +
+                     os.path.basename(__file__) + ", ft extr HR and EDA: wavelet" +
+                     ', ft extr PUP: mean, lat space dims: ' + str(K))
 
         name = 'unpooled/advi/k' + str(k) + '_sub' + str(i) + '_'
 
