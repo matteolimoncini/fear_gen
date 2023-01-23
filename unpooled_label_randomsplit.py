@@ -134,7 +134,7 @@ for k in valid_k_list:
             x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(We.dot(c.T)), dims=['e_label_d', 'physio_n'],
                                observed=e_labels_train.T)
 
-        name = 'unpooled/advi/k' + str(k) + '_sub' + str(i) + '_'
+        name = 'unpooled/advi/randomsplit/k' + str(k) + '_sub' + str(i) + '_'
         trace_file = name + 'trace.nc'
         '''if os.path.exists(trace_file):
             print("loading trace...")
