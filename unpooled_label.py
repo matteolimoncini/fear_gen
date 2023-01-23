@@ -1,4 +1,3 @@
-
 import logging
 import os.path
 import matplotlib.pyplot as plt
@@ -12,6 +11,7 @@ from scipy import stats
 import pandas as pd
 import warnings
 import extract_correct_csv
+import random
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action="ignore", category=RuntimeWarning)
@@ -23,7 +23,7 @@ valid_k_list = list(range(1, 7))
 
 num_trials_to_remove = 48
 
-logging.basicConfig(level=logging.INFO, filename="log/unpooled/unpooled_labelADVI1e6_traintest", filemode="a+",
+logging.basicConfig(level=logging.INFO, filename="log/unpooled/unpooled_labelADVI1e6_randomsplit", filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 for k in valid_k_list:
@@ -35,6 +35,7 @@ for k in valid_k_list:
         y = np.array(list([int(d > 2) for d in global_data['rating']]))
         e_labels = y[:, np.newaxis]  # rating > 2
         e_labels = e_labels[num_trials_to_remove:]
+        e_labels = pd.DataFrame(e_labels)
 
         TRIAL = 160
 
@@ -49,14 +50,39 @@ for k in valid_k_list:
 
         TRIAL_DEF = TRIAL - num_trials_to_remove
 
-        # TRAIN_PERC = 0.75
-        TEST_PERC = 0.25  # 1-TRAIN_PERC
-        N_train = int(len(pupil) * (1 - TEST_PERC))
+        TRAIN_PERC = 0.70
+        VAL_PERC = 0.1
+        TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
+        N_train = int(len(pupil) * (TRAIN_PERC))
+        N_val = int(len(pupil) * (VAL_PERC))
+
+        # RANDOM SPLIT
+        pupil = pupil.sample(frac=1, random_state=0)
+        pupil = pupil.reset_index(drop=True)
+
+        hr = hr.sample(frac=1, random_state=0)
+        hr = hr.reset_index(drop=True)
+
+        eda = eda.sample(frac=1, random_state=0)
+        eda = eda.reset_index(drop=True)
+
+        e_labels = e_labels.sample(frac=1, random_state=0)
+        e_labels = e_labels.reset_index(drop=True)
 
         pupil_train = pupil[:N_train]
         hr_train = hr[:N_train]
         eda_train = eda[:N_train]
         e_labels_train = e_labels[:N_train]
+
+        pupil_val = pupil[N_train:N_train + N_val]
+        hr_val = hr[N_train:N_train + N_val]
+        eda_val = eda[N_train:N_train + N_val]
+        e_labels_val = e_labels[N_train:N_train + N_val]
+
+        pupil_test = pupil[N_train + N_val:]
+        hr_test = hr[N_train + N_val:]
+        eda_test = eda[N_train + N_val:]
+        e_test = e_labels[N_train + N_val:]
 
         N_pupil = pupil_train.shape[0]
         D_pupil = pupil_train.shape[1]
@@ -126,7 +152,7 @@ for k in valid_k_list:
             x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(We.dot(c.T)), dims=['e_label_d', 'physio_n'],
                                observed=e_labels_train.T)
 
-        name = 'unpooled/advi/k' + str(k) + '_sub' + str(i) + '_'
+        name = 'unpooled/advi/randomsplit/k' + str(k) + '_sub' + str(i) + '_'
         trace_file = name + 'trace.nc'
         '''if os.path.exists(trace_file):
             print("loading trace...")
@@ -167,11 +193,6 @@ for k in valid_k_list:
         # from xarray import open_dataset
 
         # posterior = open_dataset('posterior.h5', engine='scipy')
-
-        pupil_test = pupil[N_train:].reset_index().drop(columns=['index'])
-        hr_test = hr[N_train:].reset_index().drop(columns=['index'])
-        eda_test = eda[N_train:].reset_index().drop(columns=['index'])
-        e_test = e_labels[N_train:]
 
         with sPPCA:
             posterior_pred = pm.sample_posterior_predictive(
