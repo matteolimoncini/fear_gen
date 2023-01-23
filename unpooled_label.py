@@ -12,23 +12,28 @@ import pandas as pd
 import warnings
 import extract_correct_csv
 import random
+import csv
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action="ignore", category=RuntimeWarning)
 
 scaler = StandardScaler()
 
-prova_3_subj = extract_correct_csv.extract_only_valid_subject()
-valid_k_list = list(range(1, 7))
+all_subject = extract_correct_csv.extract_only_valid_subject()
+valid_k_list = list(range(1, 10))
+columns = ['subject', 'k', 'train', 'val', 'test']
+with open('tmp_csv', 'w') as f:
+    write = csv.writer(f)
+    write.writerow(columns)
 
 num_trials_to_remove = 48
 
 logging.basicConfig(level=logging.INFO, filename="log/unpooled/unpooled_labelADVI1e6_randomsplit", filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
-for k in valid_k_list:
+for i in all_subject:
 
-    for i in prova_3_subj:
+    for k in valid_k_list:
         string_subject = extract_correct_csv.read_correct_subject_csv(i)
         csv_ = 'data/LookAtMe_0' + string_subject + '.csv'
         global_data = pd.read_csv(csv_, sep='\t')
@@ -79,10 +84,10 @@ for k in valid_k_list:
         eda_val = eda[N_train:N_train + N_val]
         e_labels_val = e_labels[N_train:N_train + N_val]
 
-        pupil_test = pupil[N_train + N_val:]
-        hr_test = hr[N_train + N_val:]
-        eda_test = eda[N_train + N_val:]
-        e_test = e_labels[N_train + N_val:]
+        pupil_test = pupil[N_train+N_val:]
+        hr_test = hr[N_train+N_val:]
+        eda_test = eda[N_train+N_val:]
+        e_test = e_labels[N_train+N_val:]
 
         N_pupil = pupil_train.shape[0]
         D_pupil = pupil_train.shape[1]
@@ -115,8 +120,6 @@ for k in valid_k_list:
             pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=['pupil_d', 'physio_n'])
             eda_data = pm.MutableData("eda_data", eda_train.T, dims=['physio_d', 'physio_n'])
 
-            # e_data = pm.MutableData("e_data", e_labels_train.T)
-
             # matrici pesi
             Whr = pm.Normal('Whr', mu=0, sigma=2.0 * 1, dims=['physio_d', 'K'])
             Wpupil = pm.Normal('Wpupil', mu=0, sigma=2.0 * 1, dims=['pupil_d', 'K'])
@@ -128,28 +131,28 @@ for k in valid_k_list:
             We = pm.Normal('W_e', mu=0, sigma=2.0 * 1, dims=['e_label_d', 'K'])
 
             # latent space
-            c = pm.Normal('c', mu=0, sigma=1, dims=['physio_n', 'K'])
+            c = pm.Normal('c', mu=0, sigma=1, dims=['K', 'physio_n'])
 
             # dati dell'hrv interpretati come una gaussiana
-            mu_hr = pm.Normal('mu_hr', Whr.dot(c.T), 1, dims=['physio_d', 'physio_n'])  # hyperprior 1
+            mu_hr = pm.Normal('mu_hr', at.dot(Whr, c), 1, dims=['physio_d', 'physio_n'])  # hyperprior 1
             sigma_hr = pm.Exponential('sigma_hr', 1)  # hyperprior 2
             x_hr = pm.Normal('x_hr', mu=mu_hr, sigma=sigma_hr, observed=hr_data, dims=['physio_d', 'physio_n'])
 
             # dati della dilatazione pupille interpretati come una gaussiana
-            mu_pupil = pm.Normal('mu_pupil', Wpupil.dot(c.T), 1, dims=['pupil_d', 'physio_n'])  # hyperprior 1
+            mu_pupil = pm.Normal('mu_pupil', at.dot(Wpupil, c), 1, dims=['pupil_d', 'physio_n'])  # hyperprior 1
             sigma_pupil = pm.Exponential('sigma_pupil', 1)  # hyperprior 2
             x_pupil = pm.Normal('x_pupil', mu=mu_pupil, sigma=sigma_pupil, dims=['pupil_d', 'physio_n'],
                                 observed=pupil_data)
 
             # eda
-            mu_eda = pm.Normal('mu_eda', Weda.dot(c.T), 1, dims=['physio_d', 'physio_n'])  # hyperprior 1
+            mu_eda = pm.Normal('mu_eda', at.dot(Weda, c), 1, dims=['physio_d', 'physio_n'])  # hyperprior 1
             sigma_eda = pm.Exponential('sigma_eda', 1)  # hyperprior 2
             x_eda = pm.Normal('x_eda', mu=mu_eda, sigma=sigma_eda, dims=['physio_d', 'physio_n'], observed=eda_data)
 
             # pain expectation. ciò che dovremmo inferire dato c
             # due strade: binary o multiclass (1-4)
             # p = probability of success?
-            x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(We.dot(c.T)), dims=['e_label_d', 'physio_n'],
+            x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(at.dot(We, c)), dims=['e_label_d', 'physio_n'],
                                observed=e_labels_train.T)
 
         name = 'unpooled/advi/randomsplit/k' + str(k) + '_sub' + str(i) + '_'
@@ -160,21 +163,17 @@ for k in valid_k_list:
                 pm.load_trace(trace_file)
         else:'''
         with sPPCA:
-            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(500)
 
         with sPPCA:
             posterior_predictive = pm.sample_posterior_predictive(
-                trace, var_names=["x_e"], random_seed=123, predictions=True)
+                trace, var_names=["x_e"], random_seed=123)
 
-        e_pred_train = posterior_predictive.predictions['x_e']
+        e_pred_train = posterior_predictive.posterior_predictive['x_e']
         e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
 
         train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
-
-        logging.info("Subj num: " + str(i) + " Train Acc Pain Expect: " + str(train_accuracy_exp) + " script: " +
-                     os.path.basename(__file__) + ", ft extr HR and EDA: wavelet" +
-                     ', ft extr PUP: mean, lat space dims: ' + str(K))
 
         trace.to_netcdf(trace_file)
         np.save(name + 'approx_hist.npy', approx.hist)
@@ -183,24 +182,34 @@ for k in valid_k_list:
         plt.ylabel('ELBO')
         plt.xlabel('iteration')
         plt.savefig(name + 'elboplot.png')
+        plt.show()
 
         plt.plot(approx.hist)
         plt.ylim(0, 1e5)
         plt.ylabel('ELBO')
         plt.xlabel('iteration')
         plt.savefig(name + 'elboplot_cutted.png')
+        plt.show()
 
-        # from xarray import open_dataset
-
-        # posterior = open_dataset('posterior.h5', engine='scipy')
-
-        with sPPCA:
-            posterior_pred = pm.sample_posterior_predictive(
-                trace, var_names=["x_e"], random_seed=123)
 
         # az.plot_trace(trace);
         with sPPCA:
-            # update values of predictors:
+            # update values of predictors with validation:
+            sPPCA.set_data("hr_data", hr_val.T, coords={'physio_n': range(hr_val.shape[0])})
+            sPPCA.set_data("pupil_data", pupil_val.T, coords={'physio_n': range(pupil_val.shape[0])})
+            sPPCA.set_data("eda_data", eda_val.T, coords={'physio_n': range(eda_val.shape[0])})
+            # use the updated values and predict outcomes and probabilities:
+
+            posterior_predictive = pm.sample_posterior_predictive(
+                trace, var_names=["x_e"], random_seed=123, predictions=True)
+
+        e_pred = posterior_predictive.predictions['x_e']
+        e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
+
+        val_accuracy_exp = accuracy_score(e_labels_val, e_pred_mode)
+
+        with sPPCA:
+            # update values of predictors with validation:
             sPPCA.set_data("hr_data", hr_test.T, coords={'physio_n': range(hr_test.shape[0])})
             sPPCA.set_data("pupil_data", pupil_test.T, coords={'physio_n': range(pupil_test.shape[0])})
             sPPCA.set_data("eda_data", eda_test.T, coords={'physio_n': range(eda_test.shape[0])})
@@ -213,7 +222,8 @@ for k in valid_k_list:
         e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
 
         test_accuracy_exp = accuracy_score(e_test, e_pred_mode)
+        row = [i, k, train_accuracy_exp, val_accuracy_exp, test_accuracy_exp]
 
-        logging.info("Subj num: " + str(i) + " Test Acc Pain Expect: " + str(test_accuracy_exp) + " script: " +
-                     os.path.basename(__file__) + ", ft extr HR and EDA: wavelet" +
-                     ', ft extr PUP: mean, lat space dims: ' + str(K))
+        with open('tmp_csv', 'a') as f:
+            write = csv.writer(f)
+            write.writerow(row)
