@@ -1,0 +1,3 @@
+eda 'wavelet', window=(2,1)
+hr 'wavelet', window=(2,1)
+pupil 'mean', window=(1, 0)
