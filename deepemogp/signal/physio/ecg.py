@@ -22,7 +22,7 @@ class ECG(Signal):
         for raw in self.raw:  # for each raw data series
 
             # Extract Heart Rate values
-            results = biosppy.signals.ecg.ecg(raw['data'], raw['fps'], show)
+            results = biosppy.signals.ecg.ecg(raw['data'], raw['fps'], show=False)
             t_raw = results[0]
             t_hr = results[5]
             hr = results[6]
@@ -33,4 +33,4 @@ class ECG(Signal):
 
             fps = int(len(tmp_HR) / t_raw[-1])
 
-        self.processed.append({'data': tmp_HR, 'fps': fps})
+            self.processed.append({'data': tmp_HR, 'fps': fps})
