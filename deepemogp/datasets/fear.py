@@ -9,7 +9,7 @@ class FEAR(Dataset):
     # signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/sync_signals'
 
     # signal_folder = '/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/data/sync_signals'
-    signal_folder = 'data/sync_signals'
+    signal_folder = 'data_fake'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):
         super(FEAR, self).__init__(name, signals, subjects, annotations=None)
@@ -88,7 +88,7 @@ class FEAR(Dataset):
                             signal.raw.append({'data': values, 'fps': fps})
                     #print(signal.raw[:10])
 
-            elif signal.name == 'HR':
+            elif signal.name == 'ECG':
 
                 for subject in self.subjects:  # loop over all considered subjects
 
