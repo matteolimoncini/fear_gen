@@ -20,6 +20,7 @@ warnings.simplefilter(action="ignore", category=RuntimeWarning)
 scaler = StandardScaler()
 
 all_subject = extract_correct_csv.extract_only_valid_subject()
+all_subject.remove(49)
 valid_k_list = list(range(1, 10))
 columns = ['subject', 'k', 'train', 'val', 'test']
 with open('tmp_csv', 'w') as f:
@@ -28,7 +29,8 @@ with open('tmp_csv', 'w') as f:
 
 num_trials_to_remove = 48
 
-logging.basicConfig(level=logging.INFO, filename="log/unpooled/unpooled_labelADVI1e6_randomsplit", filemode="a+",
+logging.basicConfig(level=logging.INFO, filename="log/unpooled/fake_data/unpooled_labelADVI1e6_randomsplit",
+                    filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
 for i in all_subject:
@@ -44,26 +46,26 @@ for i in all_subject:
 
         TRIAL = 160
 
-        hr = pd.read_csv('data/features/hr/' + str(i) + '.csv')
+        hr = pd.read_csv('data_fake/features_4_2/hr/' + str(i) + '.csv')
         hr = hr[num_trials_to_remove:]
 
-        eda = pd.read_csv('data/features/eda/' + str(i) + '.csv')
+        eda = pd.read_csv('data_fake/features_4_2/eda/' + str(i) + '.csv')
         eda = eda[num_trials_to_remove:]
 
-        pupil = pd.read_csv('data/features/pupil/' + str(i) + '.csv')
-        pupil = pupil[num_trials_to_remove:]
+        # pupil = pd.read_csv('data_fake/features_4_2/pupil/' + str(i) + '.csv')
+        # pupil = pupil[num_trials_to_remove:]
 
         TRIAL_DEF = TRIAL - num_trials_to_remove
 
         TRAIN_PERC = 0.70
         VAL_PERC = 0.1
         TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
-        N_train = int(len(pupil) * (TRAIN_PERC))
-        N_val = int(len(pupil) * (VAL_PERC))
+        N_train = int(len(eda) * (TRAIN_PERC))
+        N_val = int(len(eda) * (VAL_PERC))
 
         # RANDOM SPLIT
-        pupil = pupil.sample(frac=1, random_state=0)
-        pupil = pupil.reset_index(drop=True)
+        # pupil = pupil.sample(frac=1, random_state=0)
+        # pupil = pupil.reset_index(drop=True)
 
         hr = hr.sample(frac=1, random_state=0)
         hr = hr.reset_index(drop=True)
@@ -74,23 +76,23 @@ for i in all_subject:
         e_labels = e_labels.sample(frac=1, random_state=0)
         e_labels = e_labels.reset_index(drop=True)
 
-        pupil_train = pupil[:N_train]
+        #pupil_train = pupil[:N_train]
         hr_train = hr[:N_train]
         eda_train = eda[:N_train]
         e_labels_train = e_labels[:N_train]
 
-        pupil_val = pupil[N_train:N_train + N_val]
+        # pupil_val = pupil[N_train:N_train + N_val]
         hr_val = hr[N_train:N_train + N_val]
         eda_val = eda[N_train:N_train + N_val]
         e_labels_val = e_labels[N_train:N_train + N_val]
 
-        pupil_test = pupil[N_train+N_val:]
-        hr_test = hr[N_train+N_val:]
-        eda_test = eda[N_train+N_val:]
-        e_test = e_labels[N_train+N_val:]
+        # pupil_test = pupil[N_train+N_val:]
+        hr_test = hr[N_train + N_val:]
+        eda_test = eda[N_train + N_val:]
+        e_test = e_labels[N_train + N_val:]
 
-        N_pupil = pupil_train.shape[0]
-        D_pupil = pupil_train.shape[1]
+        # N_pupil = pupil_train.shape[0]
+        # D_pupil = pupil_train.shape[1]
 
         N_hr = hr_train.shape[0]
         D_hr = hr_train.shape[1]
@@ -113,16 +115,16 @@ for i in all_subject:
             sPPCA.add_coord('physio_d', np.arange(D_hr), mutable=False)
             sPPCA.add_coord('e_label_d', np.arange(D_e), mutable=True)
             sPPCA.add_coord('K', np.arange(K), mutable=True)
-            sPPCA.add_coord('pupil_d', np.arange(D_pupil), mutable=True)
+            #sPPCA.add_coord('pupil_d', np.arange(D_pupil), mutable=True)
 
             # dati osservabili
             hr_data = pm.MutableData("hr_data", hr_train.T, dims=['physio_d', 'physio_n'])
-            pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=['pupil_d', 'physio_n'])
+            #pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=['pupil_d', 'physio_n'])
             eda_data = pm.MutableData("eda_data", eda_train.T, dims=['physio_d', 'physio_n'])
 
             # matrici pesi
             Whr = pm.Normal('Whr', mu=0, sigma=2.0 * 1, dims=['physio_d', 'K'])
-            Wpupil = pm.Normal('Wpupil', mu=0, sigma=2.0 * 1, dims=['pupil_d', 'K'])
+            #Wpupil = pm.Normal('Wpupil', mu=0, sigma=2.0 * 1, dims=['pupil_d', 'K'])
 
             Weda = pm.Normal('Weda', mu=0, sigma=2.0 * 1, dims=['physio_d', 'K'])
 
@@ -139,10 +141,9 @@ for i in all_subject:
             x_hr = pm.Normal('x_hr', mu=mu_hr, sigma=sigma_hr, observed=hr_data, dims=['physio_d', 'physio_n'])
 
             # dati della dilatazione pupille interpretati come una gaussiana
-            mu_pupil = pm.Normal('mu_pupil', at.dot(Wpupil, c), 1, dims=['pupil_d', 'physio_n'])  # hyperprior 1
-            sigma_pupil = pm.Exponential('sigma_pupil', 1)  # hyperprior 2
-            x_pupil = pm.Normal('x_pupil', mu=mu_pupil, sigma=sigma_pupil, dims=['pupil_d', 'physio_n'],
-                                observed=pupil_data)
+            # mu_pupil = pm.Normal('mu_pupil', at.dot(Wpupil, c), 1, dims=['pupil_d', 'physio_n'])  # hyperprior 1
+            # sigma_pupil = pm.Exponential('sigma_pupil', 1)  # hyperprior 2
+            # x_pupil = pm.Normal('x_pupil', mu=mu_pupil, sigma=sigma_pupil, dims=['pupil_d', 'physio_n'],observed=pupil_data)
 
             # eda
             mu_eda = pm.Normal('mu_eda', at.dot(Weda, c), 1, dims=['physio_d', 'physio_n'])  # hyperprior 1
@@ -155,7 +156,7 @@ for i in all_subject:
             x_e = pm.Bernoulli('x_e', p=pm.math.sigmoid(at.dot(We, c)), dims=['e_label_d', 'physio_n'],
                                observed=e_labels_train.T)
 
-        name = 'unpooled/advi/randomsplit/k' + str(k) + '_sub' + str(i) + '_'
+        name = 'unpooled/fake_data/advi/randomsplit/k' + str(k) + '_sub' + str(i) + '_'
         trace_file = name + 'trace.nc'
         '''if os.path.exists(trace_file):
             print("loading trace...")
@@ -163,7 +164,7 @@ for i in all_subject:
                 pm.load_trace(trace_file)
         else:'''
         with sPPCA:
-            approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            approx = pm.fit(30000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(500)
 
         with sPPCA:
@@ -196,7 +197,7 @@ for i in all_subject:
         with sPPCA:
             # update values of predictors with validation:
             sPPCA.set_data("hr_data", hr_val.T, coords={'physio_n': range(hr_val.shape[0])})
-            sPPCA.set_data("pupil_data", pupil_val.T, coords={'physio_n': range(pupil_val.shape[0])})
+            #sPPCA.set_data("pupil_data", pupil_val.T, coords={'physio_n': range(pupil_val.shape[0])})
             sPPCA.set_data("eda_data", eda_val.T, coords={'physio_n': range(eda_val.shape[0])})
             # use the updated values and predict outcomes and probabilities:
 
@@ -211,7 +212,7 @@ for i in all_subject:
         with sPPCA:
             # update values of predictors with validation:
             sPPCA.set_data("hr_data", hr_test.T, coords={'physio_n': range(hr_test.shape[0])})
-            sPPCA.set_data("pupil_data", pupil_test.T, coords={'physio_n': range(pupil_test.shape[0])})
+            #sPPCA.set_data("pupil_data", pupil_test.T, coords={'physio_n': range(pupil_test.shape[0])})
             sPPCA.set_data("eda_data", eda_test.T, coords={'physio_n': range(eda_test.shape[0])})
             # use the updated values and predict outcomes and probabilities:
 
