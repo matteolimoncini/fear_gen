@@ -225,6 +225,6 @@ for i in all_subject:
         test_accuracy_exp = accuracy_score(e_test, e_pred_mode)
         row = [i, k, train_accuracy_exp, val_accuracy_exp, test_accuracy_exp]
 
-        with open('tmp_csv', 'a') as f:
+        with open('tmp_fake_csv', 'a') as f:
             write = csv.writer(f)
             write.writerow(row)
