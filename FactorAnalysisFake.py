@@ -224,6 +224,6 @@ for sub in all_subject:
 
         row = [sub, k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
 
-        with open('FA.csv', 'a') as f:
+        with open('FAFake.csv', 'a') as f:
             write = csv.writer(f)
             write.writerow(row)
