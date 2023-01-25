@@ -47,11 +47,12 @@ def expand_packed_block_triangular(d, k, packed, diag=None, mtype="aesara"):
         out = set_(out, idxs, diag)
     return out
 
-def makeW(d, k, dim_names,name):
+
+def makeW(d, k, dim_names, name):
     # make a W matrix adapted to the data shape
     n_od = int(k * d - k * (k - 1) / 2 - k)
     # trick: the cumulative sum of z will be positive increasing
-    z = pm.HalfNormal("W_z_"+name, 1.0, dims="latent_columns")
+    z = pm.HalfNormal("W_z_" + name, 1.0, dims="latent_columns")
     b = pm.HalfNormal("W_b_" + name, 1.0, shape=(n_od,), dims="packed_dim")
     L = expand_packed_block_triangular(d, k, b, at.ones(k))
     W = pm.Deterministic(name, at.dot(L, at.diag(at.extra_ops.cumsum(z))), dims=dim_names)
@@ -68,16 +69,16 @@ for sub in all_subject:
     # loop within all k
     for k in valid_k_list:
         # eda data
-        eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
+        eda = pd.read_csv('data_fake/features_4_2/eda/' + str(sub) + '.csv')
         eda = eda[num_trials_to_remove:]
 
         # hr data
-        hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
+        hr = pd.read_csv('data_fake/features_4_2/hr/' + str(sub) + '.csv')
         hr = hr[num_trials_to_remove:]
 
         # pupil data
-        pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
-        pupil = pupil[num_trials_to_remove:]
+        # pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
+        # pupil = pupil[num_trials_to_remove:]
 
         # pain expectation data
         df_ = pd.read_csv('data/LookAtMe_00' + str(sub) + '.csv', sep='\t')
