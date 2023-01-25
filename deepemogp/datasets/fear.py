@@ -9,7 +9,7 @@ class FEAR(Dataset):
     # signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/sync_signals'
 
     # signal_folder = '/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/data/sync_signals'
-    signal_folder = 'data_fake'
+    signal_folder = 'data/sync_signals_raw'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):
         super(FEAR, self).__init__(name, signals, subjects, annotations=None)
