@@ -63,8 +63,6 @@ with open('FA.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
-valid_k_list = list([2])
-all_subject = list([2])
 # loop within all subjects
 for sub in all_subject:
     # loop within all k
@@ -217,7 +215,6 @@ for sub in all_subject:
             posterior_predictive = pm.sample_posterior_predictive(
                 trace, var_names=["X_e"], random_seed=123, predictions=True)
 
-        '''
         e_pred = posterior_predictive.predictions['X_e']
         e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
 
@@ -228,5 +225,3 @@ for sub in all_subject:
         with open('FA.csv', 'a') as f:
             write = csv.writer(f)
             write.writerow(row)
-
-        '''
