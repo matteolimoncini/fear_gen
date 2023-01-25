@@ -8,7 +8,7 @@ from scipy import stats
 from sklearn.metrics import accuracy_score
 import csv
 
-from fear_gen import extract_correct_csv
+import extract_correct_csv
 
 RANDOM_SEED = 31415
 rng = default_rng(RANDOM_SEED)
@@ -182,7 +182,7 @@ for sub in all_subject:
         # gv.view('PPCA factor')
 
         with PPCA_identified:
-            approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
             trace = approx.sample(1000)
 
         with PPCA_identified:
