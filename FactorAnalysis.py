@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from numpy.random import default_rng
 from scipy import stats
 from sklearn.metrics import accuracy_score
+import csv
 
 from fear_gen import extract_correct_csv
 
@@ -56,6 +57,10 @@ def makeW(d, k, dim_names,name):
     W = pm.Deterministic(name, at.dot(L, at.diag(at.extra_ops.cumsum(z))), dims=dim_names)
     return W
 
+columns = ['subject', 'k', 'train', 'val', 'test']
+with open('FA.csv', 'w') as f:
+    write = csv.writer(f)
+    write.writerow(columns)
 
 # loop within all subjects
 for sub in all_subject:
@@ -63,28 +68,75 @@ for sub in all_subject:
     for k in valid_k_list:
 
         # eda data
-        eda = pd.read_csv('data/features_4_2/eda/'+str(sub)+'.csv').to_numpy()
+        eda = pd.read_csv('data/features_4_2/eda/'+str(sub)+'.csv')
+        eda = eda[num_trials_to_remove:]
         eda = eda.T
 
-        hr = pd.read_csv('data/features_4_2/hr/'+str(sub)+'.csv').to_numpy()
+        # hr data
+        hr = pd.read_csv('data/features_4_2/hr/'+str(sub)+'.csv')
+        hr = hr[num_trials_to_remove:]
         hr = hr.T
 
-        pupil = pd.read_csv('data/features_4_2/pupil/'+str(sub)+'.csv').to_numpy()
+        # pupil data
+        pupil = pd.read_csv('data/features_4_2/pupil/'+str(sub)+'.csv')
+        pupil = pupil[num_trials_to_remove:]
         pupil = pupil.T
 
-        df_ = pd.read_csv('data/LookAtMe_002.csv', sep='\t')
+        # pain expectation data
+        df_ = pd.read_csv('data/LookAtMe_00'+str(sub)+'.csv', sep='\t')
+        df_ = df_[num_trials_to_remove:]
         label = np.array(list([int(d>2) for d in df_['rating']]))
         E = label[:,np.newaxis]
         E = np.transpose(E)
+        E = pd.DataFrame(E)
 
+        # num trials
         N = eda.shape[1]
-        d_eda = eda.shape[0]
-        d_hr = hr.shape[0]
-        d_e = E.shape[0]
-        d_pupil = pupil.shape[0]
+
+        # specifying train, val and test split
+        TRAIN_PERC = 0.70
+        VAL_PERC = 0.1
+        TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
+        N_train = int(len(eda) * (TRAIN_PERC))
+        N_val = int(len(eda) * (VAL_PERC))
+
+        # RANDOM SPLIT
+        pupil = pupil.sample(frac=1, random_state=0)
+        pupil = pupil.reset_index(drop=True).to_numpy()
+
+        hr = hr.sample(frac=1, random_state=0)
+        hr = hr.reset_index(drop=True).to_numpy()
+
+        eda = eda.sample(frac=1, random_state=0)
+        eda = eda.reset_index(drop=True).to_numpy()
+
+        e_labels = E.sample(frac=1, random_state=0)
+        e_labels = e_labels.reset_index(drop=True).to_numpy()
+
+        hr_train = hr[:N_train]
+        eda_train = eda[:N_train]
+        pupil_train = pupil[:N_train]
+        e_labels_train = e_labels[:N_train]
 
 
+        hr_val = hr[N_train:N_train + N_val]
+        eda_val = eda[N_train:N_train + N_val]
+        pupil_val = pupil[N_train:N_train + N_val]
+        e_labels_val = e_labels[N_train:N_train + N_val]
 
+        hr_test = hr[N_train + N_val:]
+        eda_test = eda[N_train + N_val:]
+        pupil_test = pupil[N_train+N_val:]
+        e_labels_test = e_labels[N_train + N_val:]
+
+
+        # dimensions of each signal
+        d_eda = eda_train.shape[0]
+        d_hr = hr_train.shape[0]
+        d_pupil = pupil_train.shape[0]
+        d_e = e_labels_train.shape[0]
+
+        # model coordinates
         coords = {"latent_columns": np.arange(k),
                   "rows": np.arange(N),
                   "observed_eda": np.arange(d_eda),
@@ -92,24 +144,39 @@ for sub in all_subject:
                   "observed_hr":np.arange(d_hr),
                   "observed_pupil":np.arange(d_pupil)}
 
+        # model definition
+        with pm.Model() as PPCA_identified:
+            # model coordinates
+            PPCA_identified.add_coord("latent_columns", np.arange(k), mutable=True)
+            PPCA_identified.add_coord("rows", np.arange(N_train), mutable=True)
+            PPCA_identified.add_coord("observed_eda", np.arange(d_eda), mutable=False)
+            PPCA_identified.add_coord("observed_hr", np.arange(d_hr), mutable=False)
+            PPCA_identified.add_coord("observed_pupil", np.arange(d_pupil), mutable=False)
+            PPCA_identified.add_coord("observed_label", np.arange(d_e), mutable=False)
 
-        with pm.Model(coords=coords) as PPCA_identified:
-            W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"),'W_eda')
-            W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"),'W_hr')
+            hr_data = pm.MutableData("hr_data", hr_train, dims=("observed_hr", "rows"))
+            eda_data = pm.MutableData("eda_data", eda_train, dims=("observed_eda", "rows"))
+            pupil_data = pm.MutableData("pupil_data", pupil_train, dims=("observed_pupil", "rows"))
+
+            W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
+            W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
             W_pupil = pm.Normal("W_pupil", dims=("observed_pupil", "latent_columns"))
 
             W_e = pm.Normal("W_e", dims=("observed_label", "latent_columns"))
             C = pm.Normal("C", dims=("latent_columns", "rows"))
             psi_eda = pm.HalfNormal("psi_eda", 1.0)
-            X_eda = pm.Normal("X_eda", mu=at.dot(W_eda, C), sigma=psi_eda, observed=eda, dims=("observed_eda", "rows"))
+            X_eda = pm.Normal("X_eda", mu=at.dot(W_eda, C), sigma=psi_eda, observed=eda_data,
+                              dims=("observed_eda", "rows"))
 
             psi_hr = pm.HalfNormal("psi_hr", 1.0)
-            X_hr = pm.Normal("X_hr", mu=at.dot(W_hr, C), sigma=psi_hr, observed=hr, dims=("observed_hr", "rows"))
+            X_hr = pm.Normal("X_hr", mu=at.dot(W_hr, C), sigma=psi_hr, observed=hr_data, dims=("observed_hr", "rows"))
 
             psi_pupil = pm.HalfNormal("psi_pupil", 1.0)
-            X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil, dims=("observed_pupil", "rows"))
+            X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data,
+                                dims=("observed_pupil", "rows"))
 
-            X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=("observed_label", "rows"), observed=E)
+            X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=("observed_label", "rows"),
+                               observed=e_labels_train)
 
         gv = pm.model_to_graphviz(PPCA_identified)
         gv.view('PPCA example')
@@ -125,4 +192,41 @@ for sub in all_subject:
         e_pred_train = posterior_predictive.posterior_predictive['X_e']
         e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
 
-        train_accuracy_exp = accuracy_score(E.T, e_pred_mode_train)
+        train_accuracy_exp = accuracy_score(e_labels_train.T, e_pred_mode_train)
+
+        with PPCA_identified:
+            # update values of predictors with validation:
+            PPCA_identified.set_data("hr_data", hr_val, coords={'rows': np.arange(hr_val.shape[0])})
+            PPCA_identified.set_data("pupil_data", pupil_val, coords={'rows': np.arange(pupil_val.shape[0])})
+            PPCA_identified.set_data("eda_data", eda_val, coords={'rows': np.arange(eda_val.shape[0])})
+            # use the updated values and predict outcomes and probabilities:
+            posterior_predictive = pm.sample_posterior_predictive(
+                trace, var_names=["X_e"], random_seed=123)
+
+        e_pred_val = posterior_predictive.posterior_predictive['X_e']
+        e_pred_mode_val = np.squeeze(stats.mode(e_pred_val[0], keepdims=False)[0])[:, np.newaxis]
+
+        validation_accuracy_exp = accuracy_score(e_labels_val, e_pred_mode_val)
+
+
+        with PPCA_identified:
+            # update values of predictors with validation:
+            PPCA_identified.set_data("hr_data", hr_test, coords={'rows': np.arange(hr_test.shape[0])})
+            PPCA_identified.set_data("pupil_data", pupil_test, coords={'rows': np.arange(pupil_test.shape[0])})
+            PPCA_identified.set_data("eda_data", eda_test, coords={'rows': np.arange(eda_test.shape[0])})
+            # use the updated values and predict outcomes and probabilities:
+            posterior_predictive = pm.sample_posterior_predictive(
+                trace, var_names=["X_e"], random_seed=123)
+
+        e_pred_test = posterior_predictive.posterior_predictive['X_e']
+        e_pred_mode_test = np.squeeze(stats.mode(e_pred_test[0], keepdims=False)[0])[:, np.newaxis]
+
+        test_accuracy_exp = accuracy_score(e_labels_test.T, e_pred_mode_test)
+
+        row = [sub, k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
+
+        with open('FA.csv', 'a') as f:
+            write = csv.writer(f)
+            write.writerow(row)
+
+
