@@ -12,9 +12,9 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
-
+prova_3_subj.remove(49)
 TRIAL = 160
-path = "/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/features_4_2"
+path = "/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data_fake/features_4_2"
 
 for i in prova_3_subj:
 
@@ -26,15 +26,16 @@ for i in prova_3_subj:
     # definition of the physiological signals to be extracted
     eda_ = physio.EDA(f2)
     hr_ = physio.ECG(f2)
-    pupil_ = behavior.PUPIL(f3)
+    # pupil_ = behavior.PUPIL(f3)
 
-    d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects={str(i)})
+    d = datasets.FEAR(signals={hr_, eda_}, subjects={str(i)})  #pupil_,
 
     for s in d.signals:
         # preprocess ...
         if s.name == 'EDA':
-            s.preprocess(show=show, new_fps=500)
-            s.feature_ext.extract_feat(s, show=show)
+            pass
+            # s.preprocess(show=show, new_fps=500)
+            #s.feature_ext.extract_feat(s, show=show)
         else:
             if s.name == 'ECG':
                 # list_hr_test = s.raw[0]['data']
@@ -50,20 +51,22 @@ for i in prova_3_subj:
 
     for sig in d.signals:
         if sig.name == 'EDA':
-            eda_data = sig.features
+            pass
+            # eda_data = sig.features
         if sig.name == 'ECG':
             hr_data = sig.features
         if sig.name == 'PUPIL':
-            pupil_data = sig.features
+            pass
+            # pupil_data = sig.features
 
     hr = np.array(hr_data)
     hr = hr.reshape((TRIAL, int(hr.shape[0] / TRIAL * hr.shape[1])))
     pd.DataFrame(hr).to_csv(path + '/hr/' + str(i) + '.csv', index=False)
 
-    eda = np.array(eda_data)
-    eda = eda.reshape((TRIAL, int(eda.shape[0] / TRIAL * eda.shape[1])))
-    pd.DataFrame(eda).to_csv(path + '/eda/' + str(i) + '.csv', index=False)
+    # eda = np.array(eda_data)
+    # eda = eda.reshape((TRIAL, int(eda.shape[0] / TRIAL * eda.shape[1])))
+    # pd.DataFrame(eda).to_csv(path + '/eda/' + str(i) + '.csv', index=False)
 
-    pupil = np.array(pupil_data)
-    pupil = pupil.reshape((TRIAL, int(pupil.shape[0] / TRIAL * pupil.shape[1])))
-    pd.DataFrame(pupil).to_csv(path + '/pupil/' + str(i) + '.csv', index=False)
+    # pupil = np.array(pupil_data)
+    # pupil = pupil.reshape((TRIAL, int(pupil.shape[0] / TRIAL * pupil.shape[1])))
+    #pd.DataFrame(pupil).to_csv(path + '/pupil/' + str(i) + '.csv', index=False)
