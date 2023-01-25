@@ -14,18 +14,18 @@ warnings.simplefilter(action='ignore', category=RuntimeWarning)
 prova_3_subj = extract_correct_csv.extract_only_valid_subject()
 
 TRIAL = 160
-path = "/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/features"
+path = "/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/features_4_2"
 
 for i in prova_3_subj:
 
-    f2 = feature_extractor.FE('wavelet', window=(2, 1))
+    f2 = feature_extractor.FE('wavelet', window=(4, 2))
     f3 = feature_extractor.FE('mean', window=(1, 0))
 
     show = False
 
     # definition of the physiological signals to be extracted
     eda_ = physio.EDA(f2)
-    hr_ = physio.HR(f2)
+    hr_ = physio.ECG(f2)
     pupil_ = behavior.PUPIL(f3)
 
     d = datasets.FEAR(signals={hr_, pupil_, eda_}, subjects={str(i)})
@@ -36,8 +36,8 @@ for i in prova_3_subj:
             s.preprocess(show=show, new_fps=500)
             s.feature_ext.extract_feat(s, show=show)
         else:
-            if s.name == 'HR':
-                list_hr_test = s.raw[0]['data']
+            if s.name == 'ECG':
+                # list_hr_test = s.raw[0]['data']
                 s.preprocess(show=show, useneurokit=True)
                 s.feature_ext.extract_feat(s, show=show)
 
@@ -51,7 +51,7 @@ for i in prova_3_subj:
     for sig in d.signals:
         if sig.name == 'EDA':
             eda_data = sig.features
-        if sig.name == 'HR':
+        if sig.name == 'ECG':
             hr_data = sig.features
         if sig.name == 'PUPIL':
             pupil_data = sig.features
