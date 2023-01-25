@@ -27,12 +27,13 @@ with open('tmp_csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
-num_trials_to_remove = 48
+num_trials_to_remove = 0
 
 logging.basicConfig(level=logging.INFO, filename="log/unpooled/fake_data/unpooled_labelADVI1e6_randomsplit",
                     filemode="a+",
                     format="%(asctime)-15s %(levelname)-8s %(message)s")
 
+all_subject = list([2])
 for i in all_subject:
 
     for k in valid_k_list:
@@ -44,7 +45,7 @@ for i in all_subject:
         e_labels = e_labels[num_trials_to_remove:]
         e_labels = pd.DataFrame(e_labels)
 
-        TRIAL = 160
+        TRIAL = 160 * 10
 
         hr = pd.read_csv('data_fake/features_4_2/hr/' + str(i) + '.csv')
         hr = hr[num_trials_to_remove:]
