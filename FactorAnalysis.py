@@ -18,7 +18,7 @@ all_subject = extract_correct_csv.extract_only_valid_subject()
 all_subject.remove(49)
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list(range(2, 10, 2))
+valid_k_list = list(range(2, 10))
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -66,34 +66,28 @@ with open('FA.csv', 'w') as f:
 for sub in all_subject:
     # loop within all k
     for k in valid_k_list:
-
         # eda data
-        eda = pd.read_csv('data/features_4_2/eda/'+str(sub)+'.csv')
+        eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
         eda = eda[num_trials_to_remove:]
-        eda = eda.T
 
         # hr data
-        hr = pd.read_csv('data/features_4_2/hr/'+str(sub)+'.csv')
+        hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
         hr = hr[num_trials_to_remove:]
-        hr = hr.T
 
         # pupil data
-        pupil = pd.read_csv('data/features_4_2/pupil/'+str(sub)+'.csv')
+        pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
         pupil = pupil[num_trials_to_remove:]
-        pupil = pupil.T
 
         # pain expectation data
-        df_ = pd.read_csv('data/LookAtMe_00'+str(sub)+'.csv', sep='\t')
+        df_ = pd.read_csv('data/LookAtMe_00' + str(sub) + '.csv', sep='\t')
         df_ = df_[num_trials_to_remove:]
-        label = np.array(list([int(d>2) for d in df_['rating']]))
-        E = label[:,np.newaxis]
-        E = np.transpose(E)
+        label = np.array(list([int(d > 2) for d in df_['rating']]))
+        E = label[:, np.newaxis]
         E = pd.DataFrame(E)
 
         # num trials
         N = eda.shape[1]
 
-        # specifying train, val and test split
         TRAIN_PERC = 0.70
         VAL_PERC = 0.1
         TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
@@ -113,22 +107,20 @@ for sub in all_subject:
         e_labels = E.sample(frac=1, random_state=0)
         e_labels = e_labels.reset_index(drop=True).to_numpy()
 
-        hr_train = hr[:N_train]
-        eda_train = eda[:N_train]
-        pupil_train = pupil[:N_train]
-        e_labels_train = e_labels[:N_train]
+        hr_train = hr[:N_train].T
+        eda_train = eda[:N_train].T
+        pupil_train = pupil[:N_train].T
+        e_labels_train = e_labels[:N_train].T
 
+        hr_val = hr[N_train:N_train + N_val].T
+        eda_val = eda[N_train:N_train + N_val].T
+        pupil_val = pupil[N_train:N_train + N_val].T
+        e_labels_val = e_labels[N_train:N_train + N_val].T
 
-        hr_val = hr[N_train:N_train + N_val]
-        eda_val = eda[N_train:N_train + N_val]
-        pupil_val = pupil[N_train:N_train + N_val]
-        e_labels_val = e_labels[N_train:N_train + N_val]
-
-        hr_test = hr[N_train + N_val:]
-        eda_test = eda[N_train + N_val:]
-        pupil_test = pupil[N_train+N_val:]
-        e_labels_test = e_labels[N_train + N_val:]
-
+        hr_test = hr[N_train + N_val:].T
+        eda_test = eda[N_train + N_val:].T
+        pupil_test = pupil[N_train + N_val:].T
+        e_test = e_labels[N_train + N_val:].T
 
         # dimensions of each signal
         d_eda = eda_train.shape[0]
@@ -178,12 +170,10 @@ for sub in all_subject:
             X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=("observed_label", "rows"),
                                observed=e_labels_train)
 
-        gv = pm.model_to_graphviz(PPCA_identified)
-        gv.view('PPCA example')
 
         with PPCA_identified:
-            approx = pm.fit(30000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
-            trace = approx.sample(500)
+            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+            trace = approx.sample(1000)
 
         with PPCA_identified:
             posterior_predictive = pm.sample_posterior_predictive(
