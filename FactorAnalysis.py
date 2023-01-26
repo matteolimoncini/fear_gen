@@ -83,7 +83,9 @@ for sub in all_subject:
         pupil = pupil[num_trials_to_remove:]
 
         # pain expectation data
-        df_ = pd.read_csv('data/LookAtMe_00' + str(sub) + '.csv', sep='\t')
+        string_sub = extract_correct_csv.read_correct_subject_csv(sub)
+
+        df_ = pd.read_csv('data/LookAtMe_00' + str(string_sub) + '.csv', sep='\t')
         df_ = df_[num_trials_to_remove:]
         label = np.array(list([int(d > 2) for d in df_['rating']]))
         E = label[:, np.newaxis]
