@@ -1,6 +1,0 @@
-2023-01-20 17:54:07,862 INFO     Interrupted at 4 [0%]: Average Loss = 2.0935e+10
-2023-01-20 18:03:58,994 INFO     Interrupted at 21 [0%]: Average Loss = 3.4998e+10
-2023-01-21 05:33:06,740 INFO     Finished [100%]: Average Loss = 3.4222e+11
-2023-01-21 05:33:30,193 INFO     Sampling: [x_e]
-2023-01-21 05:33:40,349 INFO     Sampling: [c, x_e]
-2023-01-21 05:33:40,661 INFO     Subj num: 2 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_fullrank.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
