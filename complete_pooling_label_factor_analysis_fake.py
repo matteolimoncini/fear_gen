@@ -24,7 +24,7 @@ valid_k_list = list(range(2, 10))
 num_trials_to_remove = 48
 
 columns = ['subject', 'k', 'train', 'val', 'test']
-with open('FA_complete.csv', 'w') as f:
+with open('FAFake_complete.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -92,13 +92,13 @@ def populate_array(x, name):
     return name[NUM_TRIAL * (x - 1) + num_trials_to_remove:NUM_TRIAL * x]
 
 
-hr_temp = np.concatenate([pd.read_csv('data/features_4_2/hr/' + str(x) + '.csv') for x in all_subject])
+hr_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/hr/' + str(x) + '.csv') for x in all_subject])
 hr = np.concatenate([populate_array(x, hr_temp) for x in range(1, len(all_subject) + 1)])
 
-pupil_temp = np.concatenate([pd.read_csv('data/features_4_2/pupil/' + str(x) + '.csv') for x in all_subject])
+pupil_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/pupil/' + str(x) + '.csv') for x in all_subject])
 pupil = np.concatenate([populate_array(x, pupil_temp) for x in range(1, len(all_subject) + 1)])
 
-eda_temp = np.concatenate([pd.read_csv('data/features_4_2/eda/' + str(x) + '.csv') for x in all_subject])
+eda_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/eda/' + str(x) + '.csv') for x in all_subject])
 eda = np.concatenate([populate_array(x, eda_temp) for x in range(1, len(all_subject) + 1)])
 
 N = eda.shape[0]
@@ -245,6 +245,6 @@ for k in valid_k_list:
 
     row = ['allsubj', k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
 
-    with open('FA_complete.csv', 'a') as f:
+    with open('FAFake_complete.csv', 'a') as f:
         write = csv.writer(f)
         write.writerow(row)
