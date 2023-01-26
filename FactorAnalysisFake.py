@@ -15,6 +15,9 @@ rng = default_rng(RANDOM_SEED)
 
 # all valid subjects
 all_subject = extract_correct_csv.extract_only_valid_subject()
+
+all_subject.remove(2)
+all_subject.remove(4)
 all_subject.remove(49)
 
 # all k = {2, 4, 6, 8} for the latent space
@@ -59,11 +62,11 @@ def makeW(d, k, dim_names, name):
     return W
 
 
-columns = ['subject', 'k', 'train', 'val', 'test']
+'''columns = ['subject', 'k', 'train', 'val', 'test']
 with open('FAFake.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
-
+'''
 # loop within all subjects
 for sub in all_subject:
     # loop within all k
@@ -81,7 +84,8 @@ for sub in all_subject:
         # pupil = pupil[num_trials_to_remove:]
 
         # pain expectation data
-        df_ = pd.read_csv('data/LookAtMe_00' + str(sub) + '.csv', sep='\t')
+        string_sub = extract_correct_csv.read_correct_subject_csv(sub)
+        df_ = pd.read_csv('data/LookAtMe_00' + string_sub + '.csv', sep='\t')
         df_ = df_[num_trials_to_remove:]
         label = np.array(list([int(d > 2) for d in df_['rating']]))
         E = label[:, np.newaxis]
