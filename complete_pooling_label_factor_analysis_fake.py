@@ -95,8 +95,8 @@ def populate_array(x, name):
 hr_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/hr/' + str(x) + '.csv') for x in all_subject])
 hr = np.concatenate([populate_array(x, hr_temp) for x in range(1, len(all_subject) + 1)])
 
-pupil_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/pupil/' + str(x) + '.csv') for x in all_subject])
-pupil = np.concatenate([populate_array(x, pupil_temp) for x in range(1, len(all_subject) + 1)])
+# pupil_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/pupil/' + str(x) + '.csv') for x in all_subject])
+# pupil = np.concatenate([populate_array(x, pupil_temp) for x in range(1, len(all_subject) + 1)])
 
 eda_temp = np.concatenate([pd.read_csv('data_fake/features_4_2/eda/' + str(x) + '.csv') for x in all_subject])
 eda = np.concatenate([populate_array(x, eda_temp) for x in range(1, len(all_subject) + 1)])
@@ -105,8 +105,8 @@ N = eda.shape[0]
 N_train = int(N * (TRAIN_PERC))
 N_val = int(N * (VAL_PERC))
 
-N_pupil = pupil.shape[0]
-D_pupil = pupil.shape[1]
+# N_pupil = pupil.shape[0]
+# D_pupil = pupil.shape[1]
 
 N_hr = hr.shape[0]
 D_hr = hr.shape[1]
@@ -115,8 +115,8 @@ N_eda = eda.shape[0]
 D_eda = eda.shape[1]
 
 # RANDOM SPLIT
-pupil = pd.DataFrame(pupil).sample(frac=1, random_state=0)
-pupil = pupil.reset_index(drop=True).to_numpy()
+# pupil = pd.DataFrame(pupil).sample(frac=1, random_state=0)
+# pupil = pupil.reset_index(drop=True).to_numpy()
 
 hr = pd.DataFrame(hr).sample(frac=1, random_state=0)
 hr = hr.reset_index(drop=True).to_numpy()
@@ -129,23 +129,23 @@ e_labels = e_labels.reset_index(drop=True).to_numpy()
 
 hr_train = hr[:N_train]
 eda_train = eda[:N_train]
-pupil_train = pupil[:N_train]
+#pupil_train = pupil[:N_train]
 e_labels_train = e_labels[:N_train]
 
 hr_val = hr[N_train:N_train + N_val]
 eda_val = eda[N_train:N_train + N_val]
-pupil_val = pupil[N_train:N_train + N_val]
+#pupil_val = pupil[N_train:N_train + N_val]
 e_labels_val = e_labels[N_train:N_train + N_val]
 
 hr_test = hr[N_train + N_val:]
 eda_test = eda[N_train + N_val:]
-pupil_test = pupil[N_train + N_val:]
+#pupil_test = pupil[N_train + N_val:]
 e_labels_test = e_labels[N_train + N_val:]
 
 # dimensions of each signal
 d_eda = eda_train.shape[1]
 d_hr = hr_train.shape[1]
-d_pupil = pupil_train.shape[1]
+#d_pupil = pupil_train.shape[1]
 d_e = e_labels_train.shape[1]
 
 '''print(d_eda, d_hr, d_pupil, d_e)
@@ -171,16 +171,16 @@ for k in valid_k_list:
         PPCA_identified.add_coord("rows", np.arange(N_train), mutable=True)
         PPCA_identified.add_coord("observed_eda", np.arange(d_eda), mutable=False)
         PPCA_identified.add_coord("observed_hr", np.arange(d_hr), mutable=False)
-        PPCA_identified.add_coord("observed_pupil", np.arange(d_pupil), mutable=False)
+        #PPCA_identified.add_coord("observed_pupil", np.arange(d_pupil), mutable=False)
         PPCA_identified.add_coord("observed_label", np.arange(d_e), mutable=False)
 
         hr_data = pm.MutableData("hr_data", hr_train.T, dims=["observed_hr", "rows"])
         eda_data = pm.MutableData("eda_data", eda_train.T, dims=("observed_eda", "rows"))
-        pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
+        #pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
 
         W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
         W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
-        W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
+        #W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
 
         W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
         C = pm.Normal("C", dims=["latent_columns", "rows"])
@@ -192,9 +192,8 @@ for k in valid_k_list:
         psi_hr = pm.HalfNormal("psi_hr", 1.0)
         X_hr = pm.Normal("X_hr", mu=at.dot(W_hr, C), sigma=psi_hr, observed=hr_data, dims=["observed_hr", "rows"])
 
-        psi_pupil = pm.HalfNormal("psi_pupil", 1.0)
-        X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data,
-                            dims=["observed_pupil", "rows"])
+        # psi_pupil = pm.HalfNormal("psi_pupil", 1.0)
+        # X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data, dims=["observed_pupil", "rows"])
 
         X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                            observed=e_labels_train.T)
@@ -219,7 +218,7 @@ for k in valid_k_list:
         # update values of predictors with validation:
         PPCA_identified.set_data(name="hr_data", values=hr_val.T, coords={'rows': range(hr_val.shape[0])})
         PPCA_identified.set_data("eda_data", eda_val.T, coords={'rows': range(eda_val.shape[0])})
-        PPCA_identified.set_data("pupil_data", pupil_val.T, coords={'rows': range(pupil_val.shape[0])})
+        # PPCA_identified.set_data("pupil_data", pupil_val.T, coords={'rows': range(pupil_val.shape[0])})
         # use the updated values and predict outcomes and probabilities:
         posterior_predictive = pm.sample_posterior_predictive(
             trace, var_names=["X_e"], random_seed=123, predictions=True)
@@ -232,7 +231,7 @@ for k in valid_k_list:
     with PPCA_identified:
         # update values of predictors with validation:
         PPCA_identified.set_data("hr_data", hr_test.T, coords={'rows': range(hr_test.shape[0])})
-        PPCA_identified.set_data("pupil_data", pupil_test.T, coords={'rows': range(pupil_test.shape[0])})
+        #PPCA_identified.set_data("pupil_data", pupil_test.T, coords={'rows': range(pupil_test.shape[0])})
         PPCA_identified.set_data("eda_data", eda_test.T, coords={'rows': range(eda_test.shape[0])})
         # use the updated values and predict outcomes and probabilities:
         posterior_predictive = pm.sample_posterior_predictive(
