@@ -1,0 +1,6 @@
+2023-01-13 09:47:58,950 INFO     Interrupted at 803 [0%]: Average Loss = 2.0176e+10
+2023-01-13 10:09:12,273 INFO     Interrupted at 32,971 [32%]: Average Loss = 1.604e+09
+2023-01-13 10:09:17,829 INFO     Sampling: [x_eda, x_hr]
+2023-01-13 10:18:45,359 INFO     Finished [100%]: Average Loss = 1.4522e+06
+2023-01-13 10:18:51,090 INFO     Sampling: [x_eda, x_hr]
+2023-01-13 10:24:55,421 INFO     Interrupted at 64,818 [64%]: Average Loss = 6.9595e+08

@@ -1,0 +1,70 @@
+digraph {
+	subgraph "clusterphysio_d (60) x physio_n (78)" {
+		x_hr [label="x_hr
+~
+Normal" shape=ellipse style=filled]
+		hr_data [label="hr_data
+~
+MutableData" shape=box style="rounded, filled"]
+		mu_hr [label="mu_hr
+~
+Normal" shape=ellipse]
+		label="physio_d (60) x physio_n (78)" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "clusterK (1)" {
+		We_z [label="We_z
+~
+HalfNormal" shape=ellipse]
+		Whr_z [label="Whr_z
+~
+HalfNormal" shape=ellipse]
+		label="K (1)" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "clusterphysio_n (78)" {
+		We_b [label="We_b
+~
+HalfNormal" shape=ellipse]
+		Whr_b [label="Whr_b
+~
+HalfNormal" shape=ellipse]
+		label="physio_n (78)" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "clusterphysio_d (60) x K (1)" {
+		Whr [label="Whr
+~
+Deterministic" shape=box]
+		label="physio_d (60) x K (1)" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "clustere_label_d (1) x K (1)" {
+		We [label="We
+~
+Deterministic" shape=box]
+		label="e_label_d (1) x K (1)" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "clusterK (1) x physio_n (78)" {
+		c [label="c
+~
+Normal" shape=ellipse]
+		label="K (1) x physio_n (78)" labeljust=r labelloc=b style=rounded
+	}
+	sigma_hr [label="sigma_hr
+~
+Exponential" shape=ellipse]
+	subgraph "clustere_label_d (1) x physio_n (78)" {
+		x_e [label="x_e
+~
+Bernoulli" shape=ellipse style=filled]
+		label="e_label_d (1) x physio_n (78)" labeljust=r labelloc=b style=rounded
+	}
+	x_hr -> hr_data
+	Whr_b -> Whr
+	Whr_z -> Whr
+	We_z -> We
+	We_b -> We
+	c -> mu_hr
+	Whr -> mu_hr
+	sigma_hr -> x_hr
+	mu_hr -> x_hr
+	We -> x_e
+	c -> x_e
+}

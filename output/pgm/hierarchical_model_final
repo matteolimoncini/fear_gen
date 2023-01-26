@@ -1,0 +1,135 @@
+digraph {
+	subgraph "cluster336 x 60" {
+		hr_data [label="hr_data
+~
+MutableData" shape=box style="rounded, filled"]
+		a_subjects_eda [label="a_subjects_eda
+~
+Normal" shape=ellipse]
+		x_hr [label="x_hr
+~
+Normal" shape=ellipse style=filled]
+		a_subjects_hr [label="a_subjects_hr
+~
+Normal" shape=ellipse]
+		x_eda [label="x_eda
+~
+Normal" shape=ellipse style=filled]
+		eda_data [label="eda_data
+~
+MutableData" shape=box style="rounded, filled"]
+		label="336 x 60" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster336 x 5" {
+		pupil_data [label="pupil_data
+~
+MutableData" shape=box style="rounded, filled"]
+		a_subjects_pupil [label="a_subjects_pupil
+~
+Normal" shape=ellipse]
+		x_pupil [label="x_pupil
+~
+Normal" shape=ellipse style=filled]
+		label="336 x 5" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster336 x 1" {
+		e_data [label="e_data
+~
+ConstantData" shape=box style="rounded, filled"]
+		x_e [label="x_e
+~
+Bernoulli" shape=ellipse style=filled]
+		label="336 x 1" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster60 x 3" {
+		Whr [label="Whr
+~
+Normal" shape=ellipse]
+		sigma_eda [label="sigma_eda
+~
+Exponential" shape=ellipse]
+		Weda [label="Weda
+~
+Normal" shape=ellipse]
+		sigma_hr [label="sigma_hr
+~
+Exponential" shape=ellipse]
+		mu_hr [label="mu_hr
+~
+Normal" shape=ellipse]
+		mu_eda [label="mu_eda
+~
+Normal" shape=ellipse]
+		label="60 x 3" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster5 x 3" {
+		Wpupil [label="Wpupil
+~
+Normal" shape=ellipse]
+		mu_pupil [label="mu_pupil
+~
+Normal" shape=ellipse]
+		sigma_pupil [label="sigma_pupil
+~
+Exponential" shape=ellipse]
+		label="5 x 3" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster1 x 3" {
+		W_e [label="W_e
+~
+Normal" shape=ellipse]
+		mu_e [label="mu_e
+~
+Normal" shape=ellipse]
+		sigma_e [label="sigma_e
+~
+Exponential" shape=ellipse]
+		label="1 x 3" labeljust=r labelloc=b style=rounded
+	}
+	subgraph "cluster336 x 3" {
+		c [label="c
+~
+Normal" shape=ellipse]
+		label="336 x 3" labeljust=r labelloc=b style=rounded
+	}
+	subgraph cluster336 {
+		subject_idx [label="subject_idx
+~
+MutableData" shape=box style="rounded, filled"]
+		label=336 labeljust=r labelloc=b style=rounded
+	}
+	sigma2_pupil [label="sigma2_pupil
+~
+Exponential" shape=ellipse]
+	sigma2_eda [label="sigma2_eda
+~
+Exponential" shape=ellipse]
+	sigma2_hr [label="sigma2_hr
+~
+Exponential" shape=ellipse]
+	x_hr -> hr_data
+	x_pupil -> pupil_data
+	x_eda -> eda_data
+	x_e -> e_data
+	sigma_hr -> Whr
+	mu_hr -> Whr
+	mu_pupil -> Wpupil
+	sigma_pupil -> Wpupil
+	sigma_eda -> Weda
+	mu_eda -> Weda
+	mu_e -> W_e
+	sigma_e -> W_e
+	c -> a_subjects_hr
+	subject_idx -> x_hr
+	a_subjects_hr -> x_hr
+	sigma2_hr -> x_hr
+	c -> a_subjects_pupil
+	subject_idx -> x_pupil
+	a_subjects_pupil -> x_pupil
+	sigma2_pupil -> x_pupil
+	c -> a_subjects_eda
+	subject_idx -> x_eda
+	sigma2_eda -> x_eda
+	a_subjects_eda -> x_eda
+	c -> x_e
+}
