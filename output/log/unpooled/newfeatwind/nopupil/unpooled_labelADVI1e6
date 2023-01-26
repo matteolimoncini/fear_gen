@@ -1,0 +1,612 @@
+2023-01-20 11:58:41,046 INFO     Finished [100%]: Average Loss = 30,136
+2023-01-20 11:58:52,880 INFO     Sampling: [x_e]
+2023-01-20 11:59:00,349 INFO     Sampling: [c, x_e]
+2023-01-20 11:59:00,650 INFO     Subj num: 2 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:02:34,294 INFO     Finished [100%]: Average Loss = 29,002
+2023-01-20 12:02:45,389 INFO     Sampling: [x_e]
+2023-01-20 12:02:52,994 INFO     Sampling: [c, x_e]
+2023-01-20 12:02:53,294 INFO     Subj num: 4 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:06:29,048 INFO     Finished [100%]: Average Loss = 33,069
+2023-01-20 12:06:40,853 INFO     Sampling: [x_e]
+2023-01-20 12:06:48,148 INFO     Sampling: [c, x_e]
+2023-01-20 12:06:48,443 INFO     Subj num: 10 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:10:23,721 INFO     Finished [100%]: Average Loss = 30,251
+2023-01-20 12:10:35,969 INFO     Sampling: [x_e]
+2023-01-20 12:10:43,482 INFO     Sampling: [c, x_e]
+2023-01-20 12:10:43,779 INFO     Subj num: 41 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:14:17,356 INFO     Finished [100%]: Average Loss = 30,824
+2023-01-20 12:14:27,694 INFO     Sampling: [x_e]
+2023-01-20 12:14:34,531 INFO     Sampling: [c, x_e]
+2023-01-20 12:14:34,834 INFO     Subj num: 43 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:18:08,967 INFO     Finished [100%]: Average Loss = 29,575
+2023-01-20 12:18:21,731 INFO     Sampling: [x_e]
+2023-01-20 12:18:29,150 INFO     Sampling: [c, x_e]
+2023-01-20 12:18:29,448 INFO     Subj num: 44 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:22:06,555 INFO     Finished [100%]: Average Loss = 30,479
+2023-01-20 12:22:19,405 INFO     Sampling: [x_e]
+2023-01-20 12:22:26,890 INFO     Sampling: [c, x_e]
+2023-01-20 12:22:27,185 INFO     Subj num: 45 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:26:02,207 INFO     Finished [100%]: Average Loss = 30,027
+2023-01-20 12:26:15,573 INFO     Sampling: [x_e]
+2023-01-20 12:26:23,081 INFO     Sampling: [c, x_e]
+2023-01-20 12:26:23,378 INFO     Subj num: 46 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:29:57,491 INFO     Finished [100%]: Average Loss = 29,833
+2023-01-20 12:30:10,659 INFO     Sampling: [x_e]
+2023-01-20 12:30:17,575 INFO     Sampling: [c, x_e]
+2023-01-20 12:30:17,870 INFO     Subj num: 47 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:33:50,289 INFO     Finished [100%]: Average Loss = 30,270
+2023-01-20 12:34:05,357 INFO     Sampling: [x_e]
+2023-01-20 12:34:12,819 INFO     Sampling: [c, x_e]
+2023-01-20 12:34:13,115 INFO     Subj num: 48 Test Acc Pain Expect: 0.6428571428571429 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:37:46,597 INFO     Finished [100%]: Average Loss = 27,941
+2023-01-20 12:38:00,396 INFO     Sampling: [x_e]
+2023-01-20 12:38:07,889 INFO     Sampling: [c, x_e]
+2023-01-20 12:38:08,185 INFO     Subj num: 49 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:41:43,729 INFO     Finished [100%]: Average Loss = 28,541
+2023-01-20 12:41:58,339 INFO     Sampling: [x_e]
+2023-01-20 12:42:05,922 INFO     Sampling: [c, x_e]
+2023-01-20 12:42:06,219 INFO     Subj num: 50 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:45:41,365 INFO     Finished [100%]: Average Loss = 28,800
+2023-01-20 12:45:55,734 INFO     Sampling: [x_e]
+2023-01-20 12:46:03,117 INFO     Sampling: [c, x_e]
+2023-01-20 12:46:03,414 INFO     Subj num: 51 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:49:37,286 INFO     Finished [100%]: Average Loss = 29,923
+2023-01-20 12:49:52,467 INFO     Sampling: [x_e]
+2023-01-20 12:49:59,991 INFO     Sampling: [c, x_e]
+2023-01-20 12:50:00,288 INFO     Subj num: 52 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:53:33,508 INFO     Finished [100%]: Average Loss = 29,840
+2023-01-20 12:53:49,023 INFO     Sampling: [x_e]
+2023-01-20 12:53:56,568 INFO     Sampling: [c, x_e]
+2023-01-20 12:53:56,865 INFO     Subj num: 53 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 12:57:28,666 INFO     Finished [100%]: Average Loss = 28,156
+2023-01-20 12:57:44,383 INFO     Sampling: [x_e]
+2023-01-20 12:57:51,883 INFO     Sampling: [c, x_e]
+2023-01-20 12:57:52,182 INFO     Subj num: 54 Test Acc Pain Expect: 0.6785714285714286 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 13:01:23,247 INFO     Finished [100%]: Average Loss = 27,928
+2023-01-20 13:01:38,578 INFO     Sampling: [x_e]
+2023-01-20 13:01:46,172 INFO     Sampling: [c, x_e]
+2023-01-20 13:01:46,473 INFO     Subj num: 55 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 1
+2023-01-20 13:05:52,210 INFO     Finished [100%]: Average Loss = 30,375
+2023-01-20 13:06:10,501 INFO     Sampling: [x_e]
+2023-01-20 13:06:18,001 INFO     Sampling: [c, x_e]
+2023-01-20 13:06:18,297 INFO     Subj num: 2 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:09:55,062 INFO     Finished [100%]: Average Loss = 29,129
+2023-01-20 13:10:11,608 INFO     Sampling: [x_e]
+2023-01-20 13:10:19,034 INFO     Sampling: [c, x_e]
+2023-01-20 13:10:19,330 INFO     Subj num: 4 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:13:56,199 INFO     Finished [100%]: Average Loss = 33,198
+2023-01-20 13:14:12,139 INFO     Sampling: [x_e]
+2023-01-20 13:14:19,612 INFO     Sampling: [c, x_e]
+2023-01-20 13:14:19,908 INFO     Subj num: 10 Test Acc Pain Expect: 0.6785714285714286 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:17:39,240 INFO     Finished [100%]: Average Loss = 30,500
+2023-01-20 13:17:55,464 INFO     Sampling: [x_e]
+2023-01-20 13:18:01,148 INFO     Sampling: [c, x_e]
+2023-01-20 13:18:01,335 INFO     Subj num: 41 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:21:23,916 INFO     Finished [100%]: Average Loss = 30,951
+2023-01-20 13:21:40,552 INFO     Sampling: [x_e]
+2023-01-20 13:21:47,889 INFO     Sampling: [c, x_e]
+2023-01-20 13:21:48,187 INFO     Subj num: 43 Test Acc Pain Expect: 0.35714285714285715 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:25:24,507 INFO     Finished [100%]: Average Loss = 29,714
+2023-01-20 13:25:42,381 INFO     Sampling: [x_e]
+2023-01-20 13:25:49,888 INFO     Sampling: [c, x_e]
+2023-01-20 13:25:50,187 INFO     Subj num: 44 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:29:21,008 INFO     Finished [100%]: Average Loss = 30,717
+2023-01-20 13:29:38,730 INFO     Sampling: [x_e]
+2023-01-20 13:29:45,925 INFO     Sampling: [c, x_e]
+2023-01-20 13:29:46,223 INFO     Subj num: 45 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:33:24,104 INFO     Finished [100%]: Average Loss = 30,161
+2023-01-20 13:33:42,057 INFO     Sampling: [x_e]
+2023-01-20 13:33:49,569 INFO     Sampling: [c, x_e]
+2023-01-20 13:33:49,872 INFO     Subj num: 46 Test Acc Pain Expect: 0.7142857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:37:29,521 INFO     Finished [100%]: Average Loss = 29,956
+2023-01-20 13:37:48,082 INFO     Sampling: [x_e]
+2023-01-20 13:37:55,556 INFO     Sampling: [c, x_e]
+2023-01-20 13:37:55,856 INFO     Subj num: 47 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:41:22,724 INFO     Finished [100%]: Average Loss = 30,489
+2023-01-20 13:41:39,622 INFO     Sampling: [x_e]
+2023-01-20 13:41:46,658 INFO     Sampling: [c, x_e]
+2023-01-20 13:41:46,906 INFO     Subj num: 48 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:45:16,633 INFO     Finished [100%]: Average Loss = 28,151
+2023-01-20 13:45:32,745 INFO     Sampling: [x_e]
+2023-01-20 13:45:39,190 INFO     Sampling: [c, x_e]
+2023-01-20 13:45:39,448 INFO     Subj num: 49 Test Acc Pain Expect: 0.17857142857142858 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:48:53,682 INFO     Finished [100%]: Average Loss = 28,671
+2023-01-20 13:49:13,338 INFO     Sampling: [x_e]
+2023-01-20 13:49:20,562 INFO     Sampling: [c, x_e]
+2023-01-20 13:49:20,867 INFO     Subj num: 50 Test Acc Pain Expect: 0.35714285714285715 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:52:55,896 INFO     Finished [100%]: Average Loss = 28,927
+2023-01-20 13:53:15,891 INFO     Sampling: [x_e]
+2023-01-20 13:53:23,343 INFO     Sampling: [c, x_e]
+2023-01-20 13:53:23,643 INFO     Subj num: 51 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 13:57:02,394 INFO     Finished [100%]: Average Loss = 30,164
+2023-01-20 13:57:22,544 INFO     Sampling: [x_e]
+2023-01-20 13:57:29,824 INFO     Sampling: [c, x_e]
+2023-01-20 13:57:30,122 INFO     Subj num: 52 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 14:01:10,349 INFO     Finished [100%]: Average Loss = 29,972
+2023-01-20 14:01:30,411 INFO     Sampling: [x_e]
+2023-01-20 14:01:37,738 INFO     Sampling: [c, x_e]
+2023-01-20 14:01:37,995 INFO     Subj num: 53 Test Acc Pain Expect: 0.7142857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 14:04:42,993 INFO     Finished [100%]: Average Loss = 28,289
+2023-01-20 14:05:00,019 INFO     Sampling: [x_e]
+2023-01-20 14:05:06,261 INFO     Sampling: [c, x_e]
+2023-01-20 14:05:06,507 INFO     Subj num: 54 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 14:08:32,689 INFO     Finished [100%]: Average Loss = 28,054
+2023-01-20 14:08:54,215 INFO     Sampling: [x_e]
+2023-01-20 14:09:01,203 INFO     Sampling: [c, x_e]
+2023-01-20 14:09:01,490 INFO     Subj num: 55 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 2
+2023-01-20 14:13:10,602 INFO     Finished [100%]: Average Loss = 30,443
+2023-01-20 14:13:32,807 INFO     Sampling: [x_e]
+2023-01-20 14:13:40,417 INFO     Sampling: [c, x_e]
+2023-01-20 14:13:40,723 INFO     Subj num: 2 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:17:26,629 INFO     Finished [100%]: Average Loss = 29,258
+2023-01-20 14:17:48,364 INFO     Sampling: [x_e]
+2023-01-20 14:17:55,786 INFO     Sampling: [c, x_e]
+2023-01-20 14:17:56,084 INFO     Subj num: 4 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:21:39,336 INFO     Finished [100%]: Average Loss = 33,328
+2023-01-20 14:22:01,581 INFO     Sampling: [x_e]
+2023-01-20 14:22:09,153 INFO     Sampling: [c, x_e]
+2023-01-20 14:22:09,457 INFO     Subj num: 10 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:25:50,944 INFO     Finished [100%]: Average Loss = 30,521
+2023-01-20 14:26:14,458 INFO     Sampling: [x_e]
+2023-01-20 14:26:21,831 INFO     Sampling: [c, x_e]
+2023-01-20 14:26:22,117 INFO     Subj num: 41 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:30:00,587 INFO     Finished [100%]: Average Loss = 31,104
+2023-01-20 14:30:22,735 INFO     Sampling: [x_e]
+2023-01-20 14:30:29,758 INFO     Sampling: [c, x_e]
+2023-01-20 14:30:30,037 INFO     Subj num: 43 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:34:03,368 INFO     Finished [100%]: Average Loss = 29,857
+2023-01-20 14:34:23,878 INFO     Sampling: [x_e]
+2023-01-20 14:34:31,247 INFO     Sampling: [c, x_e]
+2023-01-20 14:34:31,544 INFO     Subj num: 44 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:38:10,967 INFO     Finished [100%]: Average Loss = 30,856
+2023-01-20 14:38:33,097 INFO     Sampling: [x_e]
+2023-01-20 14:38:40,270 INFO     Sampling: [c, x_e]
+2023-01-20 14:38:40,572 INFO     Subj num: 45 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:42:19,364 INFO     Finished [100%]: Average Loss = 30,285
+2023-01-20 14:42:43,355 INFO     Sampling: [x_e]
+2023-01-20 14:42:50,966 INFO     Sampling: [c, x_e]
+2023-01-20 14:42:51,268 INFO     Subj num: 46 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:46:28,765 INFO     Finished [100%]: Average Loss = 30,087
+2023-01-20 14:46:48,826 INFO     Sampling: [x_e]
+2023-01-20 14:46:56,310 INFO     Sampling: [c, x_e]
+2023-01-20 14:46:56,608 INFO     Subj num: 47 Test Acc Pain Expect: 0.6428571428571429 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:50:39,945 INFO     Finished [100%]: Average Loss = 30,612
+2023-01-20 14:51:03,979 INFO     Sampling: [x_e]
+2023-01-20 14:51:11,476 INFO     Sampling: [c, x_e]
+2023-01-20 14:51:11,774 INFO     Subj num: 48 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:54:53,798 INFO     Finished [100%]: Average Loss = 28,299
+2023-01-20 14:55:19,975 INFO     Sampling: [x_e]
+2023-01-20 14:55:27,453 INFO     Sampling: [c, x_e]
+2023-01-20 14:55:27,751 INFO     Subj num: 49 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 14:59:09,223 INFO     Finished [100%]: Average Loss = 28,799
+2023-01-20 14:59:32,951 INFO     Sampling: [x_e]
+2023-01-20 14:59:40,458 INFO     Sampling: [c, x_e]
+2023-01-20 14:59:40,759 INFO     Subj num: 50 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 15:03:09,772 INFO     Finished [100%]: Average Loss = 29,058
+2023-01-20 15:03:34,877 INFO     Sampling: [x_e]
+2023-01-20 15:03:41,600 INFO     Sampling: [c, x_e]
+2023-01-20 15:03:41,901 INFO     Subj num: 51 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 15:07:17,674 INFO     Finished [100%]: Average Loss = 30,183
+2023-01-20 15:07:42,199 INFO     Sampling: [x_e]
+2023-01-20 15:07:49,651 INFO     Sampling: [c, x_e]
+2023-01-20 15:07:49,951 INFO     Subj num: 52 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 15:11:30,514 INFO     Finished [100%]: Average Loss = 30,132
+2023-01-20 15:11:56,445 INFO     Sampling: [x_e]
+2023-01-20 15:12:03,975 INFO     Sampling: [c, x_e]
+2023-01-20 15:12:04,271 INFO     Subj num: 53 Test Acc Pain Expect: 0.32142857142857145 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 15:15:48,410 INFO     Finished [100%]: Average Loss = 28,413
+2023-01-20 15:16:14,817 INFO     Sampling: [x_e]
+2023-01-20 15:16:21,745 INFO     Sampling: [c, x_e]
+2023-01-20 15:16:21,994 INFO     Subj num: 54 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 15:19:48,289 INFO     Finished [100%]: Average Loss = 28,182
+2023-01-20 15:20:15,706 INFO     Sampling: [x_e]
+2023-01-20 15:20:23,120 INFO     Sampling: [c, x_e]
+2023-01-20 15:20:23,418 INFO     Subj num: 55 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 3
+2023-01-20 15:24:39,156 INFO     Finished [100%]: Average Loss = 30,639
+2023-01-20 15:25:06,669 INFO     Sampling: [x_e]
+2023-01-20 15:25:14,013 INFO     Sampling: [c, x_e]
+2023-01-20 15:25:14,316 INFO     Subj num: 2 Test Acc Pain Expect: 0.6785714285714286 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:29:01,268 INFO     Finished [100%]: Average Loss = 29,476
+2023-01-20 15:29:26,505 INFO     Sampling: [x_e]
+2023-01-20 15:29:32,935 INFO     Sampling: [c, x_e]
+2023-01-20 15:29:33,191 INFO     Subj num: 4 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:33:01,962 INFO     Finished [100%]: Average Loss = 33,587
+2023-01-20 15:33:30,797 INFO     Sampling: [x_e]
+2023-01-20 15:33:38,013 INFO     Sampling: [c, x_e]
+2023-01-20 15:33:38,278 INFO     Subj num: 10 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:37:08,085 INFO     Finished [100%]: Average Loss = 30,743
+2023-01-20 15:37:34,874 INFO     Sampling: [x_e]
+2023-01-20 15:37:42,278 INFO     Sampling: [c, x_e]
+2023-01-20 15:37:42,561 INFO     Subj num: 41 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:41:11,410 INFO     Finished [100%]: Average Loss = 31,277
+2023-01-20 15:41:38,133 INFO     Sampling: [x_e]
+2023-01-20 15:41:45,577 INFO     Sampling: [c, x_e]
+2023-01-20 15:41:45,883 INFO     Subj num: 43 Test Acc Pain Expect: 0.32142857142857145 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:45:25,574 INFO     Finished [100%]: Average Loss = 30,086
+2023-01-20 15:45:53,653 INFO     Sampling: [x_e]
+2023-01-20 15:46:00,869 INFO     Sampling: [c, x_e]
+2023-01-20 15:46:01,169 INFO     Subj num: 44 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:49:48,868 INFO     Finished [100%]: Average Loss = 30,872
+2023-01-20 15:50:16,813 INFO     Sampling: [x_e]
+2023-01-20 15:50:24,010 INFO     Sampling: [c, x_e]
+2023-01-20 15:50:24,316 INFO     Subj num: 45 Test Acc Pain Expect: 0.35714285714285715 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:54:05,617 INFO     Finished [100%]: Average Loss = 30,416
+2023-01-20 15:54:34,130 INFO     Sampling: [x_e]
+2023-01-20 15:54:41,345 INFO     Sampling: [c, x_e]
+2023-01-20 15:54:41,646 INFO     Subj num: 46 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 15:58:25,303 INFO     Finished [100%]: Average Loss = 30,219
+2023-01-20 15:58:54,747 INFO     Sampling: [x_e]
+2023-01-20 15:59:01,822 INFO     Sampling: [c, x_e]
+2023-01-20 15:59:02,124 INFO     Subj num: 47 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:02:08,450 INFO     Finished [100%]: Average Loss = 30,671
+2023-01-20 16:02:21,287 INFO     Sampling: [x_e]
+2023-01-20 16:02:24,507 INFO     Sampling: [c, x_e]
+2023-01-20 16:02:24,640 INFO     Subj num: 48 Test Acc Pain Expect: 0.32142857142857145 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:04:01,864 INFO     Finished [100%]: Average Loss = 28,335
+2023-01-20 16:04:14,034 INFO     Sampling: [x_e]
+2023-01-20 16:04:17,092 INFO     Sampling: [c, x_e]
+2023-01-20 16:04:17,219 INFO     Subj num: 49 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:05:54,648 INFO     Finished [100%]: Average Loss = 28,927
+2023-01-20 16:06:06,715 INFO     Sampling: [x_e]
+2023-01-20 16:06:09,735 INFO     Sampling: [c, x_e]
+2023-01-20 16:06:09,864 INFO     Subj num: 50 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:07:46,519 INFO     Finished [100%]: Average Loss = 29,187
+2023-01-20 16:07:58,895 INFO     Sampling: [x_e]
+2023-01-20 16:08:01,953 INFO     Sampling: [c, x_e]
+2023-01-20 16:08:02,082 INFO     Subj num: 51 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:09:38,580 INFO     Finished [100%]: Average Loss = 30,407
+2023-01-20 16:09:51,013 INFO     Sampling: [x_e]
+2023-01-20 16:09:54,030 INFO     Sampling: [c, x_e]
+2023-01-20 16:09:54,156 INFO     Subj num: 52 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:11:29,962 INFO     Finished [100%]: Average Loss = 30,231
+2023-01-20 16:11:42,420 INFO     Sampling: [x_e]
+2023-01-20 16:11:45,431 INFO     Sampling: [c, x_e]
+2023-01-20 16:11:45,557 INFO     Subj num: 53 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:13:22,611 INFO     Finished [100%]: Average Loss = 28,652
+2023-01-20 16:13:35,174 INFO     Sampling: [x_e]
+2023-01-20 16:13:38,277 INFO     Sampling: [c, x_e]
+2023-01-20 16:13:38,405 INFO     Subj num: 54 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:15:15,429 INFO     Finished [100%]: Average Loss = 28,319
+2023-01-20 16:15:28,251 INFO     Sampling: [x_e]
+2023-01-20 16:15:31,280 INFO     Sampling: [c, x_e]
+2023-01-20 16:15:31,407 INFO     Subj num: 55 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 4
+2023-01-20 16:17:24,609 INFO     Finished [100%]: Average Loss = 30,657
+2023-01-20 16:17:37,698 INFO     Sampling: [x_e]
+2023-01-20 16:17:40,757 INFO     Sampling: [c, x_e]
+2023-01-20 16:17:40,885 INFO     Subj num: 2 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:19:20,248 INFO     Finished [100%]: Average Loss = 29,524
+2023-01-20 16:19:33,269 INFO     Sampling: [x_e]
+2023-01-20 16:19:36,290 INFO     Sampling: [c, x_e]
+2023-01-20 16:19:36,419 INFO     Subj num: 4 Test Acc Pain Expect: 0.6428571428571429 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:21:15,439 INFO     Finished [100%]: Average Loss = 33,592
+2023-01-20 16:21:28,674 INFO     Sampling: [x_e]
+2023-01-20 16:21:31,689 INFO     Sampling: [c, x_e]
+2023-01-20 16:21:31,817 INFO     Subj num: 10 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:23:09,609 INFO     Finished [100%]: Average Loss = 30,881
+2023-01-20 16:23:22,848 INFO     Sampling: [x_e]
+2023-01-20 16:23:25,884 INFO     Sampling: [c, x_e]
+2023-01-20 16:23:26,012 INFO     Subj num: 41 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:25:05,238 INFO     Finished [100%]: Average Loss = 31,346
+2023-01-20 16:25:18,587 INFO     Sampling: [x_e]
+2023-01-20 16:25:21,591 INFO     Sampling: [c, x_e]
+2023-01-20 16:25:21,719 INFO     Subj num: 43 Test Acc Pain Expect: 0.75 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:27:01,036 INFO     Finished [100%]: Average Loss = 30,208
+2023-01-20 16:27:14,444 INFO     Sampling: [x_e]
+2023-01-20 16:27:17,510 INFO     Sampling: [c, x_e]
+2023-01-20 16:27:17,638 INFO     Subj num: 44 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:28:57,102 INFO     Finished [100%]: Average Loss = 31,090
+2023-01-20 16:29:10,761 INFO     Sampling: [x_e]
+2023-01-20 16:29:13,782 INFO     Sampling: [c, x_e]
+2023-01-20 16:29:13,909 INFO     Subj num: 45 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:30:52,680 INFO     Finished [100%]: Average Loss = 30,547
+2023-01-20 16:31:06,531 INFO     Sampling: [x_e]
+2023-01-20 16:31:09,581 INFO     Sampling: [c, x_e]
+2023-01-20 16:31:09,711 INFO     Subj num: 46 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:32:47,404 INFO     Finished [100%]: Average Loss = 30,350
+2023-01-20 16:33:01,213 INFO     Sampling: [x_e]
+2023-01-20 16:33:04,364 INFO     Sampling: [c, x_e]
+2023-01-20 16:33:04,492 INFO     Subj num: 47 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:34:43,792 INFO     Finished [100%]: Average Loss = 30,793
+2023-01-20 16:34:57,808 INFO     Sampling: [x_e]
+2023-01-20 16:35:00,829 INFO     Sampling: [c, x_e]
+2023-01-20 16:35:00,958 INFO     Subj num: 48 Test Acc Pain Expect: 0.6785714285714286 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:36:40,070 INFO     Finished [100%]: Average Loss = 28,462
+2023-01-20 16:36:54,159 INFO     Sampling: [x_e]
+2023-01-20 16:36:57,174 INFO     Sampling: [c, x_e]
+2023-01-20 16:36:57,302 INFO     Subj num: 49 Test Acc Pain Expect: 0.6785714285714286 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:38:36,815 INFO     Finished [100%]: Average Loss = 29,063
+2023-01-20 16:38:51,021 INFO     Sampling: [x_e]
+2023-01-20 16:38:54,045 INFO     Sampling: [c, x_e]
+2023-01-20 16:38:54,173 INFO     Subj num: 50 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:40:31,739 INFO     Finished [100%]: Average Loss = 29,430
+2023-01-20 16:40:46,908 INFO     Sampling: [x_e]
+2023-01-20 16:40:49,918 INFO     Sampling: [c, x_e]
+2023-01-20 16:40:50,046 INFO     Subj num: 51 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:42:28,087 INFO     Finished [100%]: Average Loss = 30,447
+2023-01-20 16:42:42,687 INFO     Sampling: [x_e]
+2023-01-20 16:42:45,751 INFO     Sampling: [c, x_e]
+2023-01-20 16:42:45,878 INFO     Subj num: 52 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:44:24,608 INFO     Finished [100%]: Average Loss = 30,365
+2023-01-20 16:44:39,168 INFO     Sampling: [x_e]
+2023-01-20 16:44:42,282 INFO     Sampling: [c, x_e]
+2023-01-20 16:44:42,409 INFO     Subj num: 53 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:46:22,356 INFO     Finished [100%]: Average Loss = 28,774
+2023-01-20 16:46:37,062 INFO     Sampling: [x_e]
+2023-01-20 16:46:40,107 INFO     Sampling: [c, x_e]
+2023-01-20 16:46:40,236 INFO     Subj num: 54 Test Acc Pain Expect: 0.6785714285714286 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:48:19,784 INFO     Finished [100%]: Average Loss = 28,470
+2023-01-20 16:48:34,524 INFO     Sampling: [x_e]
+2023-01-20 16:48:37,544 INFO     Sampling: [c, x_e]
+2023-01-20 16:48:37,672 INFO     Subj num: 55 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 5
+2023-01-20 16:50:32,864 INFO     Finished [100%]: Average Loss = 30,832
+2023-01-20 16:50:48,937 INFO     Sampling: [x_e]
+2023-01-20 16:50:51,941 INFO     Sampling: [c, x_e]
+2023-01-20 16:50:52,070 INFO     Subj num: 2 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 16:52:32,153 INFO     Finished [100%]: Average Loss = 29,773
+2023-01-20 16:52:47,864 INFO     Sampling: [x_e]
+2023-01-20 16:52:50,881 INFO     Sampling: [c, x_e]
+2023-01-20 16:52:51,011 INFO     Subj num: 4 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 16:54:30,610 INFO     Finished [100%]: Average Loss = 33,807
+2023-01-20 16:54:45,706 INFO     Sampling: [x_e]
+2023-01-20 16:54:48,865 INFO     Sampling: [c, x_e]
+2023-01-20 16:54:48,993 INFO     Subj num: 10 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 16:56:29,101 INFO     Finished [100%]: Average Loss = 30,903
+2023-01-20 16:56:44,296 INFO     Sampling: [x_e]
+2023-01-20 16:56:47,344 INFO     Sampling: [c, x_e]
+2023-01-20 16:56:47,473 INFO     Subj num: 41 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 16:58:27,586 INFO     Finished [100%]: Average Loss = 31,628
+2023-01-20 16:58:42,879 INFO     Sampling: [x_e]
+2023-01-20 16:58:45,885 INFO     Sampling: [c, x_e]
+2023-01-20 16:58:46,011 INFO     Subj num: 43 Test Acc Pain Expect: 0.35714285714285715 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:00:26,197 INFO     Finished [100%]: Average Loss = 30,231
+2023-01-20 17:00:41,662 INFO     Sampling: [x_e]
+2023-01-20 17:00:44,719 INFO     Sampling: [c, x_e]
+2023-01-20 17:00:44,847 INFO     Subj num: 44 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:02:24,433 INFO     Finished [100%]: Average Loss = 31,135
+2023-01-20 17:02:40,938 INFO     Sampling: [x_e]
+2023-01-20 17:02:43,931 INFO     Sampling: [c, x_e]
+2023-01-20 17:02:44,058 INFO     Subj num: 45 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:04:23,456 INFO     Finished [100%]: Average Loss = 30,775
+2023-01-20 17:04:39,231 INFO     Sampling: [x_e]
+2023-01-20 17:04:42,282 INFO     Sampling: [c, x_e]
+2023-01-20 17:04:42,409 INFO     Subj num: 46 Test Acc Pain Expect: 0.7142857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:06:22,916 INFO     Finished [100%]: Average Loss = 30,594
+2023-01-20 17:06:38,851 INFO     Sampling: [x_e]
+2023-01-20 17:06:41,873 INFO     Sampling: [c, x_e]
+2023-01-20 17:06:42,001 INFO     Subj num: 47 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:08:22,527 INFO     Finished [100%]: Average Loss = 30,997
+2023-01-20 17:08:38,516 INFO     Sampling: [x_e]
+2023-01-20 17:08:41,549 INFO     Sampling: [c, x_e]
+2023-01-20 17:08:41,676 INFO     Subj num: 48 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:10:22,236 INFO     Finished [100%]: Average Loss = 28,706
+2023-01-20 17:10:38,400 INFO     Sampling: [x_e]
+2023-01-20 17:10:41,442 INFO     Sampling: [c, x_e]
+2023-01-20 17:10:41,570 INFO     Subj num: 49 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:12:21,416 INFO     Finished [100%]: Average Loss = 29,194
+2023-01-20 17:12:37,793 INFO     Sampling: [x_e]
+2023-01-20 17:12:40,810 INFO     Sampling: [c, x_e]
+2023-01-20 17:12:40,938 INFO     Subj num: 50 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:14:21,689 INFO     Finished [100%]: Average Loss = 29,562
+2023-01-20 17:14:38,168 INFO     Sampling: [x_e]
+2023-01-20 17:14:41,231 INFO     Sampling: [c, x_e]
+2023-01-20 17:14:41,362 INFO     Subj num: 51 Test Acc Pain Expect: 0.32142857142857145 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:16:22,038 INFO     Finished [100%]: Average Loss = 30,689
+2023-01-20 17:16:38,628 INFO     Sampling: [x_e]
+2023-01-20 17:16:41,675 INFO     Sampling: [c, x_e]
+2023-01-20 17:16:41,803 INFO     Subj num: 52 Test Acc Pain Expect: 0.6428571428571429 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:18:22,789 INFO     Finished [100%]: Average Loss = 30,498
+2023-01-20 17:18:39,458 INFO     Sampling: [x_e]
+2023-01-20 17:18:42,480 INFO     Sampling: [c, x_e]
+2023-01-20 17:18:42,609 INFO     Subj num: 53 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:20:22,714 INFO     Finished [100%]: Average Loss = 28,811
+2023-01-20 17:20:39,723 INFO     Sampling: [x_e]
+2023-01-20 17:20:42,719 INFO     Sampling: [c, x_e]
+2023-01-20 17:20:42,847 INFO     Subj num: 54 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:22:24,249 INFO     Finished [100%]: Average Loss = 28,579
+2023-01-20 17:23:04,045 INFO     Sampling: [x_e]
+2023-01-20 17:23:11,660 INFO     Sampling: [c, x_e]
+2023-01-20 17:23:11,964 INFO     Subj num: 55 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 6
+2023-01-20 17:27:52,539 INFO     Finished [100%]: Average Loss = 30,949
+2023-01-20 17:28:28,546 INFO     Sampling: [x_e]
+2023-01-20 17:28:31,544 INFO     Sampling: [c, x_e]
+2023-01-20 17:28:31,672 INFO     Subj num: 2 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:30:44,829 INFO     Finished [100%]: Average Loss = 29,825
+2023-01-20 17:31:29,596 INFO     Sampling: [x_e]
+2023-01-20 17:31:36,734 INFO     Sampling: [c, x_e]
+2023-01-20 17:31:37,035 INFO     Subj num: 4 Test Acc Pain Expect: 0.32142857142857145 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:35:35,918 INFO     Finished [100%]: Average Loss = 33,858
+2023-01-20 17:36:18,064 INFO     Sampling: [x_e]
+2023-01-20 17:36:25,543 INFO     Sampling: [c, x_e]
+2023-01-20 17:36:25,845 INFO     Subj num: 10 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:40:25,786 INFO     Finished [100%]: Average Loss = 31,039
+2023-01-20 17:41:08,778 INFO     Sampling: [x_e]
+2023-01-20 17:41:15,907 INFO     Sampling: [c, x_e]
+2023-01-20 17:41:16,211 INFO     Subj num: 41 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:45:17,118 INFO     Finished [100%]: Average Loss = 31,716
+2023-01-20 17:45:59,980 INFO     Sampling: [x_e]
+2023-01-20 17:46:07,383 INFO     Sampling: [c, x_e]
+2023-01-20 17:46:07,686 INFO     Subj num: 43 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:50:11,316 INFO     Finished [100%]: Average Loss = 30,472
+2023-01-20 17:50:54,578 INFO     Sampling: [x_e]
+2023-01-20 17:51:02,062 INFO     Sampling: [c, x_e]
+2023-01-20 17:51:02,363 INFO     Subj num: 44 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:54:54,594 INFO     Finished [100%]: Average Loss = 31,269
+2023-01-20 17:55:36,894 INFO     Sampling: [x_e]
+2023-01-20 17:55:44,103 INFO     Sampling: [c, x_e]
+2023-01-20 17:55:44,404 INFO     Subj num: 45 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 17:59:14,256 INFO     Finished [100%]: Average Loss = 30,925
+2023-01-20 17:59:58,452 INFO     Sampling: [x_e]
+2023-01-20 18:00:05,901 INFO     Sampling: [c, x_e]
+2023-01-20 18:00:06,208 INFO     Subj num: 46 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:03:55,853 INFO     Finished [100%]: Average Loss = 30,625
+2023-01-20 18:04:39,479 INFO     Sampling: [x_e]
+2023-01-20 18:04:46,990 INFO     Sampling: [c, x_e]
+2023-01-20 18:04:47,291 INFO     Subj num: 47 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:08:28,777 INFO     Finished [100%]: Average Loss = 31,058
+2023-01-20 18:09:08,885 INFO     Sampling: [x_e]
+2023-01-20 18:09:15,627 INFO     Sampling: [c, x_e]
+2023-01-20 18:09:15,929 INFO     Subj num: 48 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:13:10,188 INFO     Finished [100%]: Average Loss = 28,734
+2023-01-20 18:13:55,913 INFO     Sampling: [x_e]
+2023-01-20 18:14:02,999 INFO     Sampling: [c, x_e]
+2023-01-20 18:14:03,304 INFO     Subj num: 49 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:17:54,883 INFO     Finished [100%]: Average Loss = 29,329
+2023-01-20 18:18:38,136 INFO     Sampling: [x_e]
+2023-01-20 18:18:45,608 INFO     Sampling: [c, x_e]
+2023-01-20 18:18:45,912 INFO     Subj num: 50 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:22:32,843 INFO     Finished [100%]: Average Loss = 29,588
+2023-01-20 18:23:19,218 INFO     Sampling: [x_e]
+2023-01-20 18:23:22,751 INFO     Sampling: [c, x_e]
+2023-01-20 18:23:22,888 INFO     Subj num: 51 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:26:58,004 INFO     Finished [100%]: Average Loss = 30,828
+2023-01-20 18:27:44,653 INFO     Sampling: [x_e]
+2023-01-20 18:27:51,804 INFO     Sampling: [c, x_e]
+2023-01-20 18:27:52,104 INFO     Subj num: 52 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:31:33,572 INFO     Finished [100%]: Average Loss = 30,658
+2023-01-20 18:32:17,120 INFO     Sampling: [x_e]
+2023-01-20 18:32:24,303 INFO     Sampling: [c, x_e]
+2023-01-20 18:32:24,605 INFO     Subj num: 53 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:36:08,924 INFO     Finished [100%]: Average Loss = 28,943
+2023-01-20 18:36:53,393 INFO     Sampling: [x_e]
+2023-01-20 18:36:58,576 INFO     Sampling: [c, x_e]
+2023-01-20 18:36:58,883 INFO     Subj num: 54 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:40:41,665 INFO     Finished [100%]: Average Loss = 28,713
+2023-01-20 18:41:29,366 INFO     Sampling: [x_e]
+2023-01-20 18:41:36,755 INFO     Sampling: [c, x_e]
+2023-01-20 18:41:36,964 INFO     Subj num: 55 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 7
+2023-01-20 18:45:57,632 INFO     Finished [100%]: Average Loss = 31,054
+2023-01-20 18:46:41,142 INFO     Sampling: [x_e]
+2023-01-20 18:46:48,244 INFO     Sampling: [c, x_e]
+2023-01-20 18:46:48,548 INFO     Subj num: 2 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 18:50:31,897 INFO     Finished [100%]: Average Loss = 30,002
+2023-01-20 18:51:19,117 INFO     Sampling: [x_e]
+2023-01-20 18:51:25,398 INFO     Sampling: [c, x_e]
+2023-01-20 18:51:25,700 INFO     Subj num: 4 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 18:54:47,946 INFO     Finished [100%]: Average Loss = 33,989
+2023-01-20 18:55:31,972 INFO     Sampling: [x_e]
+2023-01-20 18:55:39,250 INFO     Sampling: [c, x_e]
+2023-01-20 18:55:39,551 INFO     Subj num: 10 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 18:59:48,380 INFO     Finished [100%]: Average Loss = 31,171
+2023-01-20 19:00:37,862 INFO     Sampling: [x_e]
+2023-01-20 19:00:45,291 INFO     Sampling: [c, x_e]
+2023-01-20 19:00:45,583 INFO     Subj num: 41 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:04:53,669 INFO     Finished [100%]: Average Loss = 31,858
+2023-01-20 19:05:43,230 INFO     Sampling: [x_e]
+2023-01-20 19:05:50,620 INFO     Sampling: [c, x_e]
+2023-01-20 19:05:50,921 INFO     Subj num: 43 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:09:58,413 INFO     Finished [100%]: Average Loss = 30,610
+2023-01-20 19:10:51,725 INFO     Sampling: [x_e]
+2023-01-20 19:10:59,253 INFO     Sampling: [c, x_e]
+2023-01-20 19:10:59,552 INFO     Subj num: 44 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:15:11,892 INFO     Finished [100%]: Average Loss = 31,401
+2023-01-20 19:16:03,767 INFO     Sampling: [x_e]
+2023-01-20 19:16:11,405 INFO     Sampling: [c, x_e]
+2023-01-20 19:16:11,714 INFO     Subj num: 45 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:20:18,872 INFO     Finished [100%]: Average Loss = 30,955
+2023-01-20 19:20:45,653 INFO     Sampling: [x_e]
+2023-01-20 19:20:53,149 INFO     Sampling: [c, x_e]
+2023-01-20 19:20:53,455 INFO     Subj num: 46 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:25:05,473 INFO     Finished [100%]: Average Loss = 30,802
+2023-01-20 19:25:58,792 INFO     Sampling: [x_e]
+2023-01-20 19:26:06,362 INFO     Sampling: [c, x_e]
+2023-01-20 19:26:06,666 INFO     Subj num: 47 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:30:17,313 INFO     Finished [100%]: Average Loss = 31,191
+2023-01-20 19:31:08,149 INFO     Sampling: [x_e]
+2023-01-20 19:31:15,507 INFO     Sampling: [c, x_e]
+2023-01-20 19:31:15,800 INFO     Subj num: 48 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:35:20,681 INFO     Finished [100%]: Average Loss = 28,956
+2023-01-20 19:36:11,450 INFO     Sampling: [x_e]
+2023-01-20 19:36:18,689 INFO     Sampling: [c, x_e]
+2023-01-20 19:36:18,991 INFO     Subj num: 49 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:40:27,451 INFO     Finished [100%]: Average Loss = 29,461
+2023-01-20 19:41:19,446 INFO     Sampling: [x_e]
+2023-01-20 19:41:26,519 INFO     Sampling: [c, x_e]
+2023-01-20 19:41:26,811 INFO     Subj num: 50 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:45:34,097 INFO     Finished [100%]: Average Loss = 29,767
+2023-01-20 19:46:25,443 INFO     Sampling: [x_e]
+2023-01-20 19:46:32,929 INFO     Sampling: [c, x_e]
+2023-01-20 19:46:33,211 INFO     Subj num: 51 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:50:03,638 INFO     Finished [100%]: Average Loss = 30,848
+2023-01-20 19:50:56,500 INFO     Sampling: [x_e]
+2023-01-20 19:51:03,870 INFO     Sampling: [c, x_e]
+2023-01-20 19:51:04,170 INFO     Subj num: 52 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 19:55:07,139 INFO     Finished [100%]: Average Loss = 30,765
+2023-01-20 19:55:58,833 INFO     Sampling: [x_e]
+2023-01-20 19:56:06,140 INFO     Sampling: [c, x_e]
+2023-01-20 19:56:06,442 INFO     Subj num: 53 Test Acc Pain Expect: 0.6428571428571429 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 20:00:12,683 INFO     Finished [100%]: Average Loss = 29,080
+2023-01-20 20:01:05,390 INFO     Sampling: [x_e]
+2023-01-20 20:01:12,824 INFO     Sampling: [c, x_e]
+2023-01-20 20:01:13,127 INFO     Subj num: 54 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 20:05:21,144 INFO     Finished [100%]: Average Loss = 28,849
+2023-01-20 20:06:13,931 INFO     Sampling: [x_e]
+2023-01-20 20:06:21,456 INFO     Sampling: [c, x_e]
+2023-01-20 20:06:21,759 INFO     Subj num: 55 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 8
+2023-01-20 20:11:05,578 INFO     Finished [100%]: Average Loss = 31,187
+2023-01-20 20:12:02,853 INFO     Sampling: [x_e]
+2023-01-20 20:12:10,286 INFO     Sampling: [c, x_e]
+2023-01-20 20:12:10,587 INFO     Subj num: 2 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:16:24,699 INFO     Finished [100%]: Average Loss = 30,155
+2023-01-20 20:17:20,707 INFO     Sampling: [x_e]
+2023-01-20 20:17:28,244 INFO     Sampling: [c, x_e]
+2023-01-20 20:17:28,547 INFO     Subj num: 4 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:21:12,103 INFO     Finished [100%]: Average Loss = 34,121
+2023-01-20 20:22:08,361 INFO     Sampling: [x_e]
+2023-01-20 20:22:15,884 INFO     Sampling: [c, x_e]
+2023-01-20 20:22:16,187 INFO     Subj num: 10 Test Acc Pain Expect: 0.4642857142857143 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:26:29,951 INFO     Finished [100%]: Average Loss = 31,376
+2023-01-20 20:27:24,255 INFO     Sampling: [x_e]
+2023-01-20 20:27:31,680 INFO     Sampling: [c, x_e]
+2023-01-20 20:27:31,983 INFO     Subj num: 41 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:31:34,329 INFO     Finished [100%]: Average Loss = 31,917
+2023-01-20 20:32:33,024 INFO     Sampling: [x_e]
+2023-01-20 20:32:40,438 INFO     Sampling: [c, x_e]
+2023-01-20 20:32:40,738 INFO     Subj num: 43 Test Acc Pain Expect: 0.39285714285714285 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:36:50,862 INFO     Finished [100%]: Average Loss = 30,629
+2023-01-20 20:37:47,977 INFO     Sampling: [x_e]
+2023-01-20 20:37:55,483 INFO     Sampling: [c, x_e]
+2023-01-20 20:37:55,791 INFO     Subj num: 44 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:42:14,245 INFO     Finished [100%]: Average Loss = 31,543
+2023-01-20 20:43:11,756 INFO     Sampling: [x_e]
+2023-01-20 20:43:19,202 INFO     Sampling: [c, x_e]
+2023-01-20 20:43:19,505 INFO     Subj num: 45 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:47:08,811 INFO     Finished [100%]: Average Loss = 31,084
+2023-01-20 20:48:06,335 INFO     Sampling: [x_e]
+2023-01-20 20:48:13,797 INFO     Sampling: [c, x_e]
+2023-01-20 20:48:14,099 INFO     Subj num: 46 Test Acc Pain Expect: 0.5 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:52:24,612 INFO     Finished [100%]: Average Loss = 30,981
+2023-01-20 20:53:24,453 INFO     Sampling: [x_e]
+2023-01-20 20:53:31,862 INFO     Sampling: [c, x_e]
+2023-01-20 20:53:32,090 INFO     Subj num: 47 Test Acc Pain Expect: 0.5357142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 20:57:46,277 INFO     Finished [100%]: Average Loss = 31,401
+2023-01-20 20:58:41,811 INFO     Sampling: [x_e]
+2023-01-20 20:58:49,291 INFO     Sampling: [c, x_e]
+2023-01-20 20:58:49,596 INFO     Subj num: 48 Test Acc Pain Expect: 0.6071428571428571 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:03:08,197 INFO     Finished [100%]: Average Loss = 28,996
+2023-01-20 21:04:06,861 INFO     Sampling: [x_e]
+2023-01-20 21:04:14,363 INFO     Sampling: [c, x_e]
+2023-01-20 21:04:14,670 INFO     Subj num: 49 Test Acc Pain Expect: 0.35714285714285715 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:08:25,729 INFO     Finished [100%]: Average Loss = 29,595
+2023-01-20 21:09:20,942 INFO     Sampling: [x_e]
+2023-01-20 21:09:28,345 INFO     Sampling: [c, x_e]
+2023-01-20 21:09:28,637 INFO     Subj num: 50 Test Acc Pain Expect: 0.35714285714285715 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:13:09,106 INFO     Finished [100%]: Average Loss = 29,857
+2023-01-20 21:14:08,421 INFO     Sampling: [x_e]
+2023-01-20 21:14:15,917 INFO     Sampling: [c, x_e]
+2023-01-20 21:14:16,221 INFO     Subj num: 51 Test Acc Pain Expect: 0.2857142857142857 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:18:30,281 INFO     Finished [100%]: Average Loss = 31,095
+2023-01-20 21:19:29,294 INFO     Sampling: [x_e]
+2023-01-20 21:19:36,763 INFO     Sampling: [c, x_e]
+2023-01-20 21:19:37,066 INFO     Subj num: 52 Test Acc Pain Expect: 0.32142857142857145 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:23:46,506 INFO     Finished [100%]: Average Loss = 31,116
+2023-01-20 21:24:41,229 INFO     Sampling: [x_e]
+2023-01-20 21:24:48,553 INFO     Sampling: [c, x_e]
+2023-01-20 21:24:48,842 INFO     Subj num: 53 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:29:00,224 INFO     Finished [100%]: Average Loss = 29,211
+2023-01-20 21:29:55,686 INFO     Sampling: [x_e]
+2023-01-20 21:30:03,035 INFO     Sampling: [c, x_e]
+2023-01-20 21:30:03,325 INFO     Subj num: 54 Test Acc Pain Expect: 0.42857142857142855 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9
+2023-01-20 21:34:16,969 INFO     Finished [100%]: Average Loss = 29,091
+2023-01-20 21:35:18,065 INFO     Sampling: [x_e]
+2023-01-20 21:35:25,380 INFO     Sampling: [c, x_e]
+2023-01-20 21:35:25,674 INFO     Subj num: 55 Test Acc Pain Expect: 0.5714285714285714 script: unpooled_label_newfeatwind_nopupil.py, ft extr HR and EDA: wavelet, ft extr PUP: mean, lat space dims: 9

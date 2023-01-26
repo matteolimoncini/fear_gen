@@ -1,0 +1,56 @@
+2023-01-20 10:18:47,084 INFO     Finished [100%]: Average Loss = 1.0176e+08
+2023-01-20 10:18:57,814 INFO     Sampling: [x_e]
+2023-01-20 10:19:02,438 INFO     Sampling: [c, x_e]
+2023-01-20 10:19:37,995 INFO     Finished [100%]: Average Loss = 7.9933e+07
+2023-01-20 10:19:48,254 INFO     Sampling: [x_e]
+2023-01-20 10:20:44,899 INFO     Finished [100%]: Average Loss = 1.0176e+08
+2023-01-20 10:20:53,651 INFO     Sampling: [x_e]
+2023-01-20 10:20:57,997 INFO     Sampling: [c, x_e]
+2023-01-20 10:21:23,431 INFO     Interrupted at 5,986 [59%]: Average Loss = 5.1117e+09
+2023-01-20 10:23:18,688 INFO     Finished [100%]: Average Loss = 68,575
+2023-01-20 10:23:27,057 INFO     Sampling: [x_e]
+2023-01-20 10:23:31,549 INFO     Sampling: [c, x_e]
+2023-01-20 10:23:59,878 INFO     Interrupted at 7,547 [25%]: Average Loss = 4.1384e+09
+2023-01-20 10:25:43,613 INFO     Finished [100%]: Average Loss = 68,575
+2023-01-20 10:25:51,852 INFO     Sampling: [x_e]
+2023-01-20 10:25:56,189 INFO     Sampling: [c, x_e]
+2023-01-20 10:26:22,845 INFO     Interrupted at 6,600 [22%]: Average Loss = 4.6847e+09
+2023-01-20 10:28:06,532 INFO     Finished [100%]: Average Loss = 68,575
+2023-01-20 10:28:14,540 INFO     Sampling: [x_e]
+2023-01-20 10:28:18,935 INFO     Sampling: [c, x_e]
+2023-01-20 10:28:31,491 INFO     Interrupted at 2,034 [6%]: Average Loss = 1.0627e+10
+2023-01-20 10:30:19,914 INFO     Finished [100%]: Average Loss = 68,575
+2023-01-20 10:30:28,185 INFO     Sampling: [x_e]
+2023-01-20 10:30:33,761 INFO     Sampling: [c, x_e]
+2023-01-20 10:32:46,419 INFO     Finished [100%]: Average Loss = 68,575
+2023-01-20 10:32:56,508 INFO     Sampling: [x_e]
+2023-01-20 10:33:01,603 INFO     Sampling: [c, x_e]
+2023-01-20 10:33:37,060 INFO     Interrupted at 9,941 [33%]: Average Loss = 3.1741e+09
+2023-01-20 10:36:46,056 INFO     Finished [100%]: Average Loss = 68,435
+2023-01-20 10:36:54,237 INFO     Sampling: [x_e]
+2023-01-20 10:36:58,625 INFO     Sampling: [c, x_e]
+2023-01-20 10:37:39,812 INFO     Interrupted at 13,048 [21%]: Average Loss = 2.4252e+09
+2023-01-20 10:41:23,057 INFO     Finished [100%]: Average Loss = 68,435
+2023-01-20 10:41:32,594 INFO     Sampling: [x_e]
+2023-01-20 10:41:37,311 INFO     Sampling: [c, x_e]
+2023-01-20 10:43:07,020 INFO     Interrupted at 27,660 [46%]: Average Loss = 1.1446e+09
+2023-01-20 10:46:29,470 INFO     Finished [100%]: Average Loss = 68,435
+2023-01-20 10:46:37,985 INFO     Sampling: [x_e]
+2023-01-20 10:46:42,520 INFO     Sampling: [c, x_e]
+2023-01-20 10:47:19,235 INFO     Interrupted at 10,179 [16%]: Average Loss = 3.1013e+09
+2023-01-20 10:52:36,394 INFO     Finished [100%]: Average Loss = 68,320
+2023-01-20 10:52:44,748 INFO     Sampling: [x_e]
+2023-01-20 10:52:49,378 INFO     Sampling: [c, x_e]
+2023-01-20 10:52:58,640 INFO     Interrupted at 924 [0%]: Average Loss = 6.8182e+09
+2023-01-20 10:53:26,457 INFO     Finished [100%]: Average Loss = 1.6605e+10
+2023-01-20 10:53:35,599 INFO     Sampling: [x_e]
+2023-01-20 10:53:42,024 INFO     Sampling: [c, x_e]
+2023-01-20 10:53:54,046 INFO     Finished [100%]: Average Loss = 1.3486e+10
+2023-01-20 10:54:03,732 INFO     Sampling: [x_e]
+2023-01-20 10:54:08,479 INFO     Sampling: [c, x_e]
+2023-01-20 10:55:36,006 INFO     Finished [100%]: Average Loss = 1.6605e+10
+2023-01-20 10:55:44,799 INFO     Sampling: [x_e]
+2023-01-20 10:55:51,298 INFO     Sampling: [c, x_e]
+2023-01-20 10:56:02,059 INFO     Finished [100%]: Average Loss = 1.3486e+10
+2023-01-20 10:56:10,692 INFO     Sampling: [x_e]
+2023-01-20 10:56:15,300 INFO     Sampling: [c, x_e]

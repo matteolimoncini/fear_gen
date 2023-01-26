@@ -1,0 +1,25 @@
+2023-01-24 18:10:56,910 INFO     Finished [100%]: Average Loss = 2.1754e+09
+2023-01-24 18:11:02,563 INFO     Sampling: [x_e]
+2023-01-24 18:17:34,200 INFO     Finished [100%]: Average Loss = 28,840
+2023-01-24 18:17:38,831 INFO     Sampling: [x_e]
+2023-01-24 18:17:44,073 INFO     Sampling: [c, x_e]
+2023-01-24 18:17:47,543 INFO     Sampling: [c, x_e]
+2023-01-24 18:18:39,954 INFO     Finished [100%]: Average Loss = 29,115
+2023-01-24 18:18:44,404 INFO     Sampling: [x_e]
+2023-01-24 18:18:49,929 INFO     Sampling: [c, x_e]
+2023-01-24 18:18:53,778 INFO     Sampling: [c, x_e]
+2023-01-24 22:36:32,961 INFO     Finished [100%]: Average Loss = 28,840
+2023-01-24 22:36:37,599 INFO     Sampling: [x_e]
+2023-01-24 22:36:43,424 INFO     Sampling: [c, x_e]
+2023-01-24 22:36:48,236 INFO     Sampling: [c, x_e]
+2023-01-24 22:37:27,258 INFO     Finished [100%]: Average Loss = 29,115
+2023-01-24 22:37:31,338 INFO     Sampling: [x_e]
+2023-01-24 22:37:36,283 INFO     Sampling: [c, x_e]
+2023-01-24 22:37:39,612 INFO     Sampling: [c, x_e]
+2023-01-24 22:38:18,760 INFO     Finished [100%]: Average Loss = 29,284
+2023-01-24 22:38:23,865 INFO     Sampling: [x_e]
+2023-01-24 22:38:29,049 INFO     Sampling: [c, x_e]
+2023-01-24 22:38:33,274 INFO     Sampling: [c, x_e]
+2023-01-24 22:39:30,667 INFO     Finished [100%]: Average Loss = 29,375
+2023-01-24 22:39:35,016 INFO     Sampling: [x_e]
+2023-01-24 22:39:41,447 INFO     Sampling: [c, x_e]
