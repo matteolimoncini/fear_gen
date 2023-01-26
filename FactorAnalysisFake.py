@@ -7,6 +7,7 @@ from numpy.random import default_rng
 from scipy import stats
 from sklearn.metrics import accuracy_score
 import csv
+from sklearn.metrics import confusion_matrix
 
 import extract_correct_csv
 
@@ -197,6 +198,14 @@ for sub in all_subject:
         e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
 
         train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+        conf_mat_train = confusion_matrix(e_labels_train, e_pred_mode_train)
+        fig = plt.figure()
+        plt.matshow(conf_mat_train)
+        plt.title('Confusion Matrix all subjs train k=' + str(k))
+        plt.colorbar()
+        plt.ylabel('True Label')
+        plt.xlabel('Predicted Label')
+        plt.savefig('FA/unpooled/fake/confusion_matrix_' + str(k) + 'train.jpg')
 
         with PPCA_identified:
             # update values of predictors with validation:
@@ -211,11 +220,19 @@ for sub in all_subject:
         e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
 
         validation_accuracy_exp = accuracy_score(e_labels_val, e_pred_mode)
+        conf_mat_val = confusion_matrix(e_labels_val, e_pred_mode)
+        fig = plt.figure()
+        plt.matshow(conf_mat_val)
+        plt.title('Confusion Matrix all subjs val k=' + str(k))
+        plt.colorbar()
+        plt.ylabel('True Label')
+        plt.xlabel('Predicted Label')
+        plt.savefig('FA/unpooled/fake/confusion_matrix_' + str(k) + 'val.jpg')
 
         with PPCA_identified:
             # update values of predictors with validation:
             PPCA_identified.set_data("hr_data", hr_test.T, coords={'rows': range(hr_test.shape[0])})
-            #PPCA_identified.set_data("pupil_data", pupil_test.T, coords={'rows': range(pupil_test.shape[0])})
+            # PPCA_identified.set_data("pupil_data", pupil_test.T, coords={'rows': range(pupil_test.shape[0])})
             PPCA_identified.set_data("eda_data", eda_test.T, coords={'rows': range(eda_test.shape[0])})
             # use the updated values and predict outcomes and probabilities:
             posterior_predictive = pm.sample_posterior_predictive(
@@ -225,6 +242,15 @@ for sub in all_subject:
         e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
 
         test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode)
+
+        conf_mat_test = confusion_matrix(e_labels_test, e_pred_mode)
+        fig = plt.figure()
+        plt.matshow(conf_mat_test)
+        plt.title('Confusion Matrix all subjs test k=' + str(k))
+        plt.colorbar()
+        plt.ylabel('True Label')
+        plt.xlabel('Predicted Label')
+        plt.savefig('FA/unpooled/fake/confusion_matrix_' + str(k) + 'test.jpg')
 
         row = [sub, k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
 
