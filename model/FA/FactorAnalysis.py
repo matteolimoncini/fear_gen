@@ -1,3 +1,8 @@
+import os
+
+os.chdir('..')
+os.chdir('..')
+
 import pymc as pm
 import aesara.tensor as at
 import numpy as np
@@ -8,12 +13,7 @@ from scipy import stats
 from sklearn.metrics import accuracy_score
 import csv
 from sklearn.metrics import confusion_matrix
-import os
-
-os.chdir('..')
-os.chdir('..')
-
-from fear_gen import extract_correct_csv
+import extract_correct_csv
 
 RANDOM_SEED = 31415
 rng = default_rng(RANDOM_SEED)
