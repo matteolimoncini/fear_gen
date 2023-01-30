@@ -1,3 +1,9 @@
+import os
+
+os.chdir('..')
+os.chdir('..')
+print(os.getcwd())
+
 import pymc as pm
 import aesara.tensor as at
 import numpy as np
@@ -62,10 +68,32 @@ def makeW(d, k, dim_names, name):
     return W
 
 
-'''columns = ['subject', 'k', 'train', 'val', 'test']
-with open('FA.csv', 'w') as f:
+def my_post_predict(trace, hr_new, eda_new, pupil_new):
+    whr_ = trace.posterior['W_hr'][0]
+    weda_ = trace.posterior['W_eda'][0]
+    wpupil_ = trace.posterior['W_pupil'][0]
+
+    we_ = trace.posterior['W_e'][0]
+
+    C_val_hr = at.dot(np.linalg.pinv(whr_), hr_new.T)
+    C_val_eda = at.dot(np.linalg.pinv(weda_), eda_new.T)
+    C_val_pupil = at.dot(np.linalg.pinv(wpupil_), pupil_new.T)
+
+    val_hr = at.matmul(np.array(we_), C_val_hr.eval())
+    val_eda = at.matmul(np.array(we_), C_val_eda.eval())
+    val_pupil = at.matmul(np.array(we_), C_val_pupil.eval())
+
+    val_label_gen = at.concatenate((val_hr, val_eda, val_pupil))
+
+    label_val = np.where(val_label_gen.eval() < 0, 0, 1)
+    label_val = stats.mode(label_val[0], keepdims=False)[0]
+    return label_val
+
+
+columns = ['subject', 'k', 'train', 'val', 'test']
+with open('output/FA/FA_new_postpred.csv', 'w') as f:
     write = csv.writer(f)
-    write.writerow(columns)'''
+    write.writerow(columns)
 
 # loop within all subjects
 for sub in all_subject:
@@ -207,56 +235,38 @@ for sub in all_subject:
         plt.colorbar()
         plt.ylabel('True Label')
         plt.xlabel('Predicted Label')
-        plt.savefig('FA/unpooled/confusion_matrix_' + str(k) + 'train.jpg')
+        plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'train.jpg')
 
-        with PPCA_identified:
-            # update values of predictors with validation:
-            PPCA_identified.set_data(name="hr_data", values=hr_val.T, coords={'rows': range(hr_val.shape[0])})
-            PPCA_identified.set_data("eda_data", eda_val.T, coords={'rows': range(eda_val.shape[0])})
-            PPCA_identified.set_data("pupil_data", pupil_val.T, coords={'rows': range(pupil_val.shape[0])})
-            # use the updated values and predict outcomes and probabilities:
-            posterior_predictive = pm.sample_posterior_predictive(
-                trace, var_names=["X_e"], random_seed=123, predictions=True)
+        # validation
 
-        e_pred = posterior_predictive.predictions['X_e']
-        e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
+        e_pred_mode_val = my_post_predict(trace, hr_val, eda_val, pupil_val)
+        validation_accuracy_exp = accuracy_score(e_labels_val, e_pred_mode_val)
 
-        validation_accuracy_exp = accuracy_score(e_labels_val, e_pred_mode)
-
-        conf_mat_val = confusion_matrix(e_labels_val, e_pred_mode)
+        conf_mat_val = confusion_matrix(e_labels_val, e_pred_mode_val)
         fig = plt.figure()
         plt.matshow(conf_mat_val)
         plt.title('Confusion Matrix all subjs val k=' + str(k))
         plt.colorbar()
         plt.ylabel('True Label')
         plt.xlabel('Predicted Label')
-        plt.savefig('FA/unpooled/confusion_matrix_' + str(k) + 'val.jpg')
+        plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'val.jpg')
 
-        with PPCA_identified:
-            # update values of predictors with validation:
-            PPCA_identified.set_data("hr_data", hr_test.T, coords={'rows': range(hr_test.shape[0])})
-            PPCA_identified.set_data("pupil_data", pupil_test.T, coords={'rows': range(pupil_test.shape[0])})
-            PPCA_identified.set_data("eda_data", eda_test.T, coords={'rows': range(eda_test.shape[0])})
-            # use the updated values and predict outcomes and probabilities:
-            posterior_predictive = pm.sample_posterior_predictive(
-                trace, var_names=["X_e"], random_seed=123, predictions=True)
+        # test
 
-        e_pred = posterior_predictive.predictions['X_e']
-        e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
+        e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test)
+        test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode_test)
 
-        test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode)
-
-        conf_mat_test = confusion_matrix(e_labels_test, e_pred_mode)
+        conf_mat_test = confusion_matrix(e_labels_test, e_pred_mode_test)
         fig = plt.figure()
         plt.matshow(conf_mat_test)
         plt.title('Confusion Matrix all subjs test k=' + str(k))
         plt.colorbar()
         plt.ylabel('True Label')
         plt.xlabel('Predicted Label')
-        plt.savefig('FA/unpooled/confusion_matrix_' + str(k) + 'test.jpg')
+        plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'test.jpg')
 
         row = [sub, k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
 
-        with open('FA.csv', 'a') as f:
+        with open('output/FA/FA_new_postpred.csv', 'a') as f:
             write = csv.writer(f)
             write.writerow(row)
