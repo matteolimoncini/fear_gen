@@ -88,10 +88,11 @@ def my_post_predict(trace, hr_new, eda_new, pupil_new):
     label_val = stats.mode(label_val[0], keepdims=False)[0]
     return label_val
 
-'''columns = ['subject', 'k', 'train', 'val', 'test']
-with open('FA.csv', 'w') as f:
+
+columns = ['subject', 'k', 'train', 'val', 'test']
+with open('output/FA/FA_new_postpred.csv', 'w') as f:
     write = csv.writer(f)
-    write.writerow(columns)'''
+    write.writerow(columns)
 
 # loop within all subjects
 for sub in all_subject:
@@ -265,6 +266,6 @@ for sub in all_subject:
 
         row = [sub, k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
 
-        with open('output/FA/FA.csv', 'a') as f:
+        with open('output/FA/FA_new_postpred.csv', 'a') as f:
             write = csv.writer(f)
             write.writerow(row)
