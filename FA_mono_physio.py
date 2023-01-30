@@ -6,9 +6,7 @@ from numpy.random import default_rng
 from scipy import stats
 from sklearn.metrics import accuracy_score
 import os
-import fear_gen.extract_correct_csv as functions
-os.chdir('..')
-os.chdir('..')
+import extract_correct_csv as functions
 
 
 RANDOM_SEED = 31415
