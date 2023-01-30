@@ -2,6 +2,7 @@ import os
 
 os.chdir('..')
 os.chdir('..')
+print(os.getcwd())
 
 import pymc as pm
 import aesara.tensor as at
