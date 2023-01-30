@@ -139,10 +139,6 @@ sss = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=123)
 sss.get_n_splits(eda, E)
 
 for i, (train_index, test_index) in enumerate(sss.split(eda, E)):
-    print(f"Fold {i}:")
-    print(f"  Train: index={train_index}")
-    print(f"  Test:  index={test_index}")
-
     N_train = len(train_index)
 
     eda_train = eda.iloc[train_index, :]
