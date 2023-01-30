@@ -33,7 +33,7 @@ valid_k_list = list(range(2, 10))
 num_trials_to_remove = 48
 
 columns = ['subject', 'k', 'train', 'val', 'test']
-with open('output/FA/FA_new_complete.csv', 'w') as f:
+with open('output/FA/FA_new_complete_normalized.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -256,7 +256,7 @@ for k in valid_k_list:
     plt.colorbar()
     plt.ylabel('True Label')
     plt.xlabel('Predicted Label')
-    plt.savefig('output/FA/complete/confusion_matrix_' + str(k) + 'train.jpg')
+    plt.savefig('output/FA/complete/confusion_matrix_' + str(k) + 'train_normalized.jpg')
 
     val_results = my_post_predict(trace, hr_val, eda_val, pupil_val)
     validation_accuracy_exp = accuracy_score(e_labels_val, val_results)
@@ -268,7 +268,7 @@ for k in valid_k_list:
     plt.colorbar()
     plt.ylabel('True Label')
     plt.xlabel('Predicted Label')
-    plt.savefig('output/FA/complete/confusion_matrix_' + str(k) + 'val.jpg')
+    plt.savefig('output/FA/complete/confusion_matrix_' + str(k) + 'val_normalized.jpg')
 
     test_results = my_post_predict(trace, hr_test, eda_test, pupil_test)
     test_accuracy_exp = accuracy_score(e_labels_test, test_results)
@@ -280,10 +280,10 @@ for k in valid_k_list:
     plt.colorbar()
     plt.ylabel('True Label')
     plt.xlabel('Predicted Label')
-    plt.savefig('output/FA/complete/confusion_matrix_' + str(k) + 'test.jpg')
+    plt.savefig('output/FA/complete/confusion_matrix_' + str(k) + 'test_normalized.jpg')
 
     row = ['allsubj', k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
 
-    with open('output/FA/FA_new_complete.csv', 'a') as f:
+    with open('output/FA/FA_new_complete_normalized.csv', 'a') as f:
         write = csv.writer(f)
         write.writerow(row)
