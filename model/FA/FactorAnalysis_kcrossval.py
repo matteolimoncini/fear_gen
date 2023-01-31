@@ -97,135 +97,136 @@ with open('output/FA/FA_new_postpred_cv.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
-sub = all_subject[0]
-k = 2
+for sub in all_subject:
+    # loop within all k
+    for k in valid_k_list:
 
-eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
-eda = eda[num_trials_to_remove:]
+        eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
+        eda = eda[num_trials_to_remove:]
 
-# hr data
-hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
-hr = hr[num_trials_to_remove:]
+        # hr data
+        hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
+        hr = hr[num_trials_to_remove:]
 
-# pupil data
-pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
-pupil = pupil[num_trials_to_remove:]
+        # pupil data
+        pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
+        pupil = pupil[num_trials_to_remove:]
 
-string_sub = extract_correct_csv.read_correct_subject_csv(sub)
+        string_sub = extract_correct_csv.read_correct_subject_csv(sub)
 
-df_ = pd.read_csv('data/LookAtMe_0' + str(string_sub) + '.csv', sep='\t')
-df_ = df_[num_trials_to_remove:]
-label = np.array(list([int(d > 2) for d in df_['rating']]))
-E = label[:, np.newaxis]
-E = pd.DataFrame(E)
+        df_ = pd.read_csv('data/LookAtMe_0' + str(string_sub) + '.csv', sep='\t')
+        df_ = df_[num_trials_to_remove:]
+        label = np.array(list([int(d > 2) for d in df_['rating']]))
+        E = label[:, np.newaxis]
+        E = pd.DataFrame(E)
 
-# num trials
-N = eda.shape[0]
+        # num trials
+        N = eda.shape[0]
 
-TRAIN_PERC = 0.70
-VAL_PERC = 0.1
-TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
-N_train = int(N * (TRAIN_PERC))
-N_val = int(N * (VAL_PERC))
+        TRAIN_PERC = 0.70
+        VAL_PERC = 0.1
+        TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
+        N_train = int(N * (TRAIN_PERC))
+        N_val = int(N * (VAL_PERC))
 
-eda = eda.reset_index().drop(columns=('index'))
-pupil = pupil.reset_index().drop(columns=('index'))
-hr = hr.reset_index().drop(columns=('index'))
-E = E.reset_index().drop(columns=('index'))
+        eda = eda.reset_index().drop(columns=('index'))
+        pupil = pupil.reset_index().drop(columns=('index'))
+        hr = hr.reset_index().drop(columns=('index'))
+        E = E.reset_index().drop(columns=('index'))
 
-from sklearn.model_selection import StratifiedShuffleSplit
+        from sklearn.model_selection import StratifiedShuffleSplit
 
-sss = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=123)
-sss.get_n_splits(eda, E)
+        sss = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=123)
+        sss.get_n_splits(eda, E)
 
-for i, (train_index, test_index) in enumerate(sss.split(eda, E)):
-    N_train = len(train_index)
+        for i, (train_index, test_index) in enumerate(sss.split(eda, E)):
+            N_train = len(train_index)
 
-    eda_train = eda.iloc[train_index, :]
-    eda_test = eda.iloc[test_index, :]
-    hr_train = hr.iloc[train_index, :]
-    hr_test = hr.iloc[test_index, :]
-    pupil_train = pupil.iloc[train_index, :]
-    pupil_test = pupil.iloc[test_index, :]
-    e_labels_train = E.iloc[train_index, :]
-    e_labels_test = E.iloc[test_index, :]
+            eda_train = eda.iloc[train_index, :]
+            eda_test = eda.iloc[test_index, :]
+            hr_train = hr.iloc[train_index, :]
+            hr_test = hr.iloc[test_index, :]
+            pupil_train = pupil.iloc[train_index, :]
+            pupil_test = pupil.iloc[test_index, :]
+            e_labels_train = E.iloc[train_index, :]
+            e_labels_test = E.iloc[test_index, :]
 
-    # dimensions of each signal
-    d_eda = eda_train.shape[1]
-    d_hr = hr_train.shape[1]
-    d_pupil = pupil_train.shape[1]
-    d_e = e_labels_train.shape[1]
+            # dimensions of each signal
+            d_eda = eda_train.shape[1]
+            d_hr = hr_train.shape[1]
+            d_pupil = pupil_train.shape[1]
+            d_e = e_labels_train.shape[1]
 
-    # model definition
-    with pm.Model() as PPCA_identified:
-        # model coordinates
-        PPCA_identified.add_coord("latent_columns", np.arange(k), mutable=True)
-        PPCA_identified.add_coord("rows", np.arange(N_train), mutable=True)
-        PPCA_identified.add_coord("observed_eda", np.arange(d_eda), mutable=False)
-        PPCA_identified.add_coord("observed_hr", np.arange(d_hr), mutable=False)
-        PPCA_identified.add_coord("observed_pupil", np.arange(d_pupil), mutable=False)
-        PPCA_identified.add_coord("observed_label", np.arange(d_e), mutable=False)
+            # model definition
+            with pm.Model() as PPCA_identified:
+                # model coordinates
+                PPCA_identified.add_coord("latent_columns", np.arange(k), mutable=True)
+                PPCA_identified.add_coord("rows", np.arange(N_train), mutable=True)
+                PPCA_identified.add_coord("observed_eda", np.arange(d_eda), mutable=False)
+                PPCA_identified.add_coord("observed_hr", np.arange(d_hr), mutable=False)
+                PPCA_identified.add_coord("observed_pupil", np.arange(d_pupil), mutable=False)
+                PPCA_identified.add_coord("observed_label", np.arange(d_e), mutable=False)
 
-        hr_data = pm.MutableData("hr_data", hr_train.T, dims=["observed_hr", "rows"])
-        eda_data = pm.MutableData("eda_data", eda_train.T, dims=("observed_eda", "rows"))
-        pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
+                hr_data = pm.MutableData("hr_data", hr_train.T, dims=["observed_hr", "rows"])
+                eda_data = pm.MutableData("eda_data", eda_train.T, dims=("observed_eda", "rows"))
+                pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
 
-        W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
-        W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
-        W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
+                W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
+                W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
+                W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
 
-        W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
-        C = pm.Normal("C", dims=["latent_columns", "rows"])
+                W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
+                C = pm.Normal("C", dims=["latent_columns", "rows"])
 
-        psi_eda = pm.HalfNormal("psi_eda", 1.0)
-        X_eda = pm.Normal("X_eda", mu=at.dot(W_eda, C), sigma=psi_eda, observed=eda_data,
-                          dims=["observed_eda", "rows"])
+                psi_eda = pm.HalfNormal("psi_eda", 1.0)
+                X_eda = pm.Normal("X_eda", mu=at.dot(W_eda, C), sigma=psi_eda, observed=eda_data,
+                                  dims=["observed_eda", "rows"])
 
-        psi_hr = pm.HalfNormal("psi_hr", 1.0)
-        X_hr = pm.Normal("X_hr", mu=at.dot(W_hr, C), sigma=psi_hr, observed=hr_data, dims=["observed_hr", "rows"])
+                psi_hr = pm.HalfNormal("psi_hr", 1.0)
+                X_hr = pm.Normal("X_hr", mu=at.dot(W_hr, C), sigma=psi_hr, observed=hr_data, dims=["observed_hr", "rows"])
 
-        psi_pupil = pm.HalfNormal("psi_pupil", 1.0)
-        X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data,
-                            dims=["observed_pupil", "rows"])
+                psi_pupil = pm.HalfNormal("psi_pupil", 1.0)
+                X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data,
+                                    dims=["observed_pupil", "rows"])
 
-        X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
-                           observed=e_labels_train.T)
+                X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
+                                   observed=e_labels_train.T)
 
-    with PPCA_identified:
-        approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
-        trace = approx.sample(1000)
+            with PPCA_identified:
+                approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+                trace = approx.sample(1000)
 
-    with PPCA_identified:
-        posterior_predictive = pm.sample_posterior_predictive(
-            trace, var_names=["X_e"], random_seed=123)
+            with PPCA_identified:
+                posterior_predictive = pm.sample_posterior_predictive(
+                    trace, var_names=["X_e"], random_seed=123)
 
-    e_pred_train = posterior_predictive.posterior_predictive['X_e']
-    e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
+            e_pred_train = posterior_predictive.posterior_predictive['X_e']
+            e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
 
-    train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
-    conf_mat_train = confusion_matrix(e_labels_train, e_pred_mode_train)
-    fig = plt.figure()
-    plt.matshow(conf_mat_train)
-    plt.title('Confusion Matrix all subjs train k=' + str(k))
-    plt.colorbar()
-    plt.ylabel('True Label')
-    plt.xlabel('Predicted Label')
-    plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'train_cv.jpg')
+            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+            conf_mat_train = confusion_matrix(e_labels_train, e_pred_mode_train)
+            fig = plt.figure()
+            plt.matshow(conf_mat_train)
+            plt.title('Confusion Matrix all subjs train k=' + str(k))
+            plt.colorbar()
+            plt.ylabel('True Label')
+            plt.xlabel('Predicted Label')
+            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'train_cv.jpg')
 
-    # test
-    e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test)
-    test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode_test)
-    conf_mat_test = confusion_matrix(e_labels_test, e_pred_mode_test)
-    fig = plt.figure()
-    plt.matshow(conf_mat_test)
-    plt.title('Confusion Matrix all subjs test k=' + str(k))
-    plt.colorbar()
-    plt.ylabel('True Label')
-    plt.xlabel('Predicted Label')
-    plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'test_cv.jpg')
+            # test
+            e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test)
+            test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode_test)
+            conf_mat_test = confusion_matrix(e_labels_test, e_pred_mode_test)
+            fig = plt.figure()
+            plt.matshow(conf_mat_test)
+            plt.title('Confusion Matrix all subjs test k=' + str(k))
+            plt.colorbar()
+            plt.ylabel('True Label')
+            plt.xlabel('Predicted Label')
+            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'test_cv.jpg')
 
-    row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
+            row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
 
-    with open('output/FA/FA_new_postpred_cv.csv', 'a') as f:
-        write = csv.writer(f)
-        write.writerow(row)
+            with open('output/FA/FA_new_postpred_cv.csv', 'a') as f:
+                write = csv.writer(f)
+                write.writerow(row)
