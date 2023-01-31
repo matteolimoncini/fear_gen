@@ -84,7 +84,7 @@ def my_post_predict(trace, feature_val):
 types_ = ['hr', 'eda', 'pupil']
 columns = ['subject', 'k', 'fold', 'feature', 'train', 'test']
 
-with open('output/FA/FA_new_postpred_cv_norm.csv', 'w') as f:
+with open('output/FA/FA_new_postpred_cv_norm_monophysio.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -181,6 +181,6 @@ for sub in all_subject:
 
                 row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
 
-                with open('output/FA/FA_new_postpred_cv_norm.csv', 'a') as f:
+                with open('output/FA/FA_new_postpred_cv_norm_monophysio.csv', 'a') as f:
                     write = csv.writer(f)
                     write.writerow(row)
