@@ -132,9 +132,13 @@ for sub in all_subject:
         N_train = int(N * (TRAIN_PERC))
         N_val = int(N * (VAL_PERC))
 
+        eda = pd.DataFrame(eda)
         eda = eda.reset_index().drop(columns=('index'))
+        pupil = pd.DataFrame(pupil)
         pupil = pupil.reset_index().drop(columns=('index'))
+        hr = pd.DataFrame(hr)
         hr = hr.reset_index().drop(columns=('index'))
+        E = pd.DataFrame(E)
         E = E.reset_index().drop(columns=('index'))
 
         from sklearn.model_selection import StratifiedShuffleSplit
