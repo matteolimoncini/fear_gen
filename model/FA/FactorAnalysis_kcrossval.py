@@ -25,8 +25,6 @@ rng = default_rng(RANDOM_SEED)
 all_subject = extract_correct_csv.extract_only_valid_subject()
 all_subject.remove(49)
 
-all_subject.remove(2)
-all_subject.remove(4)
 
 # all k = {2, 4, 6, 8} for the latent space
 valid_k_list = list(range(2, 10))
