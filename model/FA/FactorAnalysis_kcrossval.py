@@ -29,7 +29,7 @@ all_subject.remove(49)
 
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list(range(2, 10))
+valid_k_list = list([2, 6, 10, 12, 15, 20])
 
 # keep only generalization trials
 num_trials_to_remove = 48
