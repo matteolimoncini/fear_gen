@@ -46,7 +46,7 @@ for sub in all_subjects:
 
             with pm.Model() as GLM:
                 intercept = pm.Normal("intercept", 0, 1, shape=y_train.shape)
-                slope = pm.Normal("slope", shape=(24,1))
+                slope = pm.Normal("slope", shape=(X_train.shape[1], 1))
                 likelihood = pm.Bernoulli('likelihood', p=pm.math.sigmoid(at.dot(X_train, slope)+intercept), observed=y_train)
                 approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
