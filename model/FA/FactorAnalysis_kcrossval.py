@@ -9,6 +9,7 @@ from sklearn.metrics import accuracy_score
 import csv
 from sklearn.metrics import confusion_matrix
 import sys
+from sklearn.preprocessing import StandardScaler
 
 sys.path.append('../../')
 
@@ -18,6 +19,7 @@ import os
 os.chdir('..')
 os.chdir('..')
 
+scaler = StandardScaler()
 RANDOM_SEED = 31415
 rng = default_rng(RANDOM_SEED)
 
@@ -27,7 +29,7 @@ all_subject.remove(49)
 
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list(range(2, 10))
+valid_k_list = list([2, 6, 10, 12, 15, 20])
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -91,7 +93,7 @@ def my_post_predict(trace, hr_new, eda_new, pupil_new):
 
 
 columns = ['subject', 'k', 'fold', 'train', 'test']
-with open('output/FA/FA_new_postpred_cv.csv', 'w') as f:
+with open('output/FA/FA_new_postpred_cv_norm.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -101,14 +103,17 @@ for sub in all_subject:
 
         eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
         eda = eda[num_trials_to_remove:]
+        eda = scaler.fit_transform(eda)
 
         # hr data
         hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
         hr = hr[num_trials_to_remove:]
+        hr = scaler.fit_transform(hr)
 
         # pupil data
         pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
         pupil = pupil[num_trials_to_remove:]
+        pupil = scaler.fit_transform(pupil)
 
         string_sub = extract_correct_csv.read_correct_subject_csv(sub)
 
@@ -127,14 +132,18 @@ for sub in all_subject:
         N_train = int(N * (TRAIN_PERC))
         N_val = int(N * (VAL_PERC))
 
+        eda = pd.DataFrame(eda)
         eda = eda.reset_index().drop(columns=('index'))
+        pupil = pd.DataFrame(pupil)
         pupil = pupil.reset_index().drop(columns=('index'))
+        hr = pd.DataFrame(hr)
         hr = hr.reset_index().drop(columns=('index'))
+        E = pd.DataFrame(E)
         E = E.reset_index().drop(columns=('index'))
 
         from sklearn.model_selection import StratifiedShuffleSplit
 
-        sss = StratifiedShuffleSplit(n_splits=10, test_size=0.2, random_state=123)
+        sss = StratifiedShuffleSplit(n_splits=3, test_size=0.2, random_state=123)
         sss.get_n_splits(eda, E)
 
         for i, (train_index, test_index) in enumerate(sss.split(eda, E)):
@@ -209,7 +218,7 @@ for sub in all_subject:
             plt.colorbar()
             plt.ylabel('True Label')
             plt.xlabel('Predicted Label')
-            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'train_cv.jpg')
+            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'train_cv_norm.jpg')
 
             # test
             e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test)
@@ -221,10 +230,10 @@ for sub in all_subject:
             plt.colorbar()
             plt.ylabel('True Label')
             plt.xlabel('Predicted Label')
-            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'test_cv.jpg')
+            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'test_cv_norm.jpg')
 
             row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
 
-            with open('output/FA/FA_new_postpred_cv.csv', 'a') as f:
+            with open('output/FA/FA_new_postpred_cv_norm.csv', 'a') as f:
                 write = csv.writer(f)
                 write.writerow(row)
