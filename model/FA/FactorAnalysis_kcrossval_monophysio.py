@@ -179,7 +179,7 @@ for sub in all_subject:
                 e_pred_mode_test = my_post_predict(trace, feature_test)
                 test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode_test)
 
-                row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
+                row = [sub, k, i, type_, train_accuracy_exp, test_accuracy_exp]
 
                 with open('output/FA/FA_new_postpred_cv_norm_monophysio.csv', 'a') as f:
                     write = csv.writer(f)
