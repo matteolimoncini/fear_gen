@@ -204,9 +204,10 @@ for sub in all_subject:
         label = np.array(list([int(d > 2) for d in df_['rating']]))
 
         E = label[:, np.newaxis]
-        img = extract_threat_level(df_)
-
-        img = convert_to_matrix(img)
+        img = np.array(extract_threat_level(df_))
+        morph_level = np.zeros((img.size, img.max()))
+        morph_level[np.arange(img.size), img - 1] = 1
+        morph_level = morph_level.astype(int)
 
         eda = pd.DataFrame(eda)
         eda = eda.reset_index().drop(columns=('index'))
@@ -214,23 +215,23 @@ for sub in all_subject:
         pupil = pupil.reset_index().drop(columns=('index'))
         hr = pd.DataFrame(hr)
         hr = hr.reset_index().drop(columns=('index'))
-        img = pd.DataFrame(img)
-        img = img.reset_index().drop(columns=('index'))
+        morph_level = pd.DataFrame(morph_level)
+        morph_level = morph_level.reset_index().drop(columns=('index'))
         E = pd.DataFrame(E)
         E = E.reset_index().drop(columns=('index'))
 
         sss = StratifiedShuffleSplit(n_splits=3, test_size=TEST_PERC, random_state=123)
         for i, (train_index, test_index) in enumerate(sss.split(eda, E)):
-            N_train = len(train_index)
 
+            N_train = len(train_index)
             eda_train = eda.iloc[train_index, :]
             eda_test = eda.iloc[test_index, :]
             hr_train = hr.iloc[train_index, :]
             hr_test = hr.iloc[test_index, :]
             pupil_train = pupil.iloc[train_index, :]
             pupil_test = pupil.iloc[test_index, :]
-            img_train = img.iloc[train_index, :]
-            img_test = img.iloc[test_index, :]
+            img_train = morph_level.iloc[train_index, :]
+            img_test = morph_level.iloc[test_index, :]
             e_labels_train = E.iloc[train_index, :]
             e_labels_test = E.iloc[test_index, :]
 
@@ -255,7 +256,7 @@ for sub in all_subject:
                 hr_data = pm.MutableData("hr_data", hr_train.T, dims=["observed_hr", "rows"])
                 eda_data = pm.MutableData("eda_data", eda_train.T, dims=("observed_eda", "rows"))
                 pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
-                img_data = pm.MutableData("img_data", img_train.T, dims=("observed_img", "rows"))
+                img_data = pm.MutableData("img_data", img_train, dims=("observed_img", "rows"))
 
                 W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
                 W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
@@ -283,8 +284,6 @@ for sub in all_subject:
                 X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                                    observed=e_labels_train.T)
 
-            g = pm.model_to_graphviz(PPCA_identified)
-            g.view('tmp')
 
             with PPCA_identified:
                 approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
