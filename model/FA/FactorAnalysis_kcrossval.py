@@ -12,12 +12,11 @@ import sys
 from sklearn.preprocessing import StandardScaler
 
 sys.path.append('../../')
+os.chdir('..')
+os.chdir('..')
 
 import extract_correct_csv
 import os
-
-os.chdir('..')
-os.chdir('..')
 
 scaler = StandardScaler()
 RANDOM_SEED = 31415
