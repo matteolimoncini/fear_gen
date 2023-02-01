@@ -29,7 +29,7 @@ all_subject = extract_correct_csv.extract_only_valid_subject()
 all_subject.remove(49)
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list([2, 6, 10, 12, 15, 20])
+valid_k_list = list([2, 6, 10, 12, 15, 20, 24, 30])
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -84,7 +84,7 @@ def my_post_predict(trace, feature_val):
 types_ = ['hr', 'eda', 'pupil']
 columns = ['subject', 'k', 'fold', 'feature', 'train', 'test']
 
-with open('output/FA/FA_new_postpred_cv_norm_monophysio.csv', 'w') as f:
+with open('output/FA/FA_new_postpred_cv_norm_monophysio_new.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -170,10 +170,8 @@ for sub in all_subject:
                     posterior_predictive = pm.sample_posterior_predictive(
                         trace, var_names=["X_e"], random_seed=123)
 
-                e_pred_train = posterior_predictive.posterior_predictive['X_e']
-                e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
-
-                train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+                e_pred_train = my_post_predict(trace, feature_train)
+                train_accuracy_exp = accuracy_score(e_labels_train, e_pred_train)
 
                 # test
                 e_pred_mode_test = my_post_predict(trace, feature_test)
@@ -181,6 +179,6 @@ for sub in all_subject:
 
                 row = [sub, k, i, type_, train_accuracy_exp, test_accuracy_exp]
 
-                with open('output/FA/FA_new_postpred_cv_norm_monophysio.csv', 'a') as f:
+                with open('output/FA/FA_new_postpred_cv_norm_monophysio_new.csv', 'a') as f:
                     write = csv.writer(f)
                     write.writerow(row)

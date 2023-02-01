@@ -33,7 +33,7 @@ valid_k_list = list([2, 6, 10, 12, 15, 20])
 num_trials_to_remove = 48
 
 TEST_PERC = 0.2
-FILENAME = 'output/FA/FA_kcv_norm_image.csv'
+FILENAME = 'output/FA/FA_kcv_norm_image_new.csv'
 columns = ['subject', 'k', 'fold', 'train', 'test']
 
 with open(FILENAME, 'w') as f:
@@ -72,6 +72,36 @@ def makeW(d, k, dim_names, name):
     L = expand_packed_block_triangular(d, k, b, at.ones(k))
     W = pm.Deterministic(name, at.dot(L, at.diag(at.extra_ops.cumsum(z))), dims=dim_names)
     return W
+
+
+def convert_to_matrix(vector):
+    """
+    Converts a 1-dimensional Python array into a matrix with 6 columns.
+    Each row of the matrix corresponds to an element in the input vector, and has a 1 in the column
+    corresponding to the value of the element in the vector.
+
+    Parameters:
+    vector (list): A 1-dimensional list with values ranging from 1 to 6.
+
+    Returns:
+    list: A 2-dimensional list representing the matrix.
+
+    Example:
+    >> convert_to_matrix([1, 2, 6, 4, 5, 3, 6, 2])
+    [[1, 0, 0, 0, 0, 0],
+     [0, 1, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 1],
+     [0, 0, 0, 1, 0, 0],
+     [0, 0, 0, 0, 1, 0],
+     [0, 0, 1, 0, 0, 0],
+     [0, 0, 0, 0, 0, 1],
+     [0, 1, 0, 0, 0, 0]]
+    """
+    num_rows = len(vector)
+    matrix = [[0 for j in range(6)] for i in range(num_rows)]
+    for i, value in enumerate(vector):
+        matrix[i][value - 1] = 1
+    return matrix
 
 
 def my_post_predict(trace, hr_new, eda_new, pupil_new, img_new):
@@ -176,6 +206,8 @@ for sub in all_subject:
         E = label[:, np.newaxis]
         img = extract_threat_level(df_)
 
+        img = convert_to_matrix(img)
+
         eda = pd.DataFrame(eda)
         eda = eda.reset_index().drop(columns=('index'))
         pupil = pd.DataFrame(pupil)
@@ -251,6 +283,9 @@ for sub in all_subject:
                 X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                                    observed=e_labels_train.T)
 
+            g = pm.model_to_graphviz(PPCA_identified)
+            g.view('tmp')
+
             with PPCA_identified:
                 approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
@@ -260,9 +295,8 @@ for sub in all_subject:
                     trace, var_names=["X_e"], random_seed=123)
 
             # train
-            e_pred_train = posterior_predictive.posterior_predictive['X_e']
-            e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
-            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+            e_pred_train = my_post_predict(trace, hr_train, eda_train, pupil_train, img_train)
+            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_train)
 
             # test
             e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test, img_test)
