@@ -74,6 +74,36 @@ def makeW(d, k, dim_names, name):
     return W
 
 
+def convert_to_matrix(vector):
+    """
+    Converts a 1-dimensional Python array into a matrix with 6 columns.
+    Each row of the matrix corresponds to an element in the input vector, and has a 1 in the column
+    corresponding to the value of the element in the vector.
+
+    Parameters:
+    vector (list): A 1-dimensional list with values ranging from 1 to 6.
+
+    Returns:
+    list: A 2-dimensional list representing the matrix.
+
+    Example:
+    >> convert_to_matrix([1, 2, 6, 4, 5, 3, 6, 2])
+    [[1, 0, 0, 0, 0, 0],
+     [0, 1, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 1],
+     [0, 0, 0, 1, 0, 0],
+     [0, 0, 0, 0, 1, 0],
+     [0, 0, 1, 0, 0, 0],
+     [0, 0, 0, 0, 0, 1],
+     [0, 1, 0, 0, 0, 0]]
+    """
+    num_rows = len(vector)
+    matrix = [[0 for j in range(6)] for i in range(num_rows)]
+    for i, value in enumerate(vector):
+        matrix[i][value - 1] = 1
+    return matrix
+
+
 def my_post_predict(trace, hr_new, eda_new, pupil_new, img_new):
     whr_ = trace.posterior['W_hr'][0]
     weda_ = trace.posterior['W_eda'][0]
@@ -176,6 +206,8 @@ for sub in all_subject:
         E = label[:, np.newaxis]
         img = extract_threat_level(df_)
 
+        img = convert_to_matrix(img)
+
         eda = pd.DataFrame(eda)
         eda = eda.reset_index().drop(columns=('index'))
         pupil = pd.DataFrame(pupil)
@@ -250,6 +282,9 @@ for sub in all_subject:
 
                 X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                                    observed=e_labels_train.T)
+
+            g = pm.model_to_graphviz(PPCA_identified)
+            g.view('tmp')
 
             with PPCA_identified:
                 approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
