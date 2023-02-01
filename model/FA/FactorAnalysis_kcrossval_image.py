@@ -33,7 +33,7 @@ valid_k_list = list([2, 6, 10, 12, 15, 20])
 num_trials_to_remove = 48
 
 TEST_PERC = 0.2
-FILENAME = 'output/FA/FA_kcv_norm_image.csv'
+FILENAME = 'output/FA/FA_kcv_norm_image_new.csv'
 columns = ['subject', 'k', 'fold', 'train', 'test']
 
 with open(FILENAME, 'w') as f:
@@ -295,9 +295,8 @@ for sub in all_subject:
                     trace, var_names=["X_e"], random_seed=123)
 
             # train
-            e_pred_train = posterior_predictive.posterior_predictive['X_e']
-            e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
-            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+            e_pred_train = my_post_predict(trace, hr_train, eda_train, pupil_train, img_train)
+            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_train)
 
             # test
             e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test, img_test)

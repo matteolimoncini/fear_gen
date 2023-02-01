@@ -29,7 +29,7 @@ all_subject.remove(49)
 
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list([2, 6, 10, 12, 15, 20])
+valid_k_list = list([2, 6, 10, 12, 15, 20, 24, 30, 50, 70])
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -93,7 +93,7 @@ def my_post_predict(trace, hr_new, eda_new, pupil_new):
 
 
 columns = ['subject', 'k', 'fold', 'train', 'test']
-with open('output/FA/FA_new_postpred_cv_norm.csv', 'w') as f:
+with open('output/FA/FA_new_postpred_cv_norm_new.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
 
@@ -207,33 +207,15 @@ for sub in all_subject:
                 posterior_predictive = pm.sample_posterior_predictive(
                     trace, var_names=["X_e"], random_seed=123)
 
-            e_pred_train = posterior_predictive.posterior_predictive['X_e']
-            e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
+            e_pred_train = my_post_predict(trace, hr_train, eda_train, pupil_train)
 
-            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
-            conf_mat_train = confusion_matrix(e_labels_train, e_pred_mode_train)
-            fig = plt.figure()
-            plt.matshow(conf_mat_train)
-            plt.title('Confusion Matrix all subjs train k=' + str(k))
-            plt.colorbar()
-            plt.ylabel('True Label')
-            plt.xlabel('Predicted Label')
-            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'train_cv_norm.jpg')
+            train_accuracy_exp = accuracy_score(e_labels_train, e_pred_train)
 
             # test
             e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test)
             test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode_test)
-            conf_mat_test = confusion_matrix(e_labels_test, e_pred_mode_test)
-            fig = plt.figure()
-            plt.matshow(conf_mat_test)
-            plt.title('Confusion Matrix all subjs test k=' + str(k))
-            plt.colorbar()
-            plt.ylabel('True Label')
-            plt.xlabel('Predicted Label')
-            plt.savefig('output/FA/unpooled/confusion_matrix_' + str(k) + 'test_cv_norm.jpg')
-
             row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
 
-            with open('output/FA/FA_new_postpred_cv_norm.csv', 'a') as f:
+            with open('output/FA/FA_new_postpred_cv_norm_new.csv', 'a') as f:
                 write = csv.writer(f)
                 write.writerow(row)
