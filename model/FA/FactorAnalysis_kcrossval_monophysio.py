@@ -29,7 +29,7 @@ all_subject = extract_correct_csv.extract_only_valid_subject()
 all_subject.remove(49)
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list([2, 6, 10, 12, 15, 20])
+valid_k_list = list([2, 6, 10, 12, 15, 20, 24, 30])
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -171,9 +171,7 @@ for sub in all_subject:
                         trace, var_names=["X_e"], random_seed=123)
 
                 e_pred_train = my_post_predict(trace, feature_train)
-                e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
-
-                train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
+                train_accuracy_exp = accuracy_score(e_labels_train, e_pred_train)
 
                 # test
                 e_pred_mode_test = my_post_predict(trace, feature_test)
