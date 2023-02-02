@@ -63,6 +63,7 @@ def expand_packed_block_triangular(d, k, packed, diag=None, mtype="aesara"):
         out = set_(out, idxs, diag)
     return out
 
+
 def makeW(d, k, dim_names, name):
     # make a W matrix adapted to the data shape
     n_od = int(k * d - k * (k - 1) / 2 - k)
@@ -256,7 +257,7 @@ for sub in all_subject:
                 hr_data = pm.MutableData("hr_data", hr_train.T, dims=["observed_hr", "rows"])
                 eda_data = pm.MutableData("eda_data", eda_train.T, dims=("observed_eda", "rows"))
                 pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
-                img_data = pm.MutableData("img_data", img_train, dims=("observed_img", "rows"))
+                img_data = pm.MutableData("img_data", img_train, dims=("rows", "observed_img", ))
 
                 W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
                 W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
@@ -278,7 +279,7 @@ for sub in all_subject:
                 X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data,
                                     dims=["observed_pupil", "rows"])
 
-                X_img = pm.Categorical('X_img', p=pm.math.softmax(at.dot(W_img, C)), dims=["observed_img", "rows"],
+                X_img = pm.Categorical('X_img', p=pm.math.softmax(at.dot(W_img, C)), dims=["rows", "observed_img"],
                                        observed=img_data)
 
                 X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
@@ -286,7 +287,7 @@ for sub in all_subject:
 
 
             with PPCA_identified:
-                approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+                approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
 
             with PPCA_identified:
