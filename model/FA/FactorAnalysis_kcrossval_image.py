@@ -2,13 +2,11 @@ import pymc as pm
 import aesara.tensor as at
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from numpy.random import default_rng
 from scipy import stats
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import confusion_matrix
 import csv
 import sys
 
@@ -27,7 +25,7 @@ rng = default_rng(RANDOM_SEED)
 all_subject = extract_correct_csv.extract_only_valid_subject()
 all_subject.remove(49)
 
-valid_k_list = list([2, 6, 10, 12, 15, 20])
+valid_k_list = np.arange(2, 7, 2)
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -75,36 +73,6 @@ def makeW(d, k, dim_names, name):
     return W
 
 
-def convert_to_matrix(vector):
-    """
-    Converts a 1-dimensional Python array into a matrix with 6 columns.
-    Each row of the matrix corresponds to an element in the input vector, and has a 1 in the column
-    corresponding to the value of the element in the vector.
-
-    Parameters:
-    vector (list): A 1-dimensional list with values ranging from 1 to 6.
-
-    Returns:
-    list: A 2-dimensional list representing the matrix.
-
-    Example:
-    >> convert_to_matrix([1, 2, 6, 4, 5, 3, 6, 2])
-    [[1, 0, 0, 0, 0, 0],
-     [0, 1, 0, 0, 0, 0],
-     [0, 0, 0, 0, 0, 1],
-     [0, 0, 0, 1, 0, 0],
-     [0, 0, 0, 0, 1, 0],
-     [0, 0, 1, 0, 0, 0],
-     [0, 0, 0, 0, 0, 1],
-     [0, 1, 0, 0, 0, 0]]
-    """
-    num_rows = len(vector)
-    matrix = [[0 for j in range(6)] for i in range(num_rows)]
-    for i, value in enumerate(vector):
-        matrix[i][value - 1] = 1
-    return matrix
-
-
 def my_post_predict(trace, hr_new, eda_new, pupil_new, img_new):
     whr_ = trace.posterior['W_hr'][0]
     weda_ = trace.posterior['W_eda'][0]
@@ -120,7 +88,7 @@ def my_post_predict(trace, hr_new, eda_new, pupil_new, img_new):
     val_hr = at.matmul(np.array(we_), C_val_hr.eval())
     val_eda = at.matmul(np.array(we_), C_val_eda.eval())
     val_pupil = at.matmul(np.array(we_), C_val_pupil.eval())
-    val_img = at.matmul(np.array(wimg_), C_val_img.eval())
+    val_img = at.matmul(np.array(we_), C_val_img.eval())
 
     val_label_gen = at.concatenate((val_hr, val_eda, val_pupil, val_img))
 
@@ -262,7 +230,7 @@ for sub in all_subject:
                 W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
                 W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
                 W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
-                W_img = pm.Normal("W_img", dims=["observed_img", "latent_columns"])
+                W_img = makeW(d_img, k, ("observed_img", "latent_columns"), 'W_img')
                 W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
 
                 C = pm.Normal("C", dims=["latent_columns", "rows"])
@@ -289,10 +257,6 @@ for sub in all_subject:
             with PPCA_identified:
                 approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
-
-            with PPCA_identified:
-                posterior_predictive = pm.sample_posterior_predictive(
-                    trace, var_names=["X_e"], random_seed=123)
 
             # train
             e_pred_train = my_post_predict(trace, hr_train, eda_train, pupil_train, img_train)
