@@ -69,6 +69,24 @@ def makeW(d, k, dim_names, name):
     return W
 
 
+def my_post_predict(trace, hr_new, eda_new, pupil_new, img_new):
+    whr_ = trace.posterior['W_hr'][0]
+    weda_ = trace.posterior['W_eda'][0]
+    we_ = trace.posterior['W_e'][0]
+
+    C_val_hr = at.dot(np.linalg.pinv(whr_), hr_new.T)
+    C_val_eda = at.dot(np.linalg.pinv(weda_), eda_new.T)
+
+    val_hr = at.matmul(np.array(we_), C_val_hr.eval())
+    val_eda = at.matmul(np.array(we_), C_val_eda.eval())
+
+    val_label_gen = at.concatenate((val_hr, val_eda))
+
+    label_val = np.where(val_label_gen.eval() < 0, 0, 1)
+    label_val = stats.mode(label_val[0], keepdims=False)[0]
+
+    return label_val
+
 columns = ['Subject', 'k', 'Train', 'Validation', 'Test']
 
 with open('output/FA/FAFake.csv', 'w') as f:
@@ -166,47 +184,6 @@ for sub in all_subject:
             X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"], observed=labels_data)
 
 
-        with PPCA_identified:
-            approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
-            trace = approx.sample(1000)
-
-        with PPCA_identified:
-            posterior_predictive = pm.sample_posterior_predictive(
-                trace, var_names=["X_e"], random_seed=123)
-
-        e_pred_train = posterior_predictive.posterior_predictive['X_e']
-        e_pred_mode_train = np.squeeze(stats.mode(e_pred_train[0], keepdims=False)[0])[:, np.newaxis]
-
-        train_accuracy_exp = accuracy_score(e_labels_train, e_pred_mode_train)
-
-        with PPCA_identified:
-            # update values of predictors with validation:
-            PPCA_identified.set_data(name="hr_data", values=hr_val.T, coords={'rows': range(hr_val.shape[0])})
-            PPCA_identified.set_data("eda_data", eda_val.T, coords={'rows': range(eda_val.shape[0])})
-            PPCA_identified.set_data("labels_data", e_labels_val.T, coords={'rows': range(e_labels_val.shape[0])})
-            # use the updated values and predict outcomes and probabilities:
-            posterior_predictive = pm.sample_posterior_predictive(
-                trace, var_names=["X_e"], random_seed=123, predictions=True)
-
-        e_pred = posterior_predictive.predictions['X_e']
-        e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
-
-        validation_accuracy_exp = accuracy_score(e_labels_val, e_pred_mode)
-        conf_mat_val = confusion_matrix(e_labels_val, e_pred_mode)
-
-        with PPCA_identified:
-            # update values of predictors with validation:
-            PPCA_identified.set_data("hr_data", hr_test.T, coords={'rows': range(hr_test.shape[0])})
-            PPCA_identified.set_data("eda_data", eda_test.T, coords={'rows': range(eda_test.shape[0])})
-            PPCA_identified.set_data("labels_data", e_labels_test.T, coords={'rows': range(e_labels_test.shape[0])})
-            # use the updated values and predict outcomes and probabilities:
-            posterior_predictive = pm.sample_posterior_predictive(
-                trace, var_names=["X_e"], random_seed=123, predictions=True)
-
-        e_pred = posterior_predictive.predictions['X_e']
-        e_pred_mode = np.squeeze(stats.mode(e_pred[0], keepdims=False)[0])[:, np.newaxis]
-
-        test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode)
 
 
         row = [sub, k, train_accuracy_exp, validation_accuracy_exp, test_accuracy_exp]
