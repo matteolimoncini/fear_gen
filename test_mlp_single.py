@@ -21,24 +21,27 @@ best_hyperP = pd.DataFrame(columns=['type', 'first layer', 'second layer', 'trai
 
 for first in first_layer_neurons:
     for second in second_layer_neurons:
-        mean_test_hr = []
-        mean_train_hr = []
-        for sub in tqdm(valid_subject):
-            string_sub = extract_correct_csv.read_correct_subject_csv(sub)
-            df_ = pd.read_csv('data/LookAtMe_0'+string_sub+'.csv', sep='\t')
-            y = np.array(list([int(d > 2) for d in df_['rating']]))
-            y = y[48:]
-
-            for type_ in types_:
+        for type_ in types_:
+            mean_test_type = []
+            mean_train_type = []
+            for sub in tqdm(valid_subject):
+                string_sub = extract_correct_csv.read_correct_subject_csv(sub)
+                df_ = pd.read_csv('data/LookAtMe_0'+string_sub+'.csv', sep='\t')
+                y = np.array(list([int(d > 2) for d in df_['rating']]))
+                y = y[48:]
                 X = pd.read_csv('data/features_4_2/' + type_ + '/' + str(sub) + '.csv')
                 X = pd.DataFrame(scaler.fit_transform(X))
                 X = X[48:]
                 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=123, stratify=y)
                 clf = MLPClassifier(hidden_layer_sizes=(first, second), max_iter=3000, learning_rate='adaptive',
                                     random_state=123).fit(X_train, y_train)
-                row_ = {'Subject': sub,
-                        'Feature': type_,
-                        'Train': clf.score(X_train, y_train),
-                        'Test': clf.score(X_test, y_test)}
-                best_hyperP = pd.concat([best_hyperP, pd.DataFrame(data=row_, index=np.arange(1))], ignore_index=True)
-best_hyperP.to_csv('output_mlp_multi_2layers.csv')
+                mean_train_type.append(clf.score(X_train, y_train))
+                mean_test_type.append(clf.score(X_test, y_test))
+
+            row_dict = {'type': type_,
+                        'first layer': first,
+                        'second layer': second,
+                        'train': np.array(mean_train_type).mean(),
+                        'test': np.array(mean_test_type).mean()}
+            best_hyperP = pd.concat([best_hyperP, pd.DataFrame(data=row_dict, index=np.arange(1))], ignore_index=True)
+best_hyperP.to_csv('output_mlp_single_2layers.csv')
