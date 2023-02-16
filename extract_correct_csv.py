@@ -5,18 +5,10 @@ import pandas as pd
 
 #
 notvalid = [x for x in range(34,41)]
-notvalid.extend([3, 9, 11, 19, 20, 21, 22, 24, 25, 30, 32, 33, 42])
-valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
+notvalid.extend([3, 9, 49, 20, 42, 29, 30, 25, 12, 8, 10, 14, 18, 24, 53, 55])
+# (49, 11, 20, 42, 29, 30, 25, 12, 8, 10, 14, 18, 24, 53, 55)
+valid_pupil_eda = [ele for ele in range(1,56) if ele not in notvalid]
 
-notvalid = [x for x in range(34,41)]
-notvalid.append(9)
-valid_patients_eda = [ele for ele in range(1,56) if ele not in notvalid]
-
-valid_pupil_eda = list(set(valid_patients_eda).intersection(set(valid_patients_pupil)))
-
-notvalid = [x for x in range(34, 41)]
-notvalid= notvalid + [9,11,12,20]
-valid_patients_hr = [ele for ele in range(1, 56) if ele not in notvalid]
 
 
 
@@ -36,6 +28,8 @@ def extract_only_valid_subject():
             i) + '_eda.csv')
         if df.shape[0] == 160:
             valid_final.append(i)
+        else:
+            print(f'subject: {i}, num trials: {df.shape[0]}')
     return valid_final
 
 
@@ -167,4 +161,6 @@ def from_csv_to_df_pupil(subject:int, latency:int, sampling_rate: int) -> pd.Dat
 
 
 if __name__ == '__main__':
-    print()
+
+    print(len(extract_only_valid_subject()))
+
