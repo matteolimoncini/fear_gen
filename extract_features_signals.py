@@ -13,15 +13,18 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 all_subjects = extract_correct_csv.extract_only_valid_subject()
-TRIAL = 160
+all_subjects.remove(11)
+
+list_less_trials = [13, 15, 16, 17, 23, 26, 27, 28, 31, 32, 33]
 path = "data/features_4_2"
-
-
 for i in all_subjects:
+    TRIAL = 160
+    if i in list_less_trials:
+        TRIAL = 159
 
-    check_path_eda = 'data/features_4_2/eda/'+str(i)+'.csv'
-    check_path_hr = 'data/features_4_2/hr/'+str(i)+'.csv'
-    check_path_pupil = 'data/features_4_2/pupil/'+str(i)+'.csv'
+    check_path_eda = 'data/features_4_2/eda/' + str(i) + '.csv'
+    check_path_hr = 'data/features_4_2/hr/' + str(i) + '.csv'
+    check_path_pupil = 'data/features_4_2/pupil/' + str(i) + '.csv'
     if (os.path.exists(check_path_hr)) & (os.path.exists(check_path_eda)) & (os.path.exists(check_path_pupil)):
         continue
 
@@ -46,7 +49,7 @@ for i in all_subjects:
             else:
                 if s.name == 'ECG':
                     list_hr_test = s.raw[0]['data']
-                    s.preprocess(show=show, useneurokit=True)
+                    s.preprocess(show=show, useneurokit=False)
                     s.feature_ext.extract_feat(s, show=show)
 
 
