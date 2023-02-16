@@ -5,7 +5,7 @@ import pandas as pd
 
 #
 notvalid = [x for x in range(34,41)]
-notvalid.extend([9, 49, 11, 20, 42, 29, 30, 25, 12, 8, 10, 14, 18, 24, 53, 55])
+notvalid.extend([3, 9, 49, 20, 42, 29, 30, 25, 12, 8, 10, 14, 18, 24, 53, 55])
 # (49, 11, 20, 42, 29, 30, 25, 12, 8, 10, 14, 18, 24, 53, 55)
 valid_pupil_eda = [ele for ele in range(1,56) if ele not in notvalid]
 
