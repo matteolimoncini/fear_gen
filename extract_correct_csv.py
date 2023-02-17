@@ -3,22 +3,35 @@
 import numpy as np
 import pandas as pd
 
-#
-notvalid = [x for x in range(34,41)]
-notvalid.extend([3, 9, 11, 19, 20, 21, 22, 24, 25, 30, 32, 33, 42])
-valid_patients_pupil = [ele for ele in range(1,56) if ele not in notvalid]
-
-notvalid = [x for x in range(34,41)]
-notvalid.append(9)
-valid_patients_eda = [ele for ele in range(1,56) if ele not in notvalid]
-
-valid_pupil_eda = list(set(valid_patients_eda).intersection(set(valid_patients_pupil)))
-
+# Info: Subject codes 34 - 40 don't exist (switch of experimenter)
 notvalid = [x for x in range(34, 41)]
-notvalid= notvalid + [9,11,12,20]
-valid_patients_hr = [ele for ele in range(1, 56) if ele not in notvalid]
 
+# 3 pain rating decreased to non-painful levels (i.e. < 4) until the end of the generalization phase (11, 20, 42)
+notvalid.extend([11, 20, 42])
 
+# 1 experiment aborted due to insufficient recognition performance of CS+ and CS- within the differentiation task (#9)
+notvalid.extend([9])
+
+# 1 too many extrasystoles to interpolate (#12)
+notvalid.extend([12])
+
+# 1 eye tracker calibration not successful (#25)
+notvalid.extend([25])
+
+# 2 too many missing values (> 20%) during generalization phase (29, 30)
+notvalid.extend([29, 30])
+
+# 10 non-responsive to UCS (8, 10, 12, 14, 18, 24, 29, 49, 53, 55)
+notvalid.extend([8, 10, 14, 18, 24, 49, 53, 55])
+
+# why we have inserted this?
+notvalid.extend([3])
+
+# 19 due to error in processing eda. division by zero with new method
+notvalid.extend([19])
+
+# (49, 11, 20, 42, 29, 30, 25, 12, 8, 10, 14, 18, 24, 53, 55)
+valid_pupil_eda = [ele for ele in range(1, 56) if ele not in notvalid]
 
 # variabili globali
 NUM_TRIALS = 160
@@ -36,6 +49,8 @@ def extract_only_valid_subject():
             i) + '_eda.csv')
         if df.shape[0] == 160:
             valid_final.append(i)
+        else:
+            print(f'subject: {i}, num trials: {df.shape[0]}')
     return valid_final
 
 
@@ -167,4 +182,6 @@ def from_csv_to_df_pupil(subject:int, latency:int, sampling_rate: int) -> pd.Dat
 
 
 if __name__ == '__main__':
-    print()
+
+    print(len(extract_only_valid_subject()))
+
