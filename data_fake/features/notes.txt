@@ -1,0 +1,3 @@
+extracted features from raw fake signals
+eda 'wavelet', sliding window=(4,2)
+hr 'wavelet', sliding window=(4,2)
