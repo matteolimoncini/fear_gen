@@ -1,0 +1,1 @@
+Fake sygnals generated with 'fake_signals_generator.ipynb'

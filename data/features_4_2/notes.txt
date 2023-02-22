@@ -1,3 +1,4 @@
-eda 'wavelet', window=(4,2)
-hr 'wavelet', window=(4,2)
-pupil 'wavelet', window=(3, 1)
+extracted features from raw signals synchronized
+eda 'wavelet', sliding window=(4,2)
+hr 'wavelet', sliding window=(4,2)
+pupil 'wavelet', sliding window=(3, 1)
