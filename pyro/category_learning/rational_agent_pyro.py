@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import torch
 import pyro
+import matplotlib.pyplot as plt
 from pyro.optim import Adam
 from pyro.infer import SVI, Trace_ELBO, MCMC, NUTS
 import pyro.distributions as dist
@@ -60,5 +61,28 @@ for i in range(len(counter)):
     logging.info("observation: {}".format(data_np[i]))
     logging.info("probabilities: {}".format(means))
     all_means.append(means)
+
+
+X = np.arange(16, 16+len(all_means))
+all_means = np.array(all_means)
+y = all_means[:, 1, 1]
+
+list_ = []
+for index, i in enumerate(data_np):
+    if np.equal(i, np.array([1,1])).all():
+        list_.append(np.array([X[index], y[index]]))
+x_points, y_points = np.array(list_)[:,0], np.array(list_)[:,1]
+
+
+fig = plt.figure(figsize=(12,8))
+
+plt.plot(X, y, label='P(C=1|S=1)', color = 'black', alpha=0.8)
+plt.scatter(x_points, y_points, marker='*', color='red', linewidths=2, label='CS+ and shock')
+plt.ylabel('p')
+plt.xlabel('Trial')
+plt.legend()
+plt.axvline(x=48, linestyle='--')
+plt.axvline(x=16, linestyle='--')
+plt.show()
 
 
