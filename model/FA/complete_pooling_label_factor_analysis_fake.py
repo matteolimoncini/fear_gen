@@ -1,3 +1,15 @@
+"""
+complete pooled model
+supervised probabilistic principal component analysis using fctor analysis implementation
+
+using fake data (hr,eda) try to predict pain expectation
+
+division of data into train, validation, test
+
+NOT use pymc post pred
+
+results:
+"""
 import pymc as pm
 import aesara.tensor as at
 import numpy as np

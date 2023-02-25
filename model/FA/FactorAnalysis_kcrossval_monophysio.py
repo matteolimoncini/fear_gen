@@ -1,3 +1,18 @@
+"""
+unpooled model
+supervised probabilistic principal component analysis using factor analysis implementation
+
+using one physio at time to predict pain expectation
+
+division of data into train, test using k-fold cross validation
+
+consider only trials of the fear generalization phase
+
+using data normalized
+
+results:
+"""
+
 import pymc as pm
 import aesara.tensor as at
 import numpy as np
