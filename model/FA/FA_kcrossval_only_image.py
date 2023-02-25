@@ -1,3 +1,16 @@
+"""
+unpooled model
+supervised probabilistic principal component analysis using factor analysis implementation
+
+using visual stimuli try to predict pain expectation
+
+division of data into trai, test
+
+consider only trials of the fear generalization phase
+
+results: 
+"""
+
 import pymc as pm
 import aesara.tensor as at
 import numpy as np
