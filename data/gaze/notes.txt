@@ -1,0 +1,1 @@
+fixation.csv contains coordinates X and Y corrected with the baseline
