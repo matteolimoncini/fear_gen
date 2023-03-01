@@ -27,7 +27,7 @@ import sys
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedShuffleSplit
 
-sys.path.append('../../')
+sys.path.append('../../../.')
 
 import extract_correct_csv
 import os
@@ -41,7 +41,7 @@ rng = default_rng(RANDOM_SEED)
 
 # all valid subjects
 all_subject = extract_correct_csv.extract_only_valid_subject()
-all_subject.remove(49)
+# all_subject.remove(49)
 
 # all k = {2, 4, 6, 8} for the latent space
 valid_k_list = list([2, 6, 10, 12, 15, 20, 23])
@@ -99,7 +99,7 @@ def my_post_predict(trace, feature_val):
 types_ = ['hr', 'eda', 'pupil']
 columns = ['subject', 'k', 'fold', 'feature', 'train', 'test']
 
-output_csv = 'output/FA/gaze/sppca_gaze.csv'
+output_csv = '../output/FA/gaze/sppca_gaze.csv'
 
 with open(output_csv, 'w') as f:
     write = csv.writer(f)
@@ -113,13 +113,14 @@ for sub in all_subject:
     for k in valid_k_list:
 
         string_sub = extract_correct_csv.read_correct_subject_csv(sub)
-        df_ = pd.read_csv('data/LookAtMe_0' + string_sub + '.csv', sep='\t')
+
+        df_ = pd.read_csv('../data/LookAtMe_old/LookAtMe_0' + string_sub + '.csv', sep='\t')
         df_ = df_[num_trials_to_remove:]
         label = np.array(list([int(d > 2) for d in df_['rating']]))
         E = label[:, np.newaxis]
         E = pd.DataFrame(E)
 
-        gaze = pd.read_csv('fear_gen/data/mockup.csv')  # TODO INSERT GAZE DATA PATH
+        gaze = pd.read_csv('../data/mockup.csv')  # TODO INSERT GAZE DATA PATH
         print(gaze)
         feature = gaze[num_trials_to_remove:]
 
