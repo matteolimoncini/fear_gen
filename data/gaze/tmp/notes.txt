@@ -1,0 +1,4 @@
+2 csv extracted from the npy of vincenzo.
+In this file there are the coordinates of each fixation and of each saccade.
+These coordinates are not corrected with the baseline.
+The files with the corrected baselines are ../fixations.csv and ../saccades.csv
