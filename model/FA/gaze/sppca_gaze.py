@@ -49,7 +49,6 @@ valid_k_list = list([2, 6, 10, 12, 15, 20, 23])
 # keep only generalization trials
 num_trials_to_remove = 48
 
-
 # functions that creates triangular matrices
 def expand_packed_block_triangular(d, k, packed, diag=None, mtype="aesara"):
     # like expand_packed_triangular, but with d > k.
@@ -108,6 +107,8 @@ with open(output_csv, 'w') as f:
 TRAIN_PERC = 0.70
 TEST_PERC = 0.3  # 1-TRAIN_PERC
 
+gaze = pd.read_csv('../data/mockup.csv')  # TODO INSERT GAZE DATA PATH
+
 for sub in all_subject:
     # loop within all k
     for k in valid_k_list:
@@ -120,9 +121,15 @@ for sub in all_subject:
         E = label[:, np.newaxis]
         E = pd.DataFrame(E)
 
-        gaze = pd.read_csv('../data/mockup.csv')  # TODO INSERT GAZE DATA PATH
-        print(gaze)
-        feature = gaze[num_trials_to_remove:]
+        # extract only data of one subject
+        gaze_subject = gaze[gaze['subject'] == sub]
+
+        # remove first 48 trials
+        feature = gaze_subject[gaze_subject['trial'] > num_trials_to_remove]
+
+        print(feature)
+
+        # TODO insert code to convert the column of feature into array
 
         # features normalization
         feature = scaler.fit_transform(feature)
