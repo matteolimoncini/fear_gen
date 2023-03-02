@@ -223,8 +223,6 @@ for sub in all_subject:
             d_feature = feature_train.shape[1]
             d_e = e_labels_train.shape[1]
 
-            print(d_feature, d_e, N_train)
-
             # model definition
             with pm.Model() as PPCA_identified:
                 # model coordinates
@@ -246,10 +244,6 @@ for sub in all_subject:
 
                 X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                                    observed=e_labels_train.T)
-
-            with PPCA_identified:
-                gv = pm.model_to_graphviz(PPCA_identified)
-                gv.view('PPCA_gaze')
 
             with PPCA_identified:
                 approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
