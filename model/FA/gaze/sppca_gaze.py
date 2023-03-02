@@ -31,7 +31,12 @@ sys.path.append('../../../.')
 
 import extract_correct_csv
 import os
+import re
+import warnings
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+os.chdir('..')
 os.chdir('..')
 os.chdir('..')
 
@@ -85,7 +90,7 @@ def makeW(d, k, dim_names, name):
 
 
 def my_post_predict(trace, feature_val):
-    wfeature_ = trace.posterior['W_feature'][0]
+    wfeature_ = trace.posterior['W_gaze'][0]
     C_val = at.dot(np.linalg.pinv(wfeature_), feature_val.T)
     we_ = trace.posterior['W_e'][0]
     val_label_gen = at.matmul(np.array(we_), C_val.eval())
@@ -94,11 +99,49 @@ def my_post_predict(trace, feature_val):
     return label_val
 
 
+def custom_parse_data(X):
+    res_x = []
+    for i in range(len(X)):
+        string = X[i]
+        new_string = re.sub(r'\s+', ',', string)
+        string_list = list(new_string)
+        string_list[1] = ''
+        new_string = ''.join(string_list)
+        res_x.append(np.fromstring(new_string.strip('[]'), dtype=float, sep=','))
+
+    return np.array(res_x)
+
+
 # loop features
 types_ = ['hr', 'eda', 'pupil']
 columns = ['subject', 'k', 'fold', 'feature', 'train', 'test']
 
-output_csv = '../output/FA/gaze/sppca_gaze.csv'
+output_csv = './output/sppca_gaze.csv'
+
+df_ = pd.read_csv('data/gaze/joined_fixation.csv')
+# remove index column
+df_ = df_.drop(columns=df_.columns[0])
+# replace NaN with 'other'
+df_['ROI'] = df_['ROI'].replace(np.NaN, 'other')
+# parse fixation feature column to convert this in value
+feat = custom_parse_data(df_['Fixation feature'])
+df_['Fixation feature'] = [x for x in feat]
+# mean features with same ROI
+result = df_.groupby(['Subject', 'Trial', 'ROI'], as_index=False)['Fixation feature'].mean()
+# insert an array of zeros if one subject in one trial has no fixations on that ROI
+result_modified = result.copy(deep=True)
+for sub in result['Subject'].unique():
+    df = result[result['Subject'] == sub]
+    for trial in df['Trial'].unique():
+        if 'mouth_nose' not in list(df[df['Trial'] == trial]['ROI']):
+            result_modified = result_modified.append(
+                {'Subject': sub, 'Trial': trial, 'ROI': 'mouth_nose', 'Fixation feature': [0] * 13}, ignore_index=True)
+        if 'eye' not in list(df[df['Trial'] == trial]['ROI']):
+            result_modified = result_modified.append(
+                {'Subject': sub, 'Trial': trial, 'ROI': 'eye', 'Fixation feature': [0] * 13}, ignore_index=True)
+        if 'other' not in list(df[df['Trial'] == trial]['ROI']):
+            result_modified = result_modified.append(
+                {'Subject': sub, 'Trial': trial, 'ROI': 'other', 'Fixation feature': [0] * 13}, ignore_index=True)
 
 with open(output_csv, 'w') as f:
     write = csv.writer(f)
@@ -107,32 +150,35 @@ with open(output_csv, 'w') as f:
 TRAIN_PERC = 0.70
 TEST_PERC = 0.3  # 1-TRAIN_PERC
 
-gaze = pd.read_csv('../data/mockup.csv')  # TODO INSERT GAZE DATA PATH
-
 for sub in all_subject:
     # loop within all k
     for k in valid_k_list:
 
         string_sub = extract_correct_csv.read_correct_subject_csv(sub)
-
-        df_ = pd.read_csv('../data/LookAtMe_old/LookAtMe_0' + string_sub + '.csv', sep='\t')
-        df_ = df_[num_trials_to_remove:]
-        label = np.array(list([int(d > 2) for d in df_['rating']]))
+        # data of one subject
+        df_sub = result_modified[result_modified['Subject'] == sub]
+        # convert rating into 0/1
+        df_look = pd.read_csv('./data/LookAtMe_old/LookAtMe_0' + string_sub + '.csv', sep='\t')
+        y = np.array(list([int(d > 2) for d in df_look['rating']]))
+        y = y[num_trials_to_remove:]
+        label = y
         E = label[:, np.newaxis]
         E = pd.DataFrame(E)
-
-        # extract only data of one subject
-        gaze_subject = gaze[gaze['subject'] == sub]
-
-        # remove first 48 trials
-        feature = gaze_subject[gaze_subject['trial'] > num_trials_to_remove]
-
-        print(feature)
-
-        # TODO insert code to convert the column of feature into array
+        # normalize feature and convert from [13][13][13] into [39]
+        X1 = df_sub[df_sub['ROI'] == 'eye']
+        X1_norm = pd.DataFrame(scaler.fit_transform(list(X1['Fixation feature'])))
+        X2 = df_sub[df_sub['ROI'] == 'mouth_nose']
+        X2_norm = pd.DataFrame(scaler.fit_transform(list(X2['Fixation feature'])))
+        X3 = df_sub[df_sub['ROI'] == 'other']
+        X3_norm = pd.DataFrame(scaler.fit_transform(list(X3['Fixation feature'])))
+        X_norm = pd.concat([X1_norm, X2_norm, X3_norm], axis=1)
+        # remove first 48 learning trials
+        X_norm = X_norm[48:]
+        X_norm = pd.DataFrame(X_norm)
+        X_norm = X_norm.reset_index().drop(columns=('index'))
 
         # features normalization
-        feature = scaler.fit_transform(feature)
+        feature = X_norm
 
         # num trials
         N = feature.shape[0]
@@ -177,6 +223,8 @@ for sub in all_subject:
             d_feature = feature_train.shape[1]
             d_e = e_labels_train.shape[1]
 
+            print(d_feature, d_e, N_train)
+
             # model definition
             with pm.Model() as PPCA_identified:
                 # model coordinates
@@ -187,17 +235,21 @@ for sub in all_subject:
 
                 feature_data = pm.MutableData("feature_data", feature_train.T, dims=["observed_gaze", "rows"])
 
-                W_feature = makeW(d_feature, k, ("observed_gaze", "latent_columns"), 'W_gaze')
+                W_gaze = makeW(d_feature, k, ("observed_gaze", "latent_columns"), 'W_gaze')
 
-                W_e = pm.Normal("W_e", dims=["observed_gaze", "latent_columns"])
+                W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
                 C = pm.Normal("C", dims=["latent_columns", "rows"])
 
                 psi_feature = pm.HalfNormal("psi_feature", 1.0)
-                X_feature = pm.Normal("X_gaze", mu=at.dot(W_feature, C), sigma=psi_feature,
+                X_feature = pm.Normal("X_gaze", mu=at.dot(W_gaze, C), sigma=psi_feature,
                                       observed=feature_data, dims=["observed_gaze", "rows"])
 
-                X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_gaze", "rows"],
+                X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                                    observed=e_labels_train.T)
+
+            with PPCA_identified:
+                gv = pm.model_to_graphviz(PPCA_identified)
+                gv.view('PPCA_gaze')
 
             with PPCA_identified:
                 approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
