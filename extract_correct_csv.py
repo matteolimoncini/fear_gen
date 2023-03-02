@@ -46,7 +46,7 @@ SAMPLING_RATE_PUPIL = 100
 def extract_only_valid_subject():
     valid_final = []
     for i in valid_pupil_eda:
-        df = pd.read_csv('../data/sync_signals_raw/eda_csv/' + str(
+        df = pd.read_csv('./data/sync_signals_raw/eda_csv/' + str(
             i) + '_eda.csv')
         if df.shape[0] == 160:
             valid_final.append(i)
