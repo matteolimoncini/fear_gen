@@ -246,7 +246,7 @@ for sub in all_subject:
                                    observed=e_labels_train.T)
 
             with PPCA_identified:
-                approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+                approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
 
             with PPCA_identified:
