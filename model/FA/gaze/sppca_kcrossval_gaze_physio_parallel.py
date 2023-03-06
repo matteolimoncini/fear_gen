@@ -302,10 +302,9 @@ if __name__ == "__main__":
 
     from multiprocessing import Pool
 
-    pool = Pool()
 
     n_processes = min(cpu_count(), len(all_subject))
     print('The computation will be parallelized in ', n_processes, ' processes')
 
     with Pool(n_processes) as p:
-        [p.apply_async(run_sub, args=(sub)) for sub in all_subject]
+        res = [p.apply_async(run_sub, args=(sub,)) for sub in all_subject]
