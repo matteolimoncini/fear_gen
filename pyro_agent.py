@@ -18,7 +18,7 @@ import extract_correct_csv
 # # Rational agent
 # 
 # The idea is to train n models where each model is trained using n trials.
-
+'''
 valid_sub = extract_correct_csv.extract_only_valid_subject()
 
 # read dataset
@@ -120,11 +120,11 @@ np.save('output/pyro/complete_rational/csplus.npy', array_csplus_simulated)
 np.save('output/pyro/complete_rational/csminus.npy', array_csminus_simulated)
 np.save('output/pyro/complete_rational/total.npy', total_array_simulated)
 
+'''
 # # rational agent sliding window
 
 # The idea is to have a rational agent with a limited memory over previous trials.
 # k = param sliding window dimension
-
 
 import extract_correct_csv
 
@@ -200,7 +200,12 @@ for k_window in list_k:
     array_csplus_simulated = []
     array_csminus_simulated = []
 
-    for index, data in enumerate(data_np):
+    HABITUATION_TRIALS = 16
+    X = np.arange(HABITUATION_TRIALS, HABITUATION_TRIALS + len(all_means))
+
+    all_means = np.array(all_means)
+
+    for index, data in enumerate(all_means):
         if data[0] == 1:
             array_csplus_simulated.append([X[index], all_means[index, 1, 1]])
             total_array_simulated.append(all_means[index, 1, 1])
