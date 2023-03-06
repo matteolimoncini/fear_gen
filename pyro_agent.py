@@ -205,7 +205,7 @@ for k_window in list_k:
 
     all_means = np.array(all_means)
 
-    for index, data in enumerate(all_means):
+    for index, data in enumerate(data_np):
         if data[0] == 1:
             array_csplus_simulated.append([X[index], all_means[index, 1, 1]])
             total_array_simulated.append(all_means[index, 1, 1])
