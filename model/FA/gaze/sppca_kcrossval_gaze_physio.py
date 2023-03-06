@@ -286,8 +286,6 @@ for sub in all_subject:
             with PPCA_identified:
                 approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
-                gv = pm.model_to_graphviz(PPCA_identified)
-                gv.view()
 
             with PPCA_identified:
                 posterior_predictive = pm.sample_posterior_predictive(
