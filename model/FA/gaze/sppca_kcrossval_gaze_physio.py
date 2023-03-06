@@ -35,7 +35,7 @@ all_subject = extract_correct_csv.extract_only_valid_subject()
 
 
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list([2, 6, 10, 12, 15, 20, 23])
+valid_k_list = list([2, 4, 6, 8, 10, 12])
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -259,7 +259,7 @@ for sub in all_subject:
                 W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
                 W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
                 W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
-                W_gaze = makeW(d_gaze, k, ("observed_gaze", "latent_columns"), "W_gaze")
+                W_gaze = makeW(d_gaze, k, ("observed_gaze", "latent_columns"), 'W_gaze')
 
                 W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
                 C = pm.Normal("C", dims=["latent_columns", "rows"])
@@ -284,8 +284,10 @@ for sub in all_subject:
                                    observed=e_labels_train.T)
 
             with PPCA_identified:
-                approx = pm.fit(1000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
+                approx = pm.fit(100000, callbacks=[pm.callbacks.CheckParametersConvergence(tolerance=1e-4)])
                 trace = approx.sample(1000)
+                gv = pm.model_to_graphviz(PPCA_identified)
+                gv.view()
 
             with PPCA_identified:
                 posterior_predictive = pm.sample_posterior_predictive(
