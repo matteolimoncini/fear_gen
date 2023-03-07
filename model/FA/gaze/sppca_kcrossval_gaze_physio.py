@@ -149,24 +149,33 @@ for sub in all_subject:
     # loop within all k
     for k in valid_k_list:
 
-        eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
-        eda = eda[num_trials_to_remove:]
-        eda = scaler.fit_transform(eda)
+        try:
+            # eda data
+            eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
+            # check trial
+            len_eda = eda.shape[0]
 
-        # hr data
-        hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
-        hr = hr[num_trials_to_remove:]
-        hr = scaler.fit_transform(hr)
+            eda = eda[num_trials_to_remove:]
+            eda = scaler.fit_transform(eda)
 
-        # pupil data
-        pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
-        pupil = pupil[num_trials_to_remove:]
-        pupil = scaler.fit_transform(pupil)
+            # hr data
+            hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
+            hr = hr[num_trials_to_remove:]
+            hr = scaler.fit_transform(hr)
+
+            # pupil data
+            pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
+            pupil = pupil[num_trials_to_remove:]
+            pupil = scaler.fit_transform(pupil)
+        except FileNotFoundError:
+            continue
+
+
 
         string_sub = extract_correct_csv.read_correct_subject_csv(sub)
 
         df_ = pd.read_csv('data/LookAtMe_old/LookAtMe_0' + str(string_sub) + '.csv', sep='\t')
-        df_ = df_[num_trials_to_remove:]
+        df_ = df_[num_trials_to_remove:len_eda]
         label = np.array(list([int(d > 2) for d in df_['rating']]))
         E = label[:, np.newaxis]
         E = pd.DataFrame(E)
@@ -182,7 +191,8 @@ for sub in all_subject:
         X3_norm = pd.DataFrame(scaler.fit_transform(list(X3['Fixation feature'])))
         X_norm = pd.concat([X1_norm, X2_norm, X3_norm], axis=1)
         # remove first 48 learning trials
-        X_norm = X_norm[48:]
+
+        X_norm = X_norm[num_trials_to_remove:len_eda]
         X_norm = pd.DataFrame(X_norm)
         X_norm = X_norm.reset_index().drop(columns=('index'))
         gaze = X_norm
@@ -190,11 +200,14 @@ for sub in all_subject:
         # num trials
         N = eda.shape[0]
 
+        '''
+            #isn't useless?
         TRAIN_PERC = 0.70
         VAL_PERC = 0.1
         TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
-        N_train = int(N * (TRAIN_PERC))
+        N_train = int(N * (TRAIN_PERC)) 
         N_val = int(N * (VAL_PERC))
+        '''
 
         eda = pd.DataFrame(eda)
         eda = eda.reset_index().drop(columns=('index'))
