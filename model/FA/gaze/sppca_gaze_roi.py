@@ -1,3 +1,18 @@
+"""
+unpooled model
+supervised probabilistic principal component analysis using factor analysis implementation
+
+using gaze data to predict pain expectation and ROI signification associated
+
+division of data into train, test using k-fold cross validation
+
+consider only trials of the fear generalization phase
+
+using data normalized
+
+results:FactorAnalysis_kcrossval_monophysio.py
+"""
+
 import pymc as pm
 import aesara.tensor as at
 import numpy as np
@@ -9,22 +24,22 @@ from sklearn.metrics import accuracy_score
 import csv
 from sklearn.metrics import confusion_matrix
 import sys
-import re
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedShuffleSplit
 
-sys.path.append('../../..')
+sys.path.append('../../../.')
 
 import extract_correct_csv
+import os
+import re
 import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-import os
+os.chdir('..')
+os.chdir('..')
+os.chdir('..')
 
-os.chdir('..')
-os.chdir('..')
-os.chdir('..')
 scaler = StandardScaler()
 RANDOM_SEED = 31415
 rng = default_rng(RANDOM_SEED)
@@ -33,9 +48,8 @@ rng = default_rng(RANDOM_SEED)
 all_subject = extract_correct_csv.extract_only_valid_subject()
 # all_subject.remove(49)
 
-
 # all k = {2, 4, 6, 8} for the latent space
-valid_k_list = list([2, 4, 6, 8, 10, 12])
+valid_k_list = list([2, 6, 10, 12, 15, 20, 23])
 
 # keep only generalization trials
 num_trials_to_remove = 48
@@ -76,26 +90,11 @@ def makeW(d, k, dim_names, name):
     return W
 
 
-def my_post_predict(trace, hr_new, eda_new, pupil_new, gaze_new):
-    whr_ = trace.posterior['W_hr'][0]
-    weda_ = trace.posterior['W_eda'][0]
-    wpupil_ = trace.posterior['W_pupil'][0]
-    wgaze_ = trace.posterior['W_gaze'][0]
-
+def my_post_predict(trace, feature_val):
+    wfeature_ = trace.posterior['W_gaze'][0]
+    C_val = at.dot(np.linalg.pinv(wfeature_), feature_val.T)
     we_ = trace.posterior['W_e'][0]
-
-    C_val_hr = at.dot(np.linalg.pinv(whr_), hr_new.T)
-    C_val_eda = at.dot(np.linalg.pinv(weda_), eda_new.T)
-    C_val_pupil = at.dot(np.linalg.pinv(wpupil_), pupil_new.T)
-    C_val_gaze = at.dot(np.linalg.pinv(wgaze_), gaze_new.T)
-
-    val_hr = at.matmul(np.array(we_), C_val_hr.eval())
-    val_eda = at.matmul(np.array(we_), C_val_eda.eval())
-    val_pupil = at.matmul(np.array(we_), C_val_pupil.eval())
-    val_gaze = at.matmul(np.array(we_), C_val_gaze.eval())
-
-    val_label_gen = at.concatenate((val_hr, val_eda, val_pupil, val_gaze))
-
+    val_label_gen = at.matmul(np.array(we_), C_val.eval())
     label_val = np.where(val_label_gen.eval() < 0, 0, 1)
     label_val = stats.mode(label_val[0], keepdims=False)[0]
     return label_val
@@ -114,7 +113,11 @@ def custom_parse_data(X):
     return np.array(res_x)
 
 
-columns = ['subject', 'k', 'fold', 'train', 'test']
+# loop features
+types_ = ['hr', 'eda', 'pupil']
+columns = ['subject', 'k', 'fold', 'feature', 'train', 'test']
+
+output_csv = './output/sppca_gaze_roi.csv'
 
 df_ = pd.read_csv('data/gaze/joined_fixation.csv')
 # remove index column
@@ -141,47 +144,27 @@ for sub in result['Subject'].unique():
             result_modified = result_modified.append(
                 {'Subject': sub, 'Trial': trial, 'ROI': 'other', 'Fixation feature': [0] * 13}, ignore_index=True)
 
-with open('output/sppca_physio_gaze.csv', 'w') as f:
+with open(output_csv, 'w') as f:
     write = csv.writer(f)
     write.writerow(columns)
+
+TRAIN_PERC = 0.70
+TEST_PERC = 0.3  # 1-TRAIN_PERC
 
 for sub in all_subject:
     # loop within all k
     for k in valid_k_list:
 
-        try:
-            # eda data
-            eda = pd.read_csv('data/features_4_2/eda/' + str(sub) + '.csv')
-            # check trial
-            len_eda = eda.shape[0]
-
-            eda = eda[num_trials_to_remove:]
-            eda = scaler.fit_transform(eda)
-
-            # hr data
-            hr = pd.read_csv('data/features_4_2/hr/' + str(sub) + '.csv')
-            hr = hr[num_trials_to_remove:]
-            hr = scaler.fit_transform(hr)
-
-            # pupil data
-            pupil = pd.read_csv('data/features_4_2/pupil/' + str(sub) + '.csv')
-            pupil = pupil[num_trials_to_remove:]
-            pupil = scaler.fit_transform(pupil)
-        except FileNotFoundError:
-            continue
-
-
-
         string_sub = extract_correct_csv.read_correct_subject_csv(sub)
-
-        df_ = pd.read_csv('data/LookAtMe_old/LookAtMe_0' + str(string_sub) + '.csv', sep='\t')
-        df_ = df_[num_trials_to_remove:len_eda]
-        label = np.array(list([int(d > 2) for d in df_['rating']]))
+        # data of one subject
+        df_sub = result_modified[result_modified['Subject'] == sub]
+        # convert rating into 0/1
+        df_look = pd.read_csv('./data/LookAtMe_old/LookAtMe_0' + string_sub + '.csv', sep='\t')
+        y = np.array(list([int(d > 2) for d in df_look['rating']]))
+        y = y[num_trials_to_remove:]
+        label = y
         E = label[:, np.newaxis]
         E = pd.DataFrame(E)
-
-        # gaze data
-        df_sub = result_modified[result_modified['Subject'] == sub]
         # normalize feature and convert from [13][13][13] into [39]
         X1 = df_sub[df_sub['ROI'] == 'eye']
         X1_norm = pd.DataFrame(scaler.fit_transform(list(X1['Fixation feature'])))
@@ -191,106 +174,99 @@ for sub in all_subject:
         X3_norm = pd.DataFrame(scaler.fit_transform(list(X3['Fixation feature'])))
         X_norm = pd.concat([X1_norm, X2_norm, X3_norm], axis=1)
         # remove first 48 learning trials
-
-        X_norm = X_norm[num_trials_to_remove:len_eda]
+        X_norm = X_norm[48:]
         X_norm = pd.DataFrame(X_norm)
         X_norm = X_norm.reset_index().drop(columns=('index'))
-        gaze = X_norm
+
+        # features normalization
+        feature = X_norm
+
+        # add ROI
+        significant_ROI = pd.read_csv('data/newLookAtMeROI/LookAtMe' + string_sub + '.csv')
+        significant_ROI = significant_ROI['ROI_change']
+        significant_ROI = [1 if x == 'mouth_nose' else 0 for x in significant_ROI]
+        significant_ROI = significant_ROI[48:]
+        significant_ROI = pd.DataFrame(significant_ROI).reset_index(drop=True)
 
         # num trials
-        N = eda.shape[0]
+        N = feature.shape[0]
 
-        '''
-            #isn't useless?
-        TRAIN_PERC = 0.70
-        VAL_PERC = 0.1
-        TEST_PERC = 0.2  # 1-TRAIN_PERC+VAL_PERC
-        N_train = int(N * (TRAIN_PERC)) 
-        N_val = int(N * (VAL_PERC))
-        '''
-
-        eda = pd.DataFrame(eda)
-        eda = eda.reset_index().drop(columns=('index'))
-        pupil = pd.DataFrame(pupil)
-        pupil = pupil.reset_index().drop(columns=('index'))
-        hr = pd.DataFrame(hr)
-        hr = hr.reset_index().drop(columns=('index'))
-        E = pd.DataFrame(E)
-        E = E.reset_index().drop(columns=('index'))
+        # num of trials used in the train set
+        N_train = int(N * (TRAIN_PERC))
 
         # convert features into dataframe and reset index
-        gaze = pd.DataFrame(gaze)
-        gaze = gaze.reset_index().drop(columns=('index'))
-        # RANDOM SPLIT of the gaze data
-        gaze = gaze.sample(frac=1, random_state=0)
-        gaze = gaze.reset_index(drop=True).to_numpy()
-        # convert data into dataframe and reset index
-        gaze = pd.DataFrame(gaze)
-        gaze = gaze.reset_index().drop(columns=('index'))
+        feature = pd.DataFrame(feature)
+        feature = feature.reset_index().drop(columns=('index'))
 
+        # RANDOM SPLIT of the gaze data
+        feature = feature.sample(frac=1, random_state=0)
+        feature = feature.reset_index(drop=True).to_numpy()
+
+        # RANDOM SPLIT of the roi
+        significant_ROI = significant_ROI.sample(frac=1, random_state=0)
+        significant_ROI = significant_ROI.reset_index(drop=True).to_numpy()
+
+        # RANDOM SPLIT of the label shock expectancy data
+        e_labels = E.sample(frac=1, random_state=0)
+        e_labels = e_labels.reset_index(drop=True).to_numpy()
+
+        # convert data into dataframe and reset index
+        feature = pd.DataFrame(feature)
+        feature = feature.reset_index().drop(columns=('index'))
+        e_labels = pd.DataFrame(e_labels)
+        e_labels = e_labels.reset_index().drop(columns=('index'))
+        significant_ROI = pd.DataFrame(significant_ROI)
+        significant_ROI = significant_ROI.reset_index().drop(columns=('index'))
+
+        # 3 fold cross validation with a test_size=0.2 and training=0.8
         sss = StratifiedShuffleSplit(n_splits=3, test_size=0.2, random_state=123)
 
-        for i, (train_index, test_index) in enumerate(sss.split(eda, E)):
+        for i, (train_index, test_index) in enumerate(sss.split(feature, E)):
+            # len train set
             N_train = len(train_index)
 
-            eda_train = eda.iloc[train_index, :]
-            eda_test = eda.iloc[test_index, :]
-            hr_train = hr.iloc[train_index, :]
-            hr_test = hr.iloc[test_index, :]
-            pupil_train = pupil.iloc[train_index, :]
-            pupil_test = pupil.iloc[test_index, :]
-            e_labels_train = E.iloc[train_index, :]
-            e_labels_test = E.iloc[test_index, :]
+            # divide gaze data into train and test
+            feature_train = feature.iloc[train_index, :]
+            feature_test = feature.iloc[test_index, :]
 
-            gaze_train = gaze.iloc[train_index, :]
-            gaze_test = gaze.iloc[test_index, :]
+            # divide roi data into train and test
+            roi_train = significant_ROI.iloc[train_index, :]
+            roi_test = significant_ROI.iloc[test_index, :]
+
+            # divide label shock prediction data into train and test
+            e_labels_train = e_labels.iloc[train_index, :]
+            e_labels_test = e_labels.iloc[test_index, :]
 
             # dimensions of each signal
-            d_eda = eda_train.shape[1]
-            d_hr = hr_train.shape[1]
-            d_pupil = pupil_train.shape[1]
+            d_feature = feature_train.shape[1]
             d_e = e_labels_train.shape[1]
-            d_gaze = gaze_train.shape[1]
+            d_roi = 1
 
             # model definition
             with pm.Model() as PPCA_identified:
                 # model coordinates
                 PPCA_identified.add_coord("latent_columns", np.arange(k), mutable=True)
                 PPCA_identified.add_coord("rows", np.arange(N_train), mutable=True)
-                PPCA_identified.add_coord("observed_eda", np.arange(d_eda), mutable=False)
-                PPCA_identified.add_coord("observed_hr", np.arange(d_hr), mutable=False)
-                PPCA_identified.add_coord("observed_pupil", np.arange(d_pupil), mutable=False)
+                PPCA_identified.add_coord("observed_gaze", np.arange(d_feature), mutable=False)
                 PPCA_identified.add_coord("observed_label", np.arange(d_e), mutable=False)
-                PPCA_identified.add_coord("observed_gaze", np.arange(d_gaze), mutable=False)
+                PPCA_identified.add_coord("observed_roi", np.arange(d_roi), mutable=False)
 
-                hr_data = pm.MutableData("hr_data", hr_train.T, dims=["observed_hr", "rows"])
-                eda_data = pm.MutableData("eda_data", eda_train.T, dims=("observed_eda", "rows"))
-                pupil_data = pm.MutableData("pupil_data", pupil_train.T, dims=("observed_pupil", "rows"))
-                gaze_data = pm.MutableData("gaze_data", gaze_train.T, dims=("observed_gaze", "rows"))
+                feature_data = pm.MutableData("feature_data", feature_train.T, dims=["observed_gaze", "rows"])
+                W_gaze = makeW(d_feature, k, ("observed_gaze", "latent_columns"), 'W_gaze')
 
-                W_eda = makeW(d_eda, k, ("observed_eda", "latent_columns"), 'W_eda')
-                W_hr = makeW(d_hr, k, ("observed_hr", "latent_columns"), 'W_hr')
-                W_pupil = makeW(d_pupil, k, ("observed_pupil", "latent_columns"), 'W_pupil')
-                W_gaze = makeW(d_gaze, k, ("observed_gaze", "latent_columns"), 'W_gaze')
+                roi_data = pm.MutableData("roi_data", roi_train.T, dims=["observed_roi", "rows"])
+                W_roi = pm.Normal("W_roi", dims=["observed_roi", "latent_columns"])
 
                 W_e = pm.Normal("W_e", dims=["observed_label", "latent_columns"])
+
                 C = pm.Normal("C", dims=["latent_columns", "rows"])
 
-                psi_eda = pm.HalfNormal("psi_eda", 1.0)
-                X_eda = pm.Normal("X_eda", mu=at.dot(W_eda, C), sigma=psi_eda, observed=eda_data,
-                                  dims=["observed_eda", "rows"])
+                psi_feature = pm.HalfNormal("psi_feature", 1.0)
+                X_feature = pm.Normal("X_gaze", mu=at.dot(W_gaze, C), sigma=psi_feature,
+                                      observed=feature_data, dims=["observed_gaze", "rows"])
 
-                psi_hr = pm.HalfNormal("psi_hr", 1.0)
-                X_hr = pm.Normal("X_hr", mu=at.dot(W_hr, C), sigma=psi_hr, observed=hr_data,
-                                 dims=["observed_hr", "rows"])
-
-                psi_pupil = pm.HalfNormal("psi_pupil", 1.0)
-                X_pupil = pm.Normal("X_pupil", mu=at.dot(W_pupil, C), sigma=psi_pupil, observed=pupil_data,
-                                    dims=["observed_pupil", "rows"])
-
-                psi_gaze = pm.HalfNormal("psi_gaze", 1.0)
-                X_gaze = pm.Normal("X_gaze", mu=at.dot(W_gaze, C), sigma=psi_gaze, observed=gaze_data,
-                                   dims=['observed_gaze', 'rows'])
+                X_roi = pm.Bernoulli("X_roi", p=pm.math.sigmoid(at.dot(W_roi, C)), dims=["observed_roi", "rows"],
+                                     observed=roi_data)
 
                 X_e = pm.Bernoulli("X_e", p=pm.math.sigmoid(at.dot(W_e, C)), dims=["observed_label", "rows"],
                                    observed=e_labels_train.T)
@@ -303,15 +279,17 @@ for sub in all_subject:
                 posterior_predictive = pm.sample_posterior_predictive(
                     trace, var_names=["X_e"], random_seed=123)
 
-            e_pred_train = my_post_predict(trace, hr_train, eda_train, pupil_train, gaze_train)
-
+            # train
+            e_pred_train = my_post_predict(trace, feature_train)
             train_accuracy_exp = accuracy_score(e_labels_train, e_pred_train)
 
             # test
-            e_pred_mode_test = my_post_predict(trace, hr_test, eda_test, pupil_test, gaze_test)
+            e_pred_mode_test = my_post_predict(trace, feature_test)
             test_accuracy_exp = accuracy_score(e_labels_test, e_pred_mode_test)
-            row = [sub, k, i, train_accuracy_exp, test_accuracy_exp]
 
-            with open('output/sppca_physio_gaze.csv', 'a') as f:
+            # save results into csv
+            row = [sub, k, i, 'gaze', train_accuracy_exp, test_accuracy_exp]
+
+            with open(output_csv, 'a') as f:
                 write = csv.writer(f)
                 write.writerow(row)
