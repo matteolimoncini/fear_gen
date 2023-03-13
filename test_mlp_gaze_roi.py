@@ -80,9 +80,6 @@ for first in first_layer_neurons:
             X3 = df_sub[df_sub['ROI'] == 'other']
             X3_norm = pd.DataFrame(scaler.fit_transform(list(X3['Fixation feature'])))
             X_norm = pd.concat([X1_norm, X2_norm, X3_norm], axis=1)
-            # remove first 48 learning trials
-            X_norm = X_norm[48:]
-            X_norm = pd.DataFrame(X_norm)
 
             # add ROI
             lookatme = pd.read_csv('data/newLookAtMe/newLookAtMe' + string_sub + '.csv')
@@ -92,6 +89,8 @@ for first in first_layer_neurons:
             significant_ROI = pd.DataFrame(significant_ROI)
             X_norm = pd.concat([X_norm, significant_ROI], axis=1)
 
+            # remove first 48 learning trials
+            X_norm = X_norm[48:]
             X_norm = pd.DataFrame(X_norm)
 
             X_norm = X_norm.reset_index().drop(columns=('index'))
