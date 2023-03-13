@@ -1,4 +1,4 @@
-expName,subject,pairs,cs1,cs2,block,trial,condition,rating,rt,shock,picName,timestamp,morphing level,gender,ROI
+expName,subject,pairs,cs1,cs2,block,trial,condition,rating,rt,shock,picName,timestamp,morphing level,gender,ROI_change
 LookAtMe,21,1,2,1,1,1,41,,-1.0,False,stim\8 F080C + F101C.jpg,2019-01-04 13:29:54,1,1,mouth_nose
 LookAtMe,21,1,2,1,1,2,46,3.0,0.792177764698863,False,stim\7 F080C.jpg,2019-01-04 13:30:02,6,1,mouth_nose
 LookAtMe,21,1,2,1,1,3,16,3.0,0.9910003459081054,False,stim\2 M024C + M010C.jpg,2019-01-04 13:30:11,6,0,eyes
