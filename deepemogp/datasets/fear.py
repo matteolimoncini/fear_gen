@@ -5,10 +5,8 @@ from scipy import io
 
 
 class FEAR(Dataset):
+    # class used to use this package with the fear generalization dataset
     # path of the directory containing physiological signals
-    # signal_folder = '/home/paolo/matteo/matteo/unimi/tesi_master/code/fear_gen/data/sync_signals'
-
-    # signal_folder = '/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/data/sync_signals'
     signal_folder = 'data/sync_signals_raw'
 
     def __init__(self, name='FEAR', signals=None, subjects=None, ):

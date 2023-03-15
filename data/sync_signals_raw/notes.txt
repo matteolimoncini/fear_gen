@@ -1,0 +1,4 @@
+contains eda,hr and pupil data synchronized
+1 file for each subject
+#rows = #trials
+#columns =  #trial_len *frequency

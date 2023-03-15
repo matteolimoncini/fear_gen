@@ -1,0 +1,4 @@
+1 file for each subject. Fixation and saccades features extracted using Ornstein-Uhlenbeck process.
+Fixation and classification recalculated with raw gaze data taken from the eye-tracker
+
+Author: Vincenzo Conversano
