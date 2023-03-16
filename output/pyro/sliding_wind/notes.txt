@@ -1,4 +1,4 @@
 output of different models in pyro.
 Same model considering different k = (2,5,10,25,50,100,150)
 
-for each model 3 different files: csminus,csplus and total where csminus
+for each model 3 different files: csminus,csplus and total where there's probability of shock expectancy for each trial
