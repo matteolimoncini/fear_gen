@@ -61,6 +61,18 @@ def read_correct_subject_csv(subject):
     else:
         return str(subject)
 
+# extract subjects with different sias and lds score
+def anxious_subjects(path, n, type_='top'):
+    os.chdir('..')
+    valid_subjects = extract_only_valid_subject()
+    os.chdir('pyro')
+    df = pd.read_csv(path).dropna().reset_index(drop=True)
+    df = df[df.subject.isin(valid_subjects)]
+    df['subject'] = [int(x) for x in df['subject']]
+    if type_=='top':
+        return df.sort_values(by=df.columns[1], ascending=False).subject[:n].values
+    else:
+        return df.sort_values(by=df.columns[1], ascending=False).subject[-n:].values
 
 # physio signals functions
 
