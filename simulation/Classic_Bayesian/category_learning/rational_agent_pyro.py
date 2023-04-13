@@ -11,7 +11,7 @@ import pyro.distributions as dist
 
 logging.basicConfig(format='%(message)s', level=logging.INFO)
 # read dataset
-df_ = pd.read_csv('/Users/marcoghezzi/PycharmProjects/pythonProject/fear_gen/data/newLookAtMe/newLookAtMe01.csv')
+df_ = pd.read_csv('/fear_gen/data/newLookAtMe/newLookAtMe01.csv')
 print(df_)
 df_ = df_[['morphing level', 'shock']]
 df_['shock'] = df_['shock'].astype(int)

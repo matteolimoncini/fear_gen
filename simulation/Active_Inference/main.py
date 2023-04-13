@@ -1,3 +1,5 @@
+# Main script step inference (same as main.ipynb)
+
 from pymdp import utils
 from pymdp.agent import Agent
 import numpy as np

@@ -1,3 +1,7 @@
+'''
+pymdp environment in the fear generalization context
+'''
+
 from pymdp import utils
 import numpy as np
 
