@@ -2,9 +2,9 @@
 unpooled model
 supervised probabilistic principal component analysis using factor analysis implementation
 
-using visual stimuli try to predict pain expectation
+using visual stimuli to predict pain expectation
 
-division of data into trai, test
+division of data into train, test
 
 consider only trials of the fear generalization phase
 
