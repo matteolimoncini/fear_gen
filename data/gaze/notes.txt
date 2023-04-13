@@ -1,9 +1,0 @@
-fixation.csv contains coordinates X and Y corrected with the baseline
-saccades.csv contains coordinates X and Y corrected with the baseline
-
-fixation_with_ROI.csv contains coordinates X and Y corrected with the baseline and the info about the ROI
-saccades_with_ROI.csv contains coordinates X and Y corrected with the baseline and the info about the ROI
-ROI column: null if not eyes and not mouth/nose
-
-fixations_features.csv and saccades_features.csv are the weel formatted file
-equals to the .npy files in the features_ou folder

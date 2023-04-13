@@ -1,4 +1,0 @@
-extracted features from raw signals synchronized
-eda 'wavelet', sliding window=(2,1)
-hr 'wavelet', sliding window=(2,1)
-pupil 'mean', sliding window=(1, 0)

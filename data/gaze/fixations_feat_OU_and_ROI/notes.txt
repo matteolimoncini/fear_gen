@@ -1,5 +1,0 @@
-1 file for each subject.
-Fixation features extracted using Ornstein-Uhlenbeck process with associated for each feature the relative ROI.
-mouth/nose if the fixation area is inside the ROI of the mouth/nose
-eye if the fixation area is inside the ROI of the eyes
-other if the fixation area is outside the ROIs

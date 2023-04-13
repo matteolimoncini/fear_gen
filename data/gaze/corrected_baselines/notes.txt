@@ -1,1 +1,0 @@
-added missing trials with value of CURRENT_FIX_X = -1 and CURRENT_FIX_Y = -1 and IS_VALID = False
